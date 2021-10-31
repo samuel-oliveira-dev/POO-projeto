@@ -4,11 +4,18 @@
  */
 package Sistema;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author samuk
  */
-public class Pessoa {
+public class Cliente {
+    
     
     private String nome;
     private String data;
@@ -64,7 +71,27 @@ public class Pessoa {
     public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
     }
-
     
     
+    
+    
+    public String salvar(){
+        
+        
+        try {
+            FileWriter fw = new FileWriter("clientes.txt", true);
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println("Nome: "+getNome());
+            pw.println("Email: "+getEmail());
+            pw.println("CPF: "+getCpf());
+            pw.println("Endereco: "+getLogradouro());
+            pw.println("CEP: "+getCep());
+            pw.flush();
+            pw.close();
+            fw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Cadastrado com sucesso!";
+    }
 }
