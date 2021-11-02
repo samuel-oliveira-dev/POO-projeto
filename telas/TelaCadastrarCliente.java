@@ -84,7 +84,7 @@ public class TelaCadastrarCliente extends javax.swing.JFrame {
         jLabel6.setText("Cadastro de Cliente");
 
         try {
-            jTextFieldCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-##")));
+            jTextFieldCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

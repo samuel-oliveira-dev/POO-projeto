@@ -4,6 +4,7 @@
  */
 package telas;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -78,14 +79,15 @@ public class Cliente {
     public String salvar(){
         
         
+        //FileWriter fw = new FileWriter("dados/clientes.txt", true);
         try {
-            FileWriter fw = new FileWriter("clientes.txt", true);
+            FileWriter fw = new FileWriter("C:\\Users\\samuk\\Documents\\NetBeansProjects\\SistemaLivraria\\src\\main\\java\\dados\\clientes.txt", true);
             PrintWriter pw = new PrintWriter(fw);
-            pw.println("Nome: "+getNome());
-            pw.println("Email: "+getEmail());
-            pw.println("CPF: "+getCpf());
-            pw.println("Endereco: "+getLogradouro());
-            pw.println("CEP: "+getCep());
+            pw.println(getNome());
+            pw.println(getEmail());
+            pw.println(getCpf());
+            pw.println(getLogradouro());
+            pw.println(getCep());
             pw.flush();
             pw.close();
             fw.close();

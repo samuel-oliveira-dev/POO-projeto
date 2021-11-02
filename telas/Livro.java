@@ -85,7 +85,7 @@ public class Livro extends Produto {
         
         FileWriter fw;
         try {
-            fw = new FileWriter("livros.txt", true);
+            fw = new FileWriter("C:\\Users\\samuk\\Documents\\NetBeansProjects\\SistemaLivraria\\src\\main\\java\\dados\\livros.txt", true);
             PrintWriter pw = new PrintWriter(fw);
             pw.println(getTitulo());
             pw.println(getAutor());

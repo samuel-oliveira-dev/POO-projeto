@@ -27,6 +27,8 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldTitulo = new javax.swing.JTextField();
         jTextFieldAutor = new javax.swing.JTextField();
@@ -43,6 +45,8 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         jTextFieldPaginas = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+
+        jScrollPane1.setViewportView(jTextPane1);
 
         jLabel1.setText("Titulo: ");
 
@@ -224,6 +228,7 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldAno;
     private javax.swing.JTextField jTextFieldAutor;
     private javax.swing.JTextField jTextFieldEdicao;
@@ -231,6 +236,7 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldISBN;
     private javax.swing.JTextField jTextFieldPaginas;
     private javax.swing.JTextField jTextFieldTitulo;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 
 }
