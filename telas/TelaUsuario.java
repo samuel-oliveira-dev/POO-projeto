@@ -5,6 +5,9 @@
  */
 package telas;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -15,17 +18,6 @@ import javax.swing.JOptionPane;
 public class TelaUsuario extends javax.swing.JFrame {
     
     private ArrayList<Usuario> lista = new ArrayList<Usuario>();
-
-    public ArrayList<Usuario> getLista() {
-        return lista;
-    }
-
-    public void setLista(ArrayList<Usuario> lista) {
-        this.lista = lista;
-    }
-    
-    
-
     /**
      * Creates new form TelaUsuario
      */
@@ -169,13 +161,33 @@ public class TelaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // TODO add your handling code here:
         txtUsuario.setText("");
         txtSenha.setText("");
         txtUsuario.requestFocus();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        lista.clear();
+        String path = "C:\\Users\\Valter\\Documents\\NetBeansProjects\\CloneMainPOO\\src\\main\\java\\POO-projeto\\dados\\usuarios.txt";
+        
+	try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+		String line;
+		line = br.readLine();
+		while (line != null) {
+			String[] vetor = line.split(",");
+			String name = vetor[0];
+			String password = vetor[1];
+			String type = vetor[2];
+	
+			Usuario usuario = new Usuario(name, password, type);
+			lista.add(usuario);
+			line = br.readLine();
+		}
+	}
+	catch (IOException e) {
+		System.out.println("Error: " + e.getMessage());
+	}
+        
         String usuario = txtUsuario.getText();
         String senha = new String(txtSenha.getPassword());
         
@@ -183,7 +195,10 @@ public class TelaUsuario extends javax.swing.JFrame {
         
         if ((usuario == null || usuario.isEmpty())
                 || senha.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Informe login e senha", "Dados inválidos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Informe usuário e senha!", "Campo em branco", JOptionPane.ERROR_MESSAGE);
+            txtUsuario.setText("");
+            txtSenha.setText("");
+            txtUsuario.requestFocus();
         }else{
             for(int i = 0; i < lista.size(); i++){
                 if(usuario.equals(lista.get(i).getNome()) && senha.equals(lista.get(i).getSenha())){
@@ -195,8 +210,12 @@ public class TelaUsuario extends javax.swing.JFrame {
                     this.dispose();
                 }
             }
-            if(avalia == false)
+            if(avalia == false){
                 JOptionPane.showMessageDialog(this, "Usuário ou senha incorreto!", "Dados inválidos", JOptionPane.ERROR_MESSAGE);
+                txtUsuario.setText("");
+                txtSenha.setText("");
+                txtUsuario.requestFocus();
+            }
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 

@@ -81,13 +81,10 @@ public class Cliente {
         
         //FileWriter fw = new FileWriter("dados/clientes.txt", true);
         try {
-            FileWriter fw = new FileWriter("C:\\Users\\samuk\\Documents\\NetBeansProjects\\SistemaLivraria\\src\\main\\java\\dados\\clientes.txt", true);
+            FileWriter fw = new FileWriter("C:\\Users\\Valter\\Documents\\NetBeansProjects\\CloneMainPOO\\src\\main\\java\\POO-projeto\\dados\\clientes.txt", true);
+            // C:\Users\Valter\Documents\NetBeansProjects\CloneMainPOO\src\main\java\POO-projeto\dados
             PrintWriter pw = new PrintWriter(fw);
-            pw.println(getNome());
-            pw.println(getEmail());
-            pw.println(getCpf());
-            pw.println(getLogradouro());
-            pw.println(getCep());
+            pw.println(getNome()+","+getEmail()+","+getCpf()+","+getLogradouro()+","+getCep());
             pw.flush();
             pw.close();
             fw.close();
