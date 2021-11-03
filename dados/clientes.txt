@@ -1,2 +1,1 @@
-valter,qualquer@hotmail.com,000.000.000-00,jabotiana,49044-000
-any,any@hotmail.com,000.000.000-00,Orlando,49000-000
+Joao,joao@gmail.com,234.567.890-98,Rua C, 123,23445-666
