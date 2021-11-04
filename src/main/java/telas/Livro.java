@@ -85,7 +85,8 @@ public class Livro extends Produto {
         
         FileWriter fw;
         String path = System.getProperty("user.dir");
-        path = path + "\\src\\main\\java\\dados\\livros.csv";
+        path = path + "\\livros.txt";
+        
         try {
             fw = new FileWriter(path, true);
             PrintWriter pw = new PrintWriter(fw);
