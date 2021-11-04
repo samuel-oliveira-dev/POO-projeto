@@ -84,16 +84,13 @@ public class Livro extends Produto {
     public String salvar(){
         
         FileWriter fw;
+        String path = System.getProperty("user.dir");
+        path = path + "\\src\\main\\java\\dados\\livros.csv";
         try {
-            fw = new FileWriter("C:\\Users\\samuk\\Documents\\NetBeansProjects\\SistemaLivraria\\src\\main\\java\\dados\\livros.txt", true);
+            fw = new FileWriter(path, true);
             PrintWriter pw = new PrintWriter(fw);
-            pw.println(getTitulo());
-            pw.println(getAutor());
-            pw.println(getEditora());
-            pw.println(getIsbn());
-            pw.println(getEdicao());
-            pw.println(getPaginas());
-            pw.println(getAno());
+            pw.println(getTitulo()+","+getAutor()+","+getEditora()+","+getIsbn()+","+getEdicao()+","
+                    +getPaginas()+","+getAno()+","+getPreco()+","+getQuantidade()+","+getCodigo());
             pw.flush();
             pw.close();
             fw.close();

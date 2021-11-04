@@ -13,13 +13,13 @@ public class Produto {
     private String nome;
     private double preco;
     private int quantidade;
-    private long codigo;
+    private String codigo;
 
-    public long getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(long codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
