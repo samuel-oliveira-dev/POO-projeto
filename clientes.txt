@@ -1,2 +1,3 @@
 Joao,joao@gmail.com,234.556.777-88,Rua C, 34,23345-667
 Pedro,pedro@gmail.com,234.456.778-88,Rua C, 23,23456-789
+valter,valter@hotmail.com,063.000.000-00,Aracaju,49044-000

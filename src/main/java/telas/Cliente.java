@@ -4,7 +4,6 @@
  */
 package telas;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -77,13 +76,7 @@ public class Cliente {
     
     
     public String salvar(){
-        
-        
-        //FileWriter fw = new FileWriter("dados/clientes.txt", true);
         try {
-            
-            //FileWriter fw = new FileWriter("C:\\Users\\Valter\\Documents\\NetBeansProjects\\CloneMainPOO\\src\\main\\java\\POO-projeto\\dados\\clientes.txt", true);
-            // C:\Users\Valter\Documents\NetBeansProjects\CloneMainPOO\src\main\java\POO-projeto\dados
             String s = System.getProperty("user.dir");
             s = s + "\\clientes.txt";
             FileWriter fw = new FileWriter(s, true);

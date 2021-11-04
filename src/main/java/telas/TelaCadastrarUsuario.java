@@ -153,7 +153,8 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
         int tipocad = comboTipo.getSelectedIndex();
         
         listaUsuarios.clear();
-        String path = "C:\\Users\\Valter\\Documents\\NetBeansProjects\\CloneMainPOO\\src\\main\\java\\POO-projeto\\dados\\usuarios.txt";
+        String path = System.getProperty("user.dir");
+        path = path + "\\usuarios.txt";
         
 	try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 		String line;
