@@ -192,11 +192,15 @@ public class TelaCadastrarCliente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Cliente cliente = new Cliente();
         cliente.setNome(jTextNome.getText());
-        cliente.setCpf(jTextCPF.getText());
+        String cpf = jTextCPF.getText().replaceAll(".", "");
+        cpf.replaceAll("-", "");
+        cliente.setCpf(cpf);
         cliente.setCep(jTextFieldCEP.getText());
         cliente.setEmail(jFormattedTextEmail.getText());
         cliente.setLogradouro(jTextFieldLogradouro.getText());
         JOptionPane.showMessageDialog(null, cliente.salvar());
+        
+        
         
         jTextNome.setText("");
         jTextCPF.setText("");

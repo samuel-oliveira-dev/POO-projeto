@@ -1,22 +1,4 @@
-csdvfvfv
-fvsgbvr
-vsfbbrtb
-1345788
-1
-220
-2021
-Dom Casmurro
-Machado de Assis
-Martin Clarey
-2345789876
-3ª
-220
-2015
-Quincas Borba
-Machado de Assis
-Martin Claret
-123456787654
-5ª
-322
-2015
 Watchmen,Alan Moore,Vertigo,23456787654,7ª,400,2019,98.0,25,2233
+V de Vinganca,Alan Moore,Vertigo,23456789,4ª,220,2015,149.0,34,1234
+Corpo,Carlos Drummond de Andrade,Companhia das Letras,34567899876,6ª,160,2020,34.0,30,4455
+Os Miseraveis,Victor Hugo,Martin Claret,2345676543,6ª,1500,2019,87.9,6,1255
