@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Sistema;
+package telas;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -76,16 +76,12 @@ public class Cliente {
     
     
     public String salvar(){
-        
-        
         try {
-            FileWriter fw = new FileWriter("clientes.txt", true);
+            String s = System.getProperty("user.dir");
+            s = s + "\\clientes.txt";
+            FileWriter fw = new FileWriter(s, true);
             PrintWriter pw = new PrintWriter(fw);
-            pw.println("Nome: "+getNome());
-            pw.println("Email: "+getEmail());
-            pw.println("CPF: "+getCpf());
-            pw.println("Endereco: "+getLogradouro());
-            pw.println("CEP: "+getCep());
+            pw.println(getNome()+","+getEmail()+","+getCpf()+","+getLogradouro()+","+getCep());
             pw.flush();
             pw.close();
             fw.close();
