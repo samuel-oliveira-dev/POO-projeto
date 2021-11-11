@@ -39,14 +39,14 @@ public class TelaCadastrarProdutos extends javax.swing.JFrame {
         Painel.setLayout(PainelLayout);
         PainelLayout.setHorizontalGroup(
             PainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 857, Short.MAX_VALUE)
+            .addGap(0, 1082, Short.MAX_VALUE)
         );
         PainelLayout.setVerticalGroup(
             PainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 473, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Cadastro");
+        jMenu1.setText("Cadastrar");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
@@ -63,9 +63,14 @@ public class TelaCadastrarProdutos extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Produtos");
+        jMenu2.setText("Listar/Apagar");
 
-        jMenuItem2.setText("Listar Produtos");
+        jMenuItem2.setText("Livros");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
@@ -76,7 +81,9 @@ public class TelaCadastrarProdutos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Painel)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Painel)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,6 +104,12 @@ public class TelaCadastrarProdutos extends javax.swing.JFrame {
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         
     }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        TelaConsultaLivros obj = new TelaConsultaLivros();
+        Painel.add(obj);
+        obj.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments

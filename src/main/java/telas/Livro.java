@@ -4,9 +4,13 @@
  */
 package telas;
 
+import java.awt.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +27,26 @@ public class Livro extends Produto {
     private String editora;
     private String ano;
     private String edicao;
+    
 
+    
+    public Livro(){
+        
+    }
+
+    public Livro(String titulo, String autor, String paginas, String isbn, String editora, String ano, String edicao) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.paginas = paginas;
+        this.isbn = isbn;
+        this.editora = editora;
+        this.ano = ano;
+        this.edicao = edicao;
+    }
+    
+    
+    
+    
     public String getTitulo() {
         return titulo;
     }
@@ -79,6 +102,19 @@ public class Livro extends Produto {
     public void setEdicao(String edicao) {
         this.edicao = edicao;
     }
+
+    
+    
+    
+  
+    
+    
+    
+    
+   
+        
+    
+    
     
     
     public String salvar(){
@@ -101,6 +137,89 @@ public class Livro extends Produto {
         }
         
         return "Cadastrado com sucesso!";
+    }
+    
+    
+    public ArrayList<Livro> ler() 
+    {
+        ArrayList<String[]> lista = new ArrayList<String[]>();
+        ArrayList<Livro> livros = new ArrayList<>();
+        String path = System.getProperty("user.dir");
+        path = path + "\\livros.txt";
+        String[] conteudo = new String[10];
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(path)))
+        {
+            String line = br.readLine();
+            while(line != null)
+            {
+                
+                
+                String[] vect = line.split(",");
+                String autor = vect[0];
+                String titulo = vect[1];
+                String editora = vect[2];
+                String isbn = vect[3];
+                String edicao = vect[4];
+                String paginas = vect[5];
+                String ano = vect[6];
+                double preco = Double.parseDouble(vect[7]);
+                int quantidade = Integer.parseInt(vect[8]) ;
+                String codigo = vect[9];
+                lista.add(conteudo);
+                
+                Livro livro = new Livro();
+                livro.setAutor(autor);
+                livro.setTitulo(titulo);
+                livro.setEditora(editora);
+                livro.setIsbn(isbn);
+                livro.setEdicao(edicao);
+                livro.setPaginas(paginas);
+                livro.setAno(ano);
+                livro.setPreco(preco);
+                livro.setQuantidade(quantidade);
+                livro.setCodigo(codigo);
+                
+                livros.add(livro);
+                
+                line = br.readLine();
+                
+                /*Livro livro = new Livro();
+                
+                livro.setTitulo(titulo);
+                livro.setAutor(autor);
+                livro.setEditora(editora);
+                livro.setIsbn(isbn);
+                livro.setEdicao(edicao);
+                livro.setPaginas(paginas);
+                livro.setAno(ano);
+                livro.setPreco(preco);
+                livro.setQuantidade(qtd);
+                livro.setCodigo(cod);
+                
+                livros.add(livro);
+*/
+
+
+            
+            } 
+        
+        
+        } catch(IOException ex){
+            System.out.print(ex.getMessage());
+        }
+        return livros;
+        
+        
+        
+    
+        
+        
+    }
+
+    @Override
+    public String toString() {
+        return "Livro{" + "titulo=" + titulo + ", autor=" + autor + ", paginas=" + paginas + ", isbn=" + isbn + ", editora=" + editora + ", ano=" + ano + ", edicao=" + edicao + '}';
     }
     
     
