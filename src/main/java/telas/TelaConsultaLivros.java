@@ -133,7 +133,8 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         
-            DefaultTableModel dtm =  (DefaultTableModel) jTableLivros.getModel();
+        //Adicionar sistema busca
+        DefaultTableModel dtm =  (DefaultTableModel) jTableLivros.getModel();
             Livro lv = new Livro();
             ArrayList<Livro> lista = lv.ler();
         

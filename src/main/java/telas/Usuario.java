@@ -53,9 +53,9 @@ public class Usuario {
     
     public String salvar(){
         try {
-            // Digitar diretório do seu pc:
-            FileWriter fw = new FileWriter("C:\\Users\\Valter\\Documents\\NetBeansProjects\\CloneMainPOO\\src\\main\\java\\POO-projeto\\dados\\usuarios.txt", true);
-            
+            String s = System.getProperty("user.dir");
+            s = s + "\\usuarios.txt";
+            FileWriter fw = new FileWriter(s, true); 
             PrintWriter pw = new PrintWriter(fw);
             pw.println(getNome()+","+getSenha()+","+getTipo());
             pw.flush();
