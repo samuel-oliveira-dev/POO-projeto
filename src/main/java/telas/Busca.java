@@ -14,16 +14,31 @@ public class Busca extends Livro{
     private Livro livro = new Livro();
     private ArrayList<Livro>  lista = livro.ler();
     
-    private ArrayList<Livro> resultado = new ArrayList<>();
+    //private ArrayList<Livro> resultado = new ArrayList<>();
     
     public ArrayList<Livro> buscar(String categoria, String argumento){
-        for(Livro l : lista){
-            if(categoria.equals("Autor") && (l.getAutor().equals(argumento))){
-                resultado.add(l);
+        ArrayList<Livro> resultado = new ArrayList<>();
+        for(Livro livro : lista){
+            if(argumento.equals(livro.getAutor()) && categoria.equals("Autor")){
+                resultado.add(livro);
+            } else {
+                if(argumento.equals(livro.getTitulo()) && categoria.equals("Titulo")){
+                    resultado.add(livro);
+                } else{
+                    if(argumento.equals(livro.getCodigo()) && categoria.equals("Codigo")){
+                        resultado.add(livro);
+                    } else {
+                        if(argumento.equals(livro.getIsbn()) && categoria.equals("ISBN")){
+                            resultado.add(livro);
+                        }
+                    }
+                }
             }
         }
         return resultado;
     }
+    
+   
     
     
     

@@ -1,1 +1,5 @@
 Assim Falou Zaratustra,Frederich Nietzsche,Companhia das Letras,Filosofia,3456789876,7ª,200,2020,20.0,6,2255
+Dom Casmurro,Machado de Assis,Matrin Claret,Literatura Brasileira,23567899,5ª,200,2020,12.9,23,2255
+Os Miseraveis,Victor Hugo,Martin Claret,Literatura Estrangeira,2456788,5ª,1500,2016,57.0,7,3344
+O Corcunda de Notredame,Victor Hugo,Martin Claret,Literatura Estrangeira,23467889999,5ª,900,2009,67.0,45,2233
+Quincas Borba,Machado de Assis,Martin Claret,Literatura Brasileira,23467888,5ª,200,2012,22.0,30,5566

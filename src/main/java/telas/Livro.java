@@ -192,16 +192,17 @@ public class Livro  {
                 
                 
                 String[] vect = line.split(",");
-                String autor = vect[0];
-                String titulo = vect[1];
+                String titulo = vect[0];
+                String autor = vect[1];
                 String editora = vect[2];
-                String isbn = vect[3];
-                String edicao = vect[4];
-                String paginas = vect[5];
-                String ano = vect[6];
-                double preco = Double.parseDouble(vect[7]);
-                int quantidade = Integer.parseInt(vect[8]) ;
-                String codigo = vect[9];
+                String categoria = vect[3];
+                String isbn = vect[4];
+                String edicao = vect[5];
+                String paginas = vect[6];
+                String ano = vect[7];
+                double preco = Double.parseDouble(vect[8]);
+                int quantidade = Integer.parseInt(vect[9]) ;
+                String codigo = vect[10];
                 lista.add(conteudo);
                 
                 Livro livro = new Livro();
@@ -215,6 +216,7 @@ public class Livro  {
                 livro.setPreco(preco);
                 livro.setQuantidade(quantidade);
                 livro.setCodigo(codigo);
+                livro.setCategoria(categoria);
                 
                 livros.add(livro);
                 
@@ -255,8 +257,10 @@ public class Livro  {
 
     @Override
     public String toString() {
-        return "Livro{" + "titulo=" + titulo + ", autor=" + autor + ", paginas=" + paginas + ", isbn=" + isbn + ", editora=" + editora + ", ano=" + ano + ", edicao=" + edicao + '}';
+        return "Livro{" + "titulo=" + titulo + ", autor=" + autor + ", paginas=" + paginas + ", isbn=" + isbn + ", editora=" + editora + ", ano=" + ano + ", edicao=" + edicao + ", codigo=" + codigo + ", categoria=" + categoria + ", quantidade=" + quantidade + ", preco=" + preco + '}';
     }
+
+    
     
     
     

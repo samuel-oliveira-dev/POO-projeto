@@ -19,6 +19,10 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
     public TelaConsultaLivros() {
         initComponents();
     }
+    
+    public void limpar(){
+        jTableLivros.setModel(new DefaultTableModel(null, new String[]{"Titulo", "Autor", "Editora", "ISBN", "Edicao", "Paginas", "Ano", "Preco", "Quantidade", "Codigo", "Categoria"}));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,7 +46,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Consulta de Produtos");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titulo", "Autor", "Codigo", "ISBN", "" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titulo", "Autor", "Codigo", "ISBN" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoActionPerformed(evt);
@@ -62,7 +66,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Titulo", "Autor", "Editora", "ISBN", "Edicao", "Paginas", "Ano", "Preco", "Quantidade", "Codigo"
+                "Titulo", "Autor", "Editora", "ISBN", "Edicao", "Paginas", "Ano", "Preco", "Quantidade", "Codigo", "Categoria"
             }
         ));
         jScrollPane1.setViewportView(jTableLivros);
@@ -100,6 +104,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
         );
@@ -112,9 +117,9 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
                     .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldArgumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton1)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
@@ -132,18 +137,23 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        
+        limpar();
         //Adicionar sistema busca
+        Busca b = new Busca();
+        ArrayList<Livro> populacao = b.buscar(jComboBoxTipo.getSelectedItem().toString(),jTextFieldArgumento.getText());
+        
+        
+        
         DefaultTableModel dtm =  (DefaultTableModel) jTableLivros.getModel();
             Livro lv = new Livro();
             ArrayList<Livro> lista = lv.ler();
         
-            for(Livro l : lista){
+            for(Livro l : populacao){
                 
                 dtm.addRow(
                     new Object[]{
-                        l.getAutor(),
                         l.getTitulo(),
+                        l.getAutor(),
                         l.getEditora(),
                         l.getIsbn(),
                         l.getEdicao(),
@@ -151,12 +161,18 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
                         l.getAno(),
                         l.getPreco(),
                         l.getQuantidade(),
-                        l.getCodigo()
+                        l.getCodigo(),
+                        l.getCategoria()
+                        
+                        
+                        
+                        
                     }
             );
             
             
         }
+        
         
         
         
