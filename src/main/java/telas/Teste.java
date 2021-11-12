@@ -17,9 +17,13 @@ public class Teste {
         Livro livro = new Livro();
         Busca busca = new Busca();
         
-        ArrayList<Livro> res = busca.buscar("Autor", "Allan Moore");
-        for(Livro l : res){
-            l.toString();
+        ArrayList<Livro> resultado = busca.buscar("Autor", "Machado de Assis");
+        
+        
+        ArrayList<Livro> list = livro.ler();
+        
+        for(Livro l : resultado){
+            System.out.println(l.toString());
         }
         
         
