@@ -19,13 +19,13 @@ public class Busca extends Livro{
     public ArrayList<Livro> buscar(String categoria, String argumento){
         ArrayList<Livro> resultado = new ArrayList<>();
         for(Livro livro : lista){
-            if(argumento.equals(livro.getAutor()) && categoria.equals("Autor")){
+            if(argumento.toUpperCase().equals(livro.getAutor().toUpperCase()) && categoria.equals("Autor")){
                 resultado.add(livro);
             } else {
-                if(argumento.equals(livro.getTitulo()) && categoria.equals("Titulo")){
+                if(argumento.toUpperCase().equals(livro.getTitulo().toUpperCase()) && categoria.equals("Titulo")){
                     resultado.add(livro);
                 } else{
-                    if(argumento.equals(livro.getCodigo()) && categoria.equals("Codigo")){
+                    if(argumento.toUpperCase().equals(livro.getCodigo().toUpperCase()) && categoria.equals("Codigo")){
                         resultado.add(livro);
                     } else {
                         if(argumento.equals(livro.getIsbn()) && categoria.equals("ISBN")){

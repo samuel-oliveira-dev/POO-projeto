@@ -37,7 +37,6 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         jTextFieldTitulo = new javax.swing.JTextField();
         jTextFieldAutor = new javax.swing.JTextField();
         jTextFieldEditora = new javax.swing.JTextField();
-        jTextFieldISBN = new javax.swing.JTextField();
         jTextFieldAno = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -46,7 +45,6 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jTextFieldPreco = new javax.swing.JTextField();
         jTextFieldQuantidade = new javax.swing.JTextField();
-        jTextFieldCodigo = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jTextFieldEdicao = new javax.swing.JTextField();
         jComboBoxCategoria = new javax.swing.JComboBox<>();
@@ -57,6 +55,8 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jFormattedTextFieldIsbn = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldCodigo = new javax.swing.JFormattedTextField();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -76,12 +76,6 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         jTextFieldAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldAutorActionPerformed(evt);
-            }
-        });
-
-        jTextFieldISBN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldISBNActionPerformed(evt);
             }
         });
 
@@ -122,12 +116,6 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
             }
         });
 
-        jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCodigoActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +129,7 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Literatura Brasileira", "Literatura Estrangeira", "Religiao", "Fantasia", "Misterio", "Infantojuvenil", "Infantil", "Jovem Adulto", "Filosofia", "Poesia", "Ciencias Sociais", "Psicologia", "Administracao", " " }));
+        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Literatura Brasileira", "Literatura Estrangeira", "Religiao", "Fantasia", "Misterio", "Infantojuvenil", "Infantil", "Jovem Adulto", "Filosofia", "Poesia", "Ciencias Sociais", "Psicologia", "Administracao" }));
 
         jLabel5.setText("Ano:");
 
@@ -156,6 +144,18 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         jLabel9.setText("Quantidade");
 
         jLabel10.setText("Preco:");
+
+        try {
+            jFormattedTextFieldIsbn.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFormattedTextFieldCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,14 +194,13 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldPreco, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldPreco, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                                    .addComponent(jFormattedTextFieldCodigo)))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextFieldISBN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
-                        .addComponent(jTextFieldEditora, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jFormattedTextFieldIsbn, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTextFieldEditora, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
                         .addComponent(jTextFieldAutor, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addGap(0, 40, Short.MAX_VALUE))
@@ -211,23 +210,21 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel4)
-                        .addGap(2, 2, 2))
-                    .addComponent(jTextFieldISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jFormattedTextFieldIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
@@ -237,8 +234,8 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8)
+                            .addComponent(jFormattedTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,7 +265,7 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel11))
-                                .addContainerGap(32, Short.MAX_VALUE))))))
+                                .addContainerGap(36, Short.MAX_VALUE))))))
         );
 
         pack();
@@ -279,14 +276,14 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         livro.setTitulo(jTextFieldTitulo.getText());
         livro.setAutor(jTextFieldAutor.getText());
         livro.setEditora(jTextFieldEditora.getText());
-        livro.setIsbn(jTextFieldISBN.getText());
+        livro.setIsbn(jFormattedTextFieldIsbn.getText());
         livro.setAno(jTextFieldAno.getText());
         livro.setEdicao(jTextFieldEdicao.getText());
         livro.setAno(jTextFieldAno.getText());
         livro.setPaginas(jTextFieldPaginas.getText());
         livro.setPreco(Double.parseDouble(jTextFieldPreco.getText()));
         livro.setQuantidade(Integer.parseInt(jTextFieldQuantidade.getText()));
-        livro.setCodigo(jTextFieldCodigo.getText());
+        livro.setCodigo(jFormattedTextFieldCodigo.getText());
         livro.setCategoria((String) jComboBoxCategoria.getSelectedItem());
         
         JOptionPane.showMessageDialog(null, livro.salvar());
@@ -295,15 +292,15 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         jTextFieldTitulo.setText("");
         jTextFieldAutor.setText("");
         jTextFieldEditora.setText("");
-        jTextFieldISBN.setText("");
-        jTextFieldISBN.setText("");
+        jFormattedTextFieldIsbn.setText("");
+        //jTextFieldISBN.setText("");
         jTextFieldAno.setText("");
         jTextFieldEdicao.setText("");
         jTextFieldAno.setText("");
         jTextFieldPaginas.setText("");
         jTextFieldPreco.setText("");
         jTextFieldQuantidade.setText("");
-        jTextFieldCodigo.setText("");
+        jFormattedTextFieldCodigo.setText("");
         
         
         
@@ -324,10 +321,6 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldAnoActionPerformed
 
-    private void jTextFieldISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldISBNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldISBNActionPerformed
-
     private void jTextFieldAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAutorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldAutorActionPerformed
@@ -339,10 +332,6 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
     private void jTextFieldPaginasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPaginasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPaginasActionPerformed
-
-    private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCodigoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        setVisible(false);
@@ -365,6 +354,8 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCodigo;
+    private javax.swing.JFormattedTextField jFormattedTextFieldIsbn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -379,10 +370,8 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldAno;
     private javax.swing.JTextField jTextFieldAutor;
-    private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldEdicao;
     private javax.swing.JTextField jTextFieldEditora;
-    private javax.swing.JTextField jTextFieldISBN;
     private javax.swing.JTextField jTextFieldPaginas;
     private javax.swing.JTextField jTextFieldPreco;
     private javax.swing.JTextField jTextFieldQuantidade;
