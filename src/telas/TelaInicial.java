@@ -84,16 +84,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
         mnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rating.png"))); // NOI18N
         mnClientes.setText("Clientes");
-        mnClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mnClientesMouseClicked(evt);
-            }
-        });
-        mnClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnClientesActionPerformed(evt);
-            }
-        });
 
         jMenuItem3.setText("Cadastrar Cliente");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -139,14 +129,11 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        TelaCadastrarCliente obj = new TelaCadastrarCliente();
+        // TODO add your handling code here:
+        TelaCadCliente obj = new TelaCadCliente();
         Painel.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void mnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnClientesActionPerformed
 
     /**
      * @param args the command line arguments
