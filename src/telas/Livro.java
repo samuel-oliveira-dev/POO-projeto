@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author samuk
  */
-public class Livro extends Produto {
+public class Livro  {
     
     private String titulo;
     private String autor;
@@ -27,6 +27,10 @@ public class Livro extends Produto {
     private String editora;
     private String ano;
     private String edicao;
+    private String codigo;
+    private String categoria;
+    private int quantidade;
+    private double preco;
     
 
     
@@ -42,6 +46,38 @@ public class Livro extends Produto {
         this.editora = editora;
         this.ano = ano;
         this.edicao = edicao;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
     
     
@@ -126,7 +162,7 @@ public class Livro extends Produto {
         try {
             fw = new FileWriter(path, true);
             PrintWriter pw = new PrintWriter(fw);
-            pw.println(getTitulo()+","+getAutor()+","+getEditora()+","+getIsbn()+","+getEdicao()+","
+            pw.println(getTitulo()+","+getAutor()+","+getEditora()+"," +getCategoria()+ ","+ getIsbn()+","+getEdicao()+","
                     +getPaginas()+","+getAno()+","+getPreco()+","+getQuantidade()+","+getCodigo());
             pw.flush();
             pw.close();
@@ -156,16 +192,17 @@ public class Livro extends Produto {
                 
                 
                 String[] vect = line.split(",");
-                String autor = vect[0];
-                String titulo = vect[1];
+                String titulo = vect[0];
+                String autor = vect[1];
                 String editora = vect[2];
-                String isbn = vect[3];
-                String edicao = vect[4];
-                String paginas = vect[5];
-                String ano = vect[6];
-                double preco = Double.parseDouble(vect[7]);
-                int quantidade = Integer.parseInt(vect[8]) ;
-                String codigo = vect[9];
+                String categoria = vect[3];
+                String isbn = vect[4];
+                String edicao = vect[5];
+                String paginas = vect[6];
+                String ano = vect[7];
+                double preco = Double.parseDouble(vect[8]);
+                int quantidade = Integer.parseInt(vect[9]) ;
+                String codigo = vect[10];
                 lista.add(conteudo);
                 
                 Livro livro = new Livro();
@@ -179,6 +216,7 @@ public class Livro extends Produto {
                 livro.setPreco(preco);
                 livro.setQuantidade(quantidade);
                 livro.setCodigo(codigo);
+                livro.setCategoria(categoria);
                 
                 livros.add(livro);
                 
@@ -219,8 +257,10 @@ public class Livro extends Produto {
 
     @Override
     public String toString() {
-        return "Livro{" + "titulo=" + titulo + ", autor=" + autor + ", paginas=" + paginas + ", isbn=" + isbn + ", editora=" + editora + ", ano=" + ano + ", edicao=" + edicao + '}';
+        return "Livro{" + "titulo=" + titulo + ", autor=" + autor + ", paginas=" + paginas + ", isbn=" + isbn + ", editora=" + editora + ", ano=" + ano + ", edicao=" + edicao + ", codigo=" + codigo + ", categoria=" + categoria + ", quantidade=" + quantidade + ", preco=" + preco + '}';
     }
+
+    
     
     
     
