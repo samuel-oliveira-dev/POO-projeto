@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author samuk
  */
-public class Livro extends Produto {
+public class Livro  {
     
     private String titulo;
     private String autor;
@@ -27,6 +27,10 @@ public class Livro extends Produto {
     private String editora;
     private String ano;
     private String edicao;
+    private String codigo;
+    private String categoria;
+    private int quantidade;
+    private double preco;
     
 
     
@@ -42,6 +46,38 @@ public class Livro extends Produto {
         this.editora = editora;
         this.ano = ano;
         this.edicao = edicao;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
     
     
@@ -126,7 +162,7 @@ public class Livro extends Produto {
         try {
             fw = new FileWriter(path, true);
             PrintWriter pw = new PrintWriter(fw);
-            pw.println(getTitulo()+","+getAutor()+","+getEditora()+","+getIsbn()+","+getEdicao()+","
+            pw.println(getTitulo()+","+getAutor()+","+getEditora()+"," +getCategoria()+ ","+ getIsbn()+","+getEdicao()+","
                     +getPaginas()+","+getAno()+","+getPreco()+","+getQuantidade()+","+getCodigo());
             pw.flush();
             pw.close();
