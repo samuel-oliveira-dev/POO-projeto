@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 Watchmen,Alan Moore,Vertigo,23456787654,7ª,400,2019,98.0,25,2233
 V de Vinganca,Alan Moore,Vertigo,23456789,4ª,220,2015,149.0,34,1234
 Corpo,Carlos Drummond de Andrade,Companhia das Letras,34567899876,6ª,160,2020,34.0,30,4455
 Os Miseraveis,Victor Hugo,Martin Claret,2345676543,6ª,1500,2019,87.9,6,1255
-=======
-Dom Casmurro,Machado de Assis,Martin Claret,Literatura Brasileira,234667788,5ª,220,2009,22.0,50,3344
-Etica,Baruch Espinosa,Autentica,Filosofia,2334455666777,4ª,300,2020,34.0,20,2345566777777
-Assim Falou Zaratustra,Frederich Nietzsche,Companhia das Letras,Filosofia,2456786557765,4ª,300,2020,25.0,30,7989894839498
-Quincas Borba,Machado de Assis,Martin Claret,Literatura Brasileira,4567898765434,7ª,200,2020,22.0,30,4968595868594
-O Alienista,Machado de Assis,Martin Claret,Literatura Brasileira,2345678765432,3ª,100,2019,22.0,30,4983838483839
->>>>>>> branch-s
