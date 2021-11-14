@@ -52,6 +52,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         mnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rating.png"))); // NOI18N
         mnClientes.setText("Clientes");
+        mnClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnClientesMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnClientes);
 
         setJMenuBar(jMenuBar1);
@@ -63,10 +68,12 @@ public class TelaInicial extends javax.swing.JFrame {
     private void mnLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnLivrosMouseClicked
         TelaCadastrarProdutos cadLivros = new TelaCadastrarProdutos();
         cadLivros.setVisible(true);
-
-        this.setVisible(false);
-        this.dispose();
     }//GEN-LAST:event_mnLivrosMouseClicked
+
+    private void mnClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnClientesMouseClicked
+        TelaCadastrarCliente cadClientes = new TelaCadastrarCliente();
+        cadClientes.setVisible(true);
+    }//GEN-LAST:event_mnClientesMouseClicked
 
     /**
      * @param args the command line arguments
