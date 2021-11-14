@@ -5,6 +5,10 @@
  */
 package telas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Valter
@@ -27,19 +31,24 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagens/thumb.jpg"));
+        Image image = icon.getImage();
+        Painel = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         mnLivros = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         mnClientes = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/thumb.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1490, 990));
+        getContentPane().add(Painel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1550, 1030));
 
         mnLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/books.png"))); // NOI18N
         mnLivros.setText("Livros");
@@ -48,6 +57,28 @@ public class TelaInicial extends javax.swing.JFrame {
                 mnLivrosMouseClicked(evt);
             }
         });
+        mnLivros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnLivrosActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("Cadastrar Livro");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnLivros.add(jMenuItem1);
+
+        jMenuItem2.setText("Consultar Estoque");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mnLivros.add(jMenuItem2);
+
         jMenuBar1.add(mnLivros);
 
         mnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rating.png"))); // NOI18N
@@ -66,14 +97,31 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnLivrosMouseClicked
-        TelaCadastrarProdutos cadLivros = new TelaCadastrarProdutos();
+        /*TelaCadastrarProdutos cadLivros = new TelaCadastrarProdutos();
         cadLivros.setVisible(true);
+
+        this.setVisible(false);
+        this.dispose();
+        */
     }//GEN-LAST:event_mnLivrosMouseClicked
 
-    private void mnClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnClientesMouseClicked
-        TelaCadastrarCliente cadClientes = new TelaCadastrarCliente();
-        cadClientes.setVisible(true);
-    }//GEN-LAST:event_mnClientesMouseClicked
+    private void mnLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLivrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnLivrosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        TelaCadastroLivro obj = new TelaCadastroLivro();
+        Painel.add(obj);
+        obj.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        TelaConsultaLivros obj = new TelaConsultaLivros();
+        Painel.add(obj);
+        obj.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,8 +159,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JDesktopPane Painel;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu mnClientes;
     private javax.swing.JMenu mnLivros;
     // End of variables declaration//GEN-END:variables
