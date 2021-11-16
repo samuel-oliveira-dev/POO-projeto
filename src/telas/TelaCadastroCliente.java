@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
  *
  * @author samuk
  */
-public class TelaCadCliente extends javax.swing.JInternalFrame {
+public class TelaCadastroCliente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form TelaCadCliente
      */
-    public TelaCadCliente() {
+    public TelaCadastroCliente() {
         initComponents();
     }
 
@@ -42,7 +42,6 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Cadastrar Cliente");
 
@@ -50,9 +49,26 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Logradouro: ");
 
+        try {
+            jTextCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         jLabel2.setText("CPF:");
 
         jLabel4.setText("CEP:");
+
+        try {
+            jTextFieldCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTextFieldCEP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCEPActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("E-mail:");
 
@@ -120,9 +136,7 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Cliente cliente = new Cliente();
         cliente.setNome(jTextNome.getText());
-        String cpf = jTextCPF.getText().replaceAll(".", "");
-        cpf.replaceAll("-", "");
-        cliente.setCpf(cpf);
+        cliente.setCpf(jTextCPF.getText());
         cliente.setCep(jTextFieldCEP.getText());
         cliente.setEmail(jFormattedTextEmail.getText());
         cliente.setLogradouro(jTextFieldLogradouro.getText());
@@ -136,6 +150,10 @@ public class TelaCadCliente extends javax.swing.JInternalFrame {
         jFormattedTextEmail.setText("");
         jTextFieldLogradouro.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCEPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCEPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

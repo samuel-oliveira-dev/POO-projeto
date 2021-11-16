@@ -44,6 +44,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         mnClientes = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
@@ -84,6 +85,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         mnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rating.png"))); // NOI18N
         mnClientes.setText("Clientes");
+        mnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnClientesActionPerformed(evt);
+            }
+        });
 
         jMenuItem3.setText("Cadastrar Cliente");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +98,14 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         mnClientes.add(jMenuItem3);
+
+        jMenuItem4.setText("Consultar Cliente");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        mnClientes.add(jMenuItem4);
 
         jMenuBar1.add(mnClientes);
 
@@ -116,7 +130,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        TelaCadastroLivro obj = new TelaCadastroLivro();
+        TelaCadLivro obj = new TelaCadLivro();
         Painel.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -130,10 +144,23 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        TelaCadCliente obj = new TelaCadCliente();
+        TelaCadastroCliente obj = new TelaCadastroCliente();
         Painel.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+         TelaConsultaClientes obj = new TelaConsultaClientes();
+        Painel.add(obj);
+        obj.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void mnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnClientesActionPerformed
+        // TODO add your handling code here:
+        
+       
+    }//GEN-LAST:event_mnClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,6 +203,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu mnClientes;
     private javax.swing.JMenu mnLivros;
     // End of variables declaration//GEN-END:variables

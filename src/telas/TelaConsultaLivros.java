@@ -50,7 +50,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Consulta de Produtos");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titulo", "Autor", "Codigo", "ISBN" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Titulo", "Autor", "Codigo", "ISBN" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoActionPerformed(evt);
@@ -70,18 +70,17 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Titulo", "Autor", "Editora", "ISBN", "Edicao", "Paginas", "Ano", "Preco", "Quantidade", "Codigo", "Categoria"
+                "Titulo", "Autor", "Editora", "Genero", "ISBN", "Edicao", "Paginas", "Ano", "Preco", "Quantidade", "Codigo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTableLivros.setColumnSelectionAllowed(false);
         jTableLivros.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableLivros);
         if (jTableLivros.getColumnModel().getColumnCount() > 0) {
@@ -98,7 +97,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
             jTableLivros.getColumnModel().getColumn(10).setResizable(false);
         }
 
-        jToggleButton1.setText("Fechar");
+        jToggleButton1.setText("Cancelar");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -125,15 +124,12 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
                 .addComponent(jTextFieldArgumento, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(341, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(490, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,14 +140,14 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
                     .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldArgumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton1)
-                .addContainerGap())
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        setBounds(30, 10, 945, 468);
+        setBounds(30, 10, 1094, 468);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoActionPerformed
@@ -166,22 +162,26 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         
         limpar();
         //Adicionar sistema busca
-        Busca b = new Busca();
-        ArrayList<Livro> populacao = b.buscar(jComboBoxTipo.getSelectedItem().toString(),jTextFieldArgumento.getText());
+        //Busca b = new Busca();
+        Livro lv = new Livro();
+        ArrayList<Livro> populacao = lv.busca(jComboBoxTipo.getSelectedItem().toString(),jTextFieldArgumento.getText());
+        
         
         
         
         DefaultTableModel dtm =  (DefaultTableModel) jTableLivros.getModel();
-            Livro lv = new Livro();
+            
             ArrayList<Livro> lista = lv.ler();
-        
-            for(Livro l : populacao){
+            
+            if(jComboBoxTipo.getSelectedItem().toString().equals("Todos")){
+                for(Livro l : lista){
                 
                 dtm.addRow(
                     new Object[]{
                         l.getTitulo(),
                         l.getAutor(),
                         l.getEditora(),
+                        l.getCategoria(),
                         l.getIsbn(),
                         l.getEdicao(),
                         l.getPaginas(),
@@ -199,6 +199,36 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
             
             
         }
+            } else {
+              
+                for(Livro l : populacao){
+                
+                dtm.addRow(
+                    new Object[]{
+                        l.getTitulo(),
+                        l.getAutor(),
+                        l.getEditora(),
+                        l.getCategoria(),
+                        l.getIsbn(),
+                        l.getEdicao(),
+                        l.getPaginas(),
+                        l.getAno(),
+                        l.getPreco(),
+                        l.getQuantidade(),
+                        l.getCodigo(),
+                        
+                        
+                        
+                        
+                        
+                    }
+            );
+            
+            
+        }
+            }
+        
+            
         
         
         

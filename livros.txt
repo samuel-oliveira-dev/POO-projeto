@@ -1,4 +1,2 @@
-Watchmen,Alan Moore,Vertigo,23456787654,7ª,400,2019,98.0,25,2233
-V de Vinganca,Alan Moore,Vertigo,23456789,4ª,220,2015,149.0,34,1234
-Corpo,Carlos Drummond de Andrade,Companhia das Letras,34567899876,6ª,160,2020,34.0,30,4455
-Os Miseraveis,Victor Hugo,Martin Claret,2345676543,6ª,1500,2019,87.9,6,1255
+V de Vinganca,Alan Moore,Vertigo,Literatura Estrangeira,3747848474744,4,234,2020,89.0,22,3847364363636
+Dom Casmurro,Machado de Assis,Martin Claret,Literatura Brasileira,3737274737,5,200,2020,200.0,500,3466777655

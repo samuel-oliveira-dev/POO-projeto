@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author samuk
  */
-public class Livro  {
+public class Livro  implements Cadastro{
     
     private String titulo;
     private String autor;
@@ -176,13 +176,13 @@ public class Livro  {
     }
     
     
-    public ArrayList<Livro> ler() 
+    public ArrayList ler() 
     {
-        ArrayList<String[]> lista = new ArrayList<String[]>();
+        //ArrayList<String[]> lista = new ArrayList<String[]>();
         ArrayList<Livro> livros = new ArrayList<>();
         String path = System.getProperty("user.dir");
         path = path + "\\livros.txt";
-        String[] conteudo = new String[10];
+        
         
         try (BufferedReader br = new BufferedReader(new FileReader(path)))
         {
@@ -203,7 +203,7 @@ public class Livro  {
                 double preco = Double.parseDouble(vect[8]);
                 int quantidade = Integer.parseInt(vect[9]) ;
                 String codigo = vect[10];
-                lista.add(conteudo);
+                //lista.add(conteudo);
                 
                 Livro livro = new Livro();
                 livro.setAutor(autor);
@@ -249,10 +249,33 @@ public class Livro  {
         return livros;
         
         
-        
+     
+    }
     
+    
+    public ArrayList busca(String categoria, String argumento){
         
-        
+        Livro livro = new Livro();
+        ArrayList<Livro>  lista = livro.ler();
+        ArrayList<Livro> resultado = new ArrayList<>();
+        for(Livro l : lista){
+            if(argumento.toUpperCase().equals(l.getAutor().toUpperCase()) && categoria.equals("Autor")){
+                resultado.add(l);
+            } else {
+                if(argumento.toUpperCase().equals(l.getTitulo().toUpperCase()) && categoria.equals("Titulo")){
+                    resultado.add(l);
+                } else{
+                    if(argumento.toUpperCase().equals(l.getCodigo().toUpperCase()) && categoria.equals("Codigo")){
+                        resultado.add(l);
+                    } else {
+                        if(argumento.equals(l.getIsbn()) && categoria.equals("ISBN")){
+                            resultado.add(l);
+                        }
+                    }
+                }
+            }
+        }
+        return resultado;
     }
 
     @Override
