@@ -42,7 +42,6 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        btnVoltar = new javax.swing.JButton();
         btnCadastrarUsuario = new javax.swing.JButton();
         comboTipo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -52,17 +51,10 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jDesktopPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar Usuários"));
-
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
 
         btnCadastrarUsuario.setText("Cadastrar");
         btnCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +75,6 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 51, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add-user.png"))); // NOI18N
 
-        jDesktopPane1.setLayer(btnVoltar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btnCadastrarUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(comboTipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -104,22 +95,20 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnVoltar)
-                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtUsuarioCad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3))
-                                    .addGap(26, 26, 26)
-                                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(btnCadastrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtUsuarioCad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(26, 26, 26)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnCadastrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -141,9 +130,7 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCadastrarUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVoltar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,11 +206,6 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCadastrarUsuarioActionPerformed
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        tela.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -252,16 +234,13 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaCadastrarUsuario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaCadastrarUsuario().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarUsuario;
-    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
