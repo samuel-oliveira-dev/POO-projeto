@@ -5,11 +5,14 @@
  */
 package telas;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 /**
  *
@@ -153,8 +156,20 @@ public class TelaUsuario extends javax.swing.JFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         TelaCadastrarUsuario cadastrarUsuario = new TelaCadastrarUsuario(this);
-
+        
+        cadastrarUsuario.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        cadastrarUsuario.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent evt){
+                java.awt.EventQueue.invokeLater(() -> {
+                    new TelaUsuario().setVisible(true);
+                });
+                cadastrarUsuario.dispose();
+            }
+        });
+        
         this.setVisible(false);
+        this.dispose();
         cadastrarUsuario.setVisible(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -212,8 +227,20 @@ public class TelaUsuario extends javax.swing.JFrame {
                 if(usuario.equals(lista.get(i).getNome()) && senha.equals(lista.get(i).getSenha())){
                     avalia = true;
                     TelaInicial tela = new TelaInicial();
+                    tela.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                    tela.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosing(WindowEvent evt){
+                            Object[] options = {"Sim", "Nao"};
+                            int sairSistema = JOptionPane.showOptionDialog(null, "Deseja realmente fechar o do Sistema?", "Fechar Sistema", 0, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                            if (sairSistema == 1) {
+                                tela.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                            }else{
+                                System.exit(0);
+                            }
+                        }
+                    });
                     tela.setVisible(true);
-
                     this.setVisible(false);
                     this.dispose();
                 }
@@ -255,10 +282,8 @@ public class TelaUsuario extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaUsuario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaUsuario().setVisible(true);
         });
     }
 

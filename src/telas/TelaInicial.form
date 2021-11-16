@@ -41,9 +41,12 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Clientes"/>
           </Properties>
+<<<<<<< HEAD
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnClientesActionPerformed"/>
           </Events>
+=======
+>>>>>>> d92ae06879bc5aab8aa04bf744edba8fe7683643
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>

@@ -7,14 +7,17 @@ package telas;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 /**
  *
  * @author Valter
  */
 public class TelaInicial extends javax.swing.JFrame {
-
     /**
      * Creates new form TelaInicial
      */
@@ -190,10 +193,23 @@ public class TelaInicial extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaInicial().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            TelaInicial tela = new TelaInicial();
+            tela.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            tela.addWindowListener(new WindowAdapter() {
+                
+                @Override
+                public void windowClosing(WindowEvent evt){
+                    Object[] options = {"Sim", "Nao"};
+                    int sairSistema = JOptionPane.showOptionDialog(null, "Deseja realmente fechar o do Sistema?", "Fechar Sistema", 0, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                    if (sairSistema == 1) {
+                        tela.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                    }else{
+                        System.exit(0);
+                    }
+                }
+            });
+            tela.setVisible(true);
         });
     }
 
