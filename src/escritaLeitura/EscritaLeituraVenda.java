@@ -4,10 +4,27 @@
  */
 package escritaLeitura;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author samuk
  */
-public class EscritaLeituraVenda {
+public class EscritaLeituraVenda extends EscritaLeitura{
+
+    @Override
+    public void salvar(Cadastravel c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList buscar(String arg1, String arg2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList ler() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

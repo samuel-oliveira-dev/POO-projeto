@@ -42,7 +42,7 @@ public class EscritaLeituraCliente extends EscritaLeitura {
     }
     
     
-    private String undoMaskCpf(String arg){
+    public String undoMaskCpf(String arg){
         String[] mask1 = arg.split("\\.");
         
         String res = "";

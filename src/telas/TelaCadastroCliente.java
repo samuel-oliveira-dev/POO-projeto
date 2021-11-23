@@ -147,7 +147,7 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
         cliente.setLogradouro(jTextFieldLogradouro.getText());
         elc.salvar(cliente);
         
-        JOptionPane.showMessageDialog(null, "Cliente Cadastrado com Sucesso!");
+        JOptionPane.showMessageDialog(this, "Cliente Cadastrado com Sucesso!");
         
         
         

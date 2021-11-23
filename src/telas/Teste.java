@@ -16,16 +16,7 @@ import escritaLeitura.EscritaLeituraLivro;
  */
 public class Teste {
     public static void main(String[] agrs){
-      EscritaLeituraLivro ell = new EscritaLeituraLivro(); 
-      Livro livro = new Livro();
-      ArrayList<Livro> res = ell.buscar("Autor", "Machado de Assis");
-      Livro liv = res.get(0);
-      EscritaLeituraLivro es = new  EscritaLeituraLivro();
-      
-      es.salvar(liv);
-      
-      
-     
+    
         
         
     }

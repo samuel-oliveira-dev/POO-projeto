@@ -261,7 +261,7 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         
         ell.salvar(livro);
         
-        JOptionPane.showMessageDialog(null, "Livro Cadastrado com Sucesso!");
+        JOptionPane.showMessageDialog(this, "Livro Cadastrado com Sucesso!");
         
         
         jTextFieldTitulo.setText("");

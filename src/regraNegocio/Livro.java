@@ -159,6 +159,7 @@ public class Livro  implements Cadastravel{
    public void vender(String codigo, int quantidade) {
        EscritaLeituraLivro ell = new EscritaLeituraLivro();
        ArrayList<Livro> livros = ell.ler();
+       Livro livro;
        
        for(Livro l:livros){
            if(codigo.equals(l.getCodigo())){

@@ -7,6 +7,7 @@ package regraNegocio;
 import regraNegocio.Livro;
 import java.util.ArrayList;
 import escritaLeitura.Cadastravel;
+import java.util.Date;
 
 /**
  *
@@ -16,18 +17,54 @@ public class Venda implements Cadastravel{
     
     private int qtdVendida;
     private Livro livro;
+    private Cliente cliente;
+    private Date data;
+
+    public Venda(int qtdVendida, Livro livro, Cliente cliente, Date data) {
+        this.qtdVendida = qtdVendida;
+        this.livro = livro;
+        this.cliente = cliente;
+        this.data = data;
+    }
     
     
     
 
-    
-    public String salvar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getQtdVendida() {
+        return qtdVendida;
     }
 
-    
-    public ArrayList<Cadastravel> ler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setQtdVendida(int qtdVendida) {
+        this.qtdVendida = qtdVendida;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
     }
     
+    
+    
+    
+    
+
 }

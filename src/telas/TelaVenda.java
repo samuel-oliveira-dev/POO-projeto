@@ -4,10 +4,13 @@
  */
 package telas;
 
+import escritaLeitura.EscritaLeituraCliente;
 import regraNegocio.Livro;
 import escritaLeitura.EscritaLeituraLivro;
 import java.util.ArrayList;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import regraNegocio.Cliente;
 
 /**
  *
@@ -23,7 +26,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
     }
     
     public void setJTextCodigo(String cod){
-        jTextFieldCodigo.setText(cod);
+        jFormattedTextFieldCodigo.setText(cod);
     }
     
     public void setTextPane(String str){
@@ -41,27 +44,21 @@ public class TelaVenda extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jSpinnerQuantidade = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jFormattedTextFieldCPF = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldCodigo = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
 
         jLabel1.setText("Codigo:");
-
-        jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCodigoActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Quantidade:");
 
@@ -87,6 +84,28 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         jTextPane1.setEditable(false);
         jScrollPane2.setViewportView(jTextPane1);
 
+        try {
+            jFormattedTextFieldCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextFieldCPF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jFormattedTextFieldCPFMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jFormattedTextFieldCPFMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jFormattedTextFieldCPFMousePressed(evt);
+            }
+        });
+        jFormattedTextFieldCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldCPFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,9 +117,9 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldCodigo)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jFormattedTextFieldCodigo)
+                    .addComponent(jFormattedTextFieldCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -121,21 +140,21 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSpinnerQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2)
+                        .addComponent(jFormattedTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(24, 24, 24))
         );
@@ -143,15 +162,29 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCodigoActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         EscritaLeituraCliente elc = new EscritaLeituraCliente();
         
-        Livro l = new Livro();
-        l.vender(jTextFieldCodigo.getText(), Integer.parseInt(jSpinnerQuantidade.getValue().toString()));
+        Cliente cliente;
+        ArrayList<Cliente> clientes = elc.buscar("Codigo", elc.undoMaskCpf(jFormattedTextFieldCPF.getText()));
+        
+        if(clientes.size() != 0){
+            cliente = clientes.get(0);
+        } else {
+            String[] opcoes = {"Sim", "Nao"};
+            int cadastrarNovoCliente = JOptionPane.showOptionDialog(this, "Cliente sem Cadastro. Deseja Cadastra-lo?", "Cadastro Inexistente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, frameIcon, opcoes, "Sim");
+            if (cadastrarNovoCliente == 0){
+                TelaCadastroCliente obj = new TelaCadastroCliente();
+                JDesktopPane desk = getDesktopPane();
+                desk.add(obj);
+                obj.setVisible(true);
+            }
+        }
+        
+        
+        //Livro l = new Livro();
+        //l.vender(jFormattedTextFieldCodigo.getText(), Integer.parseInt(jSpinnerQuantidade.getValue().toString()));
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -160,9 +193,9 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         EscritaLeituraLivro ell = new EscritaLeituraLivro();
         Livro livro1 = new Livro();
         
-        ArrayList<Livro> resultado = ell.buscar("Codigo", jTextFieldCodigo.getText());
+        ArrayList<Livro> resultado = ell.buscar("Codigo", jFormattedTextFieldCodigo.getText());
         if(resultado.size() == 0){
-            JOptionPane.showMessageDialog(null, "Codigo invalido!");
+            JOptionPane.showMessageDialog(this, "Codigo invalido!");
         } else {
             jTextPane1.setText("Titulo: "+resultado.get(0).getTitulo()+"\nAutor: "+resultado.get(0).getAutor()+"\nPreco: "+resultado.get(0).getPreco()+"\nQuantidade: "+resultado.get(0).getQuantidade());
         }
@@ -172,17 +205,42 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jFormattedTextFieldCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldCPFActionPerformed
+
+    private void jFormattedTextFieldCPFMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCPFMouseExited
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jFormattedTextFieldCPFMouseExited
+
+    private void jFormattedTextFieldCPFMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCPFMousePressed
+        // TODO add your handling code here:
+       
+        
+    }//GEN-LAST:event_jFormattedTextFieldCPFMousePressed
+
+    private void jFormattedTextFieldCPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCPFMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jFormattedTextFieldCPFMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCodigo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinnerQuantidade;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
