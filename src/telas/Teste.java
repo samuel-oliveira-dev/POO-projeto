@@ -5,8 +5,10 @@
 package telas;
 
 
+import regraNegocio.Livro;
 import java.util.ArrayList;
 import java.util.Scanner;
+import escritaLeitura.EscritaLeituraLivro;
 
 /**
  *
@@ -14,14 +16,16 @@ import java.util.Scanner;
  */
 public class Teste {
     public static void main(String[] agrs){
-        
+      EscritaLeituraLivro ell = new EscritaLeituraLivro(); 
       Livro livro = new Livro();
-      ArrayList<Livro> res = livro.busca("Autor", "Alan Moore");
+      ArrayList<Livro> res = ell.buscar("Autor", "Machado de Assis");
+      Livro liv = res.get(0);
+      EscritaLeituraLivro es = new  EscritaLeituraLivro();
       
-      for(Livro l: res){
-          System.out.println(l.toString());
-      }
+      es.salvar(liv);
       
+      
+     
         
         
     }

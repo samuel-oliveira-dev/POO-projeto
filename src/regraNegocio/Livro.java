@@ -2,23 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package telas;
+package regraNegocio;
 
 import java.awt.List;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import escritaLeitura.Cadastravel;
+import escritaLeitura.EscritaLeituraLivro;
 
 /**
  *
  * @author samuk
  */
-public class Livro  implements Cadastro{
+public class Livro  implements Cadastravel{
     
     private String titulo;
     private String autor;
@@ -138,6 +145,8 @@ public class Livro  implements Cadastro{
     public void setEdicao(String edicao) {
         this.edicao = edicao;
     }
+    
+    
 
     
     
@@ -147,13 +156,54 @@ public class Livro  implements Cadastro{
     
     
     
-   
+   public void vender(String codigo, int quantidade) {
+       EscritaLeituraLivro ell = new EscritaLeituraLivro();
+       ArrayList<Livro> livros = ell.ler();
+       
+       for(Livro l:livros){
+           if(codigo.equals(l.getCodigo())){
+               if(quantidade <= l.getQuantidade()){
+                   l.setQuantidade(l.getQuantidade() - quantidade);
+                   JOptionPane.showMessageDialog(null, "Compra concluída!");
+               } else {
+                   JOptionPane.showMessageDialog(null, "Estoque insuficiente,por favor revise o pedido.");
+               }
+                   
+               
+           }
+       }
+       
+       for(Livro l:livros){
+           System.out.println(l.toString());
+       }
+       
+       String path = System.getProperty("user.dir");
+        path = path + "\\livros.txt";
+       FileWriter fw; 
+       try{
+           fw = new FileWriter(path);
+           
+           for(Livro l:livros){
+               String line = (l.getTitulo()+","+l.getAutor()+","+l.getEditora()+"," +l.getCategoria()+ ","+ l.getIsbn()+","+l.getEdicao()+","
+                    +l.getPaginas()+","+l.getAno()+","+l.getPreco()+","+l.getQuantidade()+","+l.getCodigo());
+               fw.write(line + System.lineSeparator());
+           }
+           fw.close();
+       }catch(IOException ex){
+           System.out.println(ex);
+       }
+       
+      
+       
+       
+        
+   }
         
     
     
     
     
-    public String salvar(){
+    /*public String salvar(){
         
         FileWriter fw;
         String path = System.getProperty("user.dir");
@@ -174,11 +224,11 @@ public class Livro  implements Cadastro{
         
         return "Cadastrado com sucesso!";
     }
+    */
     
-    
-    public ArrayList ler() 
+    /*public ArrayList ler() 
     {
-        //ArrayList<String[]> lista = new ArrayList<String[]>();
+       
         ArrayList<Livro> livros = new ArrayList<>();
         String path = System.getProperty("user.dir");
         path = path + "\\livros.txt";
@@ -203,7 +253,7 @@ public class Livro  implements Cadastro{
                 double preco = Double.parseDouble(vect[8]);
                 int quantidade = Integer.parseInt(vect[9]) ;
                 String codigo = vect[10];
-                //lista.add(conteudo);
+                
                 
                 Livro livro = new Livro();
                 livro.setAutor(autor);
@@ -222,21 +272,7 @@ public class Livro  implements Cadastro{
                 
                 line = br.readLine();
                 
-                /*Livro livro = new Livro();
-                
-                livro.setTitulo(titulo);
-                livro.setAutor(autor);
-                livro.setEditora(editora);
-                livro.setIsbn(isbn);
-                livro.setEdicao(edicao);
-                livro.setPaginas(paginas);
-                livro.setAno(ano);
-                livro.setPreco(preco);
-                livro.setQuantidade(qtd);
-                livro.setCodigo(cod);
-                
-                livros.add(livro);
-*/
+               
 
 
             
@@ -251,18 +287,19 @@ public class Livro  implements Cadastro{
         
      
     }
+    /*
     
     
-    public ArrayList busca(String categoria, String argumento){
+    /*public ArrayList busca(String categoria, String argumento){
         
         Livro livro = new Livro();
         ArrayList<Livro>  lista = livro.ler();
         ArrayList<Livro> resultado = new ArrayList<>();
         for(Livro l : lista){
-            if(argumento.toUpperCase().equals(l.getAutor().toUpperCase()) && categoria.equals("Autor")){
+            if(l.getAutor().toUpperCase().contains(argumento.toUpperCase()) && categoria.equals("Autor")){
                 resultado.add(l);
             } else {
-                if(argumento.toUpperCase().equals(l.getTitulo().toUpperCase()) && categoria.equals("Titulo")){
+                if(l.getTitulo().toUpperCase().contains(argumento.toUpperCase()) && categoria.equals("Titulo")){
                     resultado.add(l);
                 } else{
                     if(argumento.toUpperCase().equals(l.getCodigo().toUpperCase()) && categoria.equals("Codigo")){
@@ -277,6 +314,7 @@ public class Livro  implements Cadastro{
         }
         return resultado;
     }
+    */
 
     @Override
     public String toString() {

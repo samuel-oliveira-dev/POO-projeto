@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package telas;
+package regraNegocio;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,12 +13,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import escritaLeitura.Cadastravel;
 
 /**
  *
  * @author samuk
  */
-public class Cliente implements Cadastro{
+public class Cliente implements Cadastravel{
     
     
     private String nome;
@@ -84,7 +85,7 @@ public class Cliente implements Cadastro{
     
     
     
-    public String salvar(){
+    /*public String salvar(){
         try {
             String s = System.getProperty("user.dir");
             s = s + "\\clientes.txt";
@@ -99,8 +100,9 @@ public class Cliente implements Cadastro{
         }
         return "Cadastrado com sucesso!";
     }
+*/
     
-    private String undoMaskCpf(String arg){
+    /*private String undoMaskCpf(String arg){
         String[] mask1 = arg.split("\\.");
         
         String res = "";
@@ -120,9 +122,9 @@ public class Cliente implements Cadastro{
         
         return resdef;
     }
-
+*/
     
-    public ArrayList<Cliente> busca(String parametro, String argumento) {
+    /*public ArrayList<Cliente> busca(String parametro, String argumento) {
         
         Cliente cl = new Cliente();
         ArrayList<Cliente> resultado = new ArrayList<>();
@@ -149,9 +151,10 @@ public class Cliente implements Cadastro{
         
         
     }
+*/
 
-    @Override
-    public ArrayList ler() {
+    
+    /*public ArrayList ler() {
         
         String path = System.getProperty("user.dir");
         path = path + "\\clientes.txt";
@@ -186,8 +189,8 @@ public class Cliente implements Cadastro{
             line = br.readLine();
             
             
-        }
-        } catch (IOException ex) {
+               }
+          } catch (IOException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -197,4 +200,5 @@ public class Cliente implements Cadastro{
         
         
     }
+*/
 }

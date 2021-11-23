@@ -45,6 +45,7 @@ public class TelaInicial extends javax.swing.JFrame {
         mnLivros = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         mnClientes = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -83,6 +84,14 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         mnLivros.add(jMenuItem2);
+
+        jMenuItem5.setText("Realizar Venda");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        mnLivros.add(jMenuItem5);
 
         jMenuBar1.add(mnLivros);
 
@@ -133,7 +142,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        TelaCadLivro obj = new TelaCadLivro();
+        TelaCadastroLivro obj = new TelaCadastroLivro();
         Painel.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -164,6 +173,13 @@ public class TelaInicial extends javax.swing.JFrame {
         
        
     }//GEN-LAST:event_mnClientesActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        TelaVenda obj = new TelaVenda();
+        Painel.add(obj);
+        obj.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,6 +236,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu mnClientes;
     private javax.swing.JMenu mnLivros;
     // End of variables declaration//GEN-END:variables

@@ -1,2 +1,3 @@
-V de Vinganca,Alan Moore,Vertigo,Literatura Estrangeira,3747848474744,4,234,2020,89.0,22,3847364363636
-Dom Casmurro,Machado de Assis,Martin Claret,Literatura Brasileira,3737274737,5,200,2020,200.0,500,3466777655
+Dom Casmurro,Machado de Assis,Martin Claret,Literatura Brasileira,8749894030493,2,220,2020,22.0,48,2537483849
+Etica,Baruch Espinosa,Autentica,Literatura Estrangeira,6374838488383,2,300,2009,45.0,50,2837498384O
+O Lobo da Estepe,Hermann Hesse,Best Bolso,Literatura Estrangeira,8498388388382,2,340,2020,45.0,50,7637382983

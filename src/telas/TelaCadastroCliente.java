@@ -4,6 +4,8 @@
  */
 package telas;
 
+import regraNegocio.Cliente;
+import escritaLeitura.EscritaLeituraCliente;
 import javax.swing.JOptionPane;
 
 /**
@@ -134,13 +136,18 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        EscritaLeituraCliente elc = new EscritaLeituraCliente();
+        
+        
         Cliente cliente = new Cliente();
         cliente.setNome(jTextNome.getText());
         cliente.setCpf(jTextCPF.getText());
         cliente.setCep(jTextFieldCEP.getText());
         cliente.setEmail(jFormattedTextEmail.getText());
         cliente.setLogradouro(jTextFieldLogradouro.getText());
-        JOptionPane.showMessageDialog(null, cliente.salvar());
+        elc.salvar(cliente);
+        
+        JOptionPane.showMessageDialog(null, "Cliente Cadastrado com Sucesso!");
         
         
         

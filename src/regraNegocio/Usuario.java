@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package telas;
+package regraNegocio;
 
+import regraNegocio.Cliente;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;

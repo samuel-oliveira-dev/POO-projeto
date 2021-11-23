@@ -4,6 +4,8 @@
  */
 package telas;
 
+import regraNegocio.Cliente;
+import escritaLeitura.EscritaLeituraCliente;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -141,12 +143,12 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        EscritaLeituraCliente elc = new EscritaLeituraCliente();
         limpar();
         
         
         Cliente cliente = new Cliente();
-        ArrayList<Cliente> leitura = cliente.ler();
+        ArrayList<Cliente> leitura = elc.ler();
         
         DefaultTableModel dtm = (DefaultTableModel) jTableConsulta.getModel();
         
@@ -166,7 +168,7 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
             );
         }
         } else {
-            ArrayList<Cliente> resultado = cliente.busca(jComboBoxTipo.getSelectedItem().toString(), jTextFieldArgumento.getText());
+            ArrayList<Cliente> resultado = elc.buscar(jComboBoxTipo.getSelectedItem().toString(), jTextFieldArgumento.getText());
             for(Cliente c : resultado){
             dtm.addRow(
                     new Object []{
