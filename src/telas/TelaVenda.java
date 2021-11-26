@@ -7,10 +7,14 @@ package telas;
 import escritaLeitura.EscritaLeituraCliente;
 import regraNegocio.Livro;
 import escritaLeitura.EscritaLeituraLivro;
+import escritaLeitura.EscritaLeituraVenda;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import regraNegocio.Cliente;
+import regraNegocio.Venda;
 
 /**
  *
@@ -165,12 +169,24 @@ public class TelaVenda extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          EscritaLeituraCliente elc = new EscritaLeituraCliente();
+         EscritaLeituraLivro ell = new EscritaLeituraLivro();
+         EscritaLeituraVenda elv = new EscritaLeituraVenda();
         
         Cliente cliente;
-        ArrayList<Cliente> clientes = elc.buscar("Codigo", elc.undoMaskCpf(jFormattedTextFieldCPF.getText()));
+        
+        ArrayList<Cliente> clientes = elc.buscar("CPF", jFormattedTextFieldCPF.getText());
+        ArrayList<Livro> livros = ell.buscar("Codigo", jFormattedTextFieldCodigo.getText());
         
         if(clientes.size() != 0){
             cliente = clientes.get(0);
+            Calendar data = Calendar.getInstance();
+            int qtd = Integer.parseInt(jSpinnerQuantidade.getValue().toString());
+            Venda venda = new Venda(qtd, livros.get(0), clientes.get(0), data);
+            elv.salvar(venda);
+            elv.vender(venda.getLivro(), venda.getQtdVendida());
+            
+            
+            
         } else {
             String[] opcoes = {"Sim", "Nao"};
             int cadastrarNovoCliente = JOptionPane.showOptionDialog(this, "Cliente sem Cadastro. Deseja Cadastra-lo?", "Cadastro Inexistente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, frameIcon, opcoes, "Sim");
@@ -179,7 +195,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                 JDesktopPane desk = getDesktopPane();
                 desk.add(obj);
                 obj.setVisible(true);
-            }
+            } 
         }
         
         

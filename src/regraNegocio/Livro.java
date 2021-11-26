@@ -20,12 +20,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import escritaLeitura.Cadastravel;
 import escritaLeitura.EscritaLeituraLivro;
+import java.io.Serializable;
 
 /**
  *
  * @author samuk
  */
-public class Livro  implements Cadastravel{
+public class Livro  implements Cadastravel, Serializable{
     
     private String titulo;
     private String autor;

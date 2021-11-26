@@ -7,6 +7,7 @@ package telas;
 import regraNegocio.Cliente;
 import escritaLeitura.EscritaLeituraCliente;
 import javax.swing.JOptionPane;
+import regraNegocio.ValidacaoEntradas;
 
 /**
  *
@@ -137,8 +138,19 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         EscritaLeituraCliente elc = new EscritaLeituraCliente();
+        ValidacaoEntradas vld = new ValidacaoEntradas();
         
         
+        String nome = jTextNome.getText();
+        String cpf = jTextCPF.getText();
+        String cep = jTextFieldCEP.getText();
+        String email = jTextFieldCEP.getText();
+        String logradouro = jTextFieldLogradouro.getText();
+        
+        
+        if(vld.isCampoVazio(nome)){
+            
+        }
         Cliente cliente = new Cliente();
         cliente.setNome(jTextNome.getText());
         cliente.setCpf(jTextCPF.getText());

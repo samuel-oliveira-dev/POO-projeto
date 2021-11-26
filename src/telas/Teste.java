@@ -5,10 +5,12 @@
 package telas;
 
 
+import escritaLeitura.EscritaLeituraCliente;
 import regraNegocio.Livro;
 import java.util.ArrayList;
 import java.util.Scanner;
 import escritaLeitura.EscritaLeituraLivro;
+import regraNegocio.Cliente;
 
 /**
  *
@@ -17,6 +19,11 @@ import escritaLeitura.EscritaLeituraLivro;
 public class Teste {
     public static void main(String[] agrs){
     
+        EscritaLeituraCliente elc = new EscritaLeituraCliente();
+        ArrayList<Cliente> clientes = elc.buscar("Todos", "");
+        for(Cliente c:clientes){
+            System.out.println(c.toString());
+        }
         
         
     }

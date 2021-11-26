@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import escritaLeitura.Cadastravel;
+import java.io.Serializable;
 
 /**
  *
  * @author samuk
  */
-public class Cliente implements Cadastravel{
+public class Cliente implements Cadastravel, Serializable{
     
     
     private String nome;

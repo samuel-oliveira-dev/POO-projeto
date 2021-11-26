@@ -76,7 +76,7 @@ public class EscritaLeituraCliente extends EscritaLeitura {
             if(parametro.equals("Nome") && c.getNome().toUpperCase().equals(argumento.toUpperCase())){
                 resultado.add(c);
             } else {
-                if(parametro.equals("CPF") && undoMaskCpf(c.getCpf()).equals(argumento)){
+                if(parametro.equals("CPF") && undoMaskCpf(c.getCpf()).equals(undoMaskCpf(argumento))){
                     resultado.add(c);
                 } else {
                     if(parametro.equals("Todos")){
