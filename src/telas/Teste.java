@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import escritaLeitura.EscritaLeituraLivro;
 import regraNegocio.Cliente;
+import regraNegocio.ValidacaoEntradas;
 
 /**
  *
@@ -18,12 +19,9 @@ import regraNegocio.Cliente;
  */
 public class Teste {
     public static void main(String[] agrs){
+    ValidacaoEntradas vld = new ValidacaoEntradas();
     
-        EscritaLeituraCliente elc = new EscritaLeituraCliente();
-        ArrayList<Cliente> clientes = elc.buscar("Todos", "");
-        for(Cliente c:clientes){
-            System.out.println(c.toString());
-        }
+    System.out.println(vld.checkName("a345aa"));
         
         
     }

@@ -148,26 +148,39 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
         String logradouro = jTextFieldLogradouro.getText();
         
         
-        if(vld.isCampoVazio(nome)){
-            
+        if(nome.isBlank() || cpf.isBlank() || cep.isBlank() || email.isBlank() || logradouro.isBlank())
+            JOptionPane.showMessageDialog(this, "Campos vazios nao sao permitidos!");
+        else if(vld.checkName(nome) == false && nome.isBlank() == false)
+             JOptionPane.showMessageDialog(this, "O nome nao deve conter numeros!");
+        else {
+            Cliente cliente = new Cliente();
+            cliente.setNome(jTextNome.getText());
+            cliente.setCpf(jTextCPF.getText());
+            cliente.setCep(jTextFieldCEP.getText());
+            cliente.setEmail(jFormattedTextEmail.getText());
+            cliente.setLogradouro(jTextFieldLogradouro.getText());
+            elc.salvar(cliente);
+        
+            JOptionPane.showMessageDialog(this, "Cliente Cadastrado com Sucesso!");
+        
+        
+        
+          jTextNome.setText("");
+          jTextCPF.setText("");
+          jTextFieldCEP.setText("");
+          jFormattedTextEmail.setText("");
+          jTextFieldLogradouro.setText("");
+        
         }
-        Cliente cliente = new Cliente();
-        cliente.setNome(jTextNome.getText());
-        cliente.setCpf(jTextCPF.getText());
-        cliente.setCep(jTextFieldCEP.getText());
-        cliente.setEmail(jFormattedTextEmail.getText());
-        cliente.setLogradouro(jTextFieldLogradouro.getText());
-        elc.salvar(cliente);
         
-        JOptionPane.showMessageDialog(this, "Cliente Cadastrado com Sucesso!");
+        
+            
+        
+            
+      
         
         
         
-        jTextNome.setText("");
-        jTextCPF.setText("");
-        jTextFieldCEP.setText("");
-        jFormattedTextEmail.setText("");
-        jTextFieldLogradouro.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextFieldCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCEPActionPerformed

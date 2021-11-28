@@ -21,11 +21,13 @@ import javax.swing.JOptionPane;
  * @author samuk
  */
 public class Venda implements Cadastravel, Serializable {
+    private static final long serialVersionUID = 4440897898944013059L;
     
     private int qtdVendida;
     private Livro livro;
     private Cliente cliente;
     private Calendar  data = Calendar.getInstance();
+    private String dataStr;
 
     public Venda(int qtdVendida, Livro livro, Cliente cliente, Calendar data) {
         this.qtdVendida = qtdVendida;
@@ -33,11 +35,25 @@ public class Venda implements Cadastravel, Serializable {
         this.cliente = cliente;
         this.data = data;
     }
+
+    public Venda(int qtdVendida, Livro livro, Cliente cliente, String dataStr) {
+        this.qtdVendida = qtdVendida;
+        this.livro = livro;
+        this.cliente = cliente;
+        this.dataStr = dataStr;
+    }
+    
+    
     
     public Venda(int qtdVendida, Livro livro, Calendar data){
         this.qtdVendida = qtdVendida;
         this.livro = livro;
         this.data = data;
+        this.cliente = null;
+    }
+
+    public Venda() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public void vender(){
@@ -115,6 +131,16 @@ public class Venda implements Cadastravel, Serializable {
     public void setData(Calendar data) {
         this.data = data;
     }
+
+    public String getDataStr() {
+        return dataStr;
+    }
+
+    public void setDataStr(String dataStr) {
+        this.dataStr = dataStr;
+    }
+    
+    
 
     @Override
     public String toString() {

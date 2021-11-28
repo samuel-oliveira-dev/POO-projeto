@@ -156,50 +156,7 @@ public class Livro  implements Cadastravel, Serializable{
     
     
     
-    
-   public void vender(String codigo, int quantidade) {
-       EscritaLeituraLivro ell = new EscritaLeituraLivro();
-       ArrayList<Livro> livros = ell.ler();
-       Livro livro;
-       
-       for(Livro l:livros){
-           if(codigo.equals(l.getCodigo())){
-               if(quantidade <= l.getQuantidade()){
-                   l.setQuantidade(l.getQuantidade() - quantidade);
-                   JOptionPane.showMessageDialog(null, "Compra concluída!");
-               } else {
-                   JOptionPane.showMessageDialog(null, "Estoque insuficiente,por favor revise o pedido.");
-               }
-                   
-               
-           }
-       }
-       
-       for(Livro l:livros){
-           System.out.println(l.toString());
-       }
-       
-       String path = System.getProperty("user.dir");
-        path = path + "\\livros.txt";
-       FileWriter fw; 
-       try{
-           fw = new FileWriter(path);
-           
-           for(Livro l:livros){
-               String line = (l.getTitulo()+","+l.getAutor()+","+l.getEditora()+"," +l.getCategoria()+ ","+ l.getIsbn()+","+l.getEdicao()+","
-                    +l.getPaginas()+","+l.getAno()+","+l.getPreco()+","+l.getQuantidade()+","+l.getCodigo());
-               fw.write(line + System.lineSeparator());
-           }
-           fw.close();
-       }catch(IOException ex){
-           System.out.println(ex);
-       }
-       
-      
-       
-       
-        
-   }
+   
         
     
     

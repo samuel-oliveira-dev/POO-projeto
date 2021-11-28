@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,12 +30,20 @@ import regraNegocio.Venda;
  */
 public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
 
+    private final String PATH = System.getProperty("user.dir")+"\\livros.txt";
+    ObjectOutputStream oos = null;
+    FileOutputStream fos = null;
+    FileInputStream fis = null;
+    ObjectInputStream ois = null;
+    
+    
+    
     public void vender(Livro livro, int quantidade){
         
         //int quantidade = livro.getQuantidade();
         String codigo = livro.getCodigo();
         EscritaLeituraLivro ell = new EscritaLeituraLivro();
-       ArrayList<Livro> livros = ell.ler();
+        ArrayList<Livro> livros = ell.ler();
        //Livro livro;
        
        for(Livro l:livros){
@@ -73,6 +82,29 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
     }
     
     
+    public void save(Cadastravel c) throws IOException{
+        Venda v = ((Venda)c);
+        String path = System.getProperty("user.dir") + "\\vendas.ser";
+        //FileOutputStream fos = null;
+        //ObjectOutputStream oos = null;
+        
+        try {
+            fos = new FileOutputStream(path,true);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(v);
+            
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally{
+            if(oos != null){
+                oos.close();
+            }
+        }
+        
+        
+    }
+    
     
     @Override
     public void salvar(Cadastravel c) {
@@ -85,17 +117,6 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
         FileOutputStream fos;
         Livro livro = venda.getLivro();
         Cliente cliente = venda.getCliente();
-        
-        /*try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(caminho, true))){
-            
-            oos.writeObject(venda);
-            
-        }   catch (FileNotFoundException ex) {
-                Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-
         
         try {
             fos = new FileOutputStream(path, true);
@@ -116,6 +137,7 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
             int segundo = data.get(Calendar.SECOND);
             
             String dataCompleta = String.format("%02d/%02d/%d at %02d:%02d:%02d", dia,mes,ano,hora,minuto,segundo);
+            venda.setDataStr(dataCompleta);
             
             
              String lineSeparator = System.getProperty("line.separator");
@@ -142,26 +164,60 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
 
     @Override
     public ArrayList ler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void read(){
-        String caminho = System.getProperty("user.dir") + "\\vendas.ser";
-        Collection vendas = new ArrayList();
-        
-       try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(caminho))){
-            int num = ois.readInt();
-            for(int i = 0; i<num;++i){
-                vendas.add((Venda)ois.readObject());
+        try {
+            FileInputStream fis = new FileInputStream(PATH);
+            Scanner input = new Scanner(fis);
+            while(input.hasNext()){
+                String[] vect = input.nextLine().split(",");
+                String titulo = vect[0];
+                String autor = vect[1];
+                String codigo = vect[2];
+                String isbn = vect[3];
+                int qtd = Integer.parseInt(vect[4]);
+                String dataStr = vect[3];
+                
+                
             }
-           
-           
-           
-        } catch (IOException ex) {
-            Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+            
+        } catch (FileNotFoundException ex) {
             Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        return null;
+        
     }
     
-}
+    public void read() throws IOException{
+       //ObjectInputStream ois = null;
+       //FileInputStream fis = null;
+       String path = System.getProperty("user.dir") + "\\vendas.ser";
+       ArrayList<Venda> vendas = new ArrayList<>();
+       try{
+           fis = new FileInputStream(path);
+           ois = new ObjectInputStream(fis);
+           Venda v = null;
+           do{
+               ois.readObject();
+               v = (Venda) ois.readObject();
+               if(v != null){
+                   vendas.add(v);
+                   
+                   
+                
+               
+           }
+           
+       }while (v != null);
+           //System.out.println(vendas.get());
+       
+    } catch(Exception ex){
+        ex.printStackTrace();
+    } finally{
+           if(ois != null){
+               ois.close();
+           }
+       }
+    
+   }
+}    

@@ -46,6 +46,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         mnClientes = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -92,6 +93,14 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         mnLivros.add(jMenuItem5);
+
+        jMenuItem6.setText("Consultar Vendas");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        mnLivros.add(jMenuItem6);
 
         jMenuBar1.add(mnLivros);
 
@@ -181,6 +190,14 @@ public class TelaInicial extends javax.swing.JFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        TelaConsultaVendas obj = new TelaConsultaVendas();
+        Painel.add(obj);
+        obj.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,6 +254,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenu mnClientes;
     private javax.swing.JMenu mnLivros;
     // End of variables declaration//GEN-END:variables

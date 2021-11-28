@@ -8,9 +8,12 @@ import escritaLeitura.EscritaLeituraCliente;
 import regraNegocio.Livro;
 import escritaLeitura.EscritaLeituraLivro;
 import escritaLeitura.EscritaLeituraVenda;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import regraNegocio.Cliente;
@@ -176,18 +179,9 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         
         ArrayList<Cliente> clientes = elc.buscar("CPF", jFormattedTextFieldCPF.getText());
         ArrayList<Livro> livros = ell.buscar("Codigo", jFormattedTextFieldCodigo.getText());
+        int qtd = Integer.parseInt(jSpinnerQuantidade.getValue().toString());
         
-        if(clientes.size() != 0){
-            cliente = clientes.get(0);
-            Calendar data = Calendar.getInstance();
-            int qtd = Integer.parseInt(jSpinnerQuantidade.getValue().toString());
-            Venda venda = new Venda(qtd, livros.get(0), clientes.get(0), data);
-            elv.salvar(venda);
-            elv.vender(venda.getLivro(), venda.getQtdVendida());
-            
-            
-            
-        } else {
+        if(clientes.size() == 0){
             String[] opcoes = {"Sim", "Nao"};
             int cadastrarNovoCliente = JOptionPane.showOptionDialog(this, "Cliente sem Cadastro. Deseja Cadastra-lo?", "Cadastro Inexistente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, frameIcon, opcoes, "Sim");
             if (cadastrarNovoCliente == 0){
@@ -195,6 +189,31 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                 JDesktopPane desk = getDesktopPane();
                 desk.add(obj);
                 obj.setVisible(true);
+                  } else {
+                if(qtd > 0){
+                    cliente = null;
+                    Calendar data = Calendar.getInstance();
+            
+                    Venda venda = new Venda(qtd, livros.get(0), data);
+                    elv.salvar(venda);
+                    try {
+                        elv.save(venda);
+                    } catch (IOException ex) {
+                        Logger.getLogger(TelaVenda.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    elv.vender(venda.getLivro(), venda.getQtdVendida());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Escolha uma quantidade maior que 0 para continuar.");
+                }
+            } 
+        
+        if(clientes.size() != 0){
+            
+            
+            
+            
+        } else {
+            
             } 
         }
         

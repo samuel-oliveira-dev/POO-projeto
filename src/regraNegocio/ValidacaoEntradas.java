@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package regraNegocio;
-import br.com.caelum.stella.validation.AcceptAnyValidator;
+
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import javax.swing.JOptionPane;
 /**
  *
@@ -12,7 +14,11 @@ import javax.swing.JOptionPane;
 public class ValidacaoEntradas {
     
     //String entrada;
-    
+    public boolean isNumeric(String str) {
+       ParsePosition pos = new ParsePosition(0);
+       NumberFormat.getInstance().parse(str, pos);
+       return str.length() == pos.getIndex();
+    }
     
     public boolean isCampoVazio(String str){
         
@@ -28,17 +34,23 @@ public class ValidacaoEntradas {
         
         
     }
-
-    
-    public boolean isNumeric(String num){
+    public boolean checkName(String str){
         
-        boolean res = false;
-        
+        boolean res = true;
+        for(int i = 0; i<str.length();++i){
+            
+            String a = String.valueOf(str.charAt(i));
+            System.out.println(a);
+            if(isNumeric(a)){
+                res = false;
+            } 
+        }
         
         
         return res;
-        
     }
+
+    
    
     
     
