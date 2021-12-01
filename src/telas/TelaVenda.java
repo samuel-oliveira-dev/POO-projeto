@@ -175,10 +175,13 @@ public class TelaVenda extends javax.swing.JInternalFrame {
          EscritaLeituraLivro ell = new EscritaLeituraLivro();
          EscritaLeituraVenda elv = new EscritaLeituraVenda();
         
-        Cliente cliente;
+        
         
         ArrayList<Cliente> clientes = elc.buscar("CPF", jFormattedTextFieldCPF.getText());
         ArrayList<Livro> livros = ell.buscar("Codigo", jFormattedTextFieldCodigo.getText());
+        String cpf = elc.undoMaskCpf(jFormattedTextFieldCPF.getText()).isBlank()? null: jFormattedTextFieldCPF.getText() ;
+        String cod =  jFormattedTextFieldCodigo.getText();
+        //ArrayList<Cliente> clientes =  elc.buscar("CPF", cpf);
         int qtd = Integer.parseInt(jSpinnerQuantidade.getValue().toString());
         
         if(clientes.size() == 0){
@@ -191,30 +194,19 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                 obj.setVisible(true);
                   } else {
                 if(qtd > 0){
-                    cliente = null;
-                    Calendar data = Calendar.getInstance();
+                    //cliente = null;
+                    //Calendar data = Calendar.getInstance();
             
-                    Venda venda = new Venda(qtd, livros.get(0), data);
+                    Venda venda = new Venda(cod, cpf,qtd);
                     elv.salvar(venda);
-                    try {
-                        elv.save(venda);
-                    } catch (IOException ex) {
-                        Logger.getLogger(TelaVenda.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    elv.vender(venda.getLivro(), venda.getQtdVendida());
+                    
+                    elv.vender(cod, qtd);
                 } else {
                     JOptionPane.showMessageDialog(this, "Escolha uma quantidade maior que 0 para continuar.");
                 }
             } 
         
-        if(clientes.size() != 0){
-            
-            
-            
-            
-        } else {
-            
-            } 
+         
         }
         
         

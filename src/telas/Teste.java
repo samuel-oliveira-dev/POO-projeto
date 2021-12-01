@@ -10,18 +10,20 @@ import regraNegocio.Livro;
 import java.util.ArrayList;
 import java.util.Scanner;
 import escritaLeitura.EscritaLeituraLivro;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import regraNegocio.Cliente;
 import regraNegocio.ValidacaoEntradas;
+import regraNegocio.Venda;
 
 /**
  *
  * @author samuk
  */
 public class Teste {
-    public static void main(String[] agrs){
-    ValidacaoEntradas vld = new ValidacaoEntradas();
-    
-    System.out.println(vld.checkName("a345aa"));
+    public static void main(String[] agrs) throws IOException{
+    read();
         
         
     }
@@ -46,5 +48,38 @@ public class Teste {
         
         return resdef;
     }
+    static ObjectInputStream ois = null;
+     public static void read() throws IOException{
+       //ObjectInputStream ois = null;
+       //FileInputStream fis = null;
+       String path = System.getProperty("user.dir") + "\\vendas.ser";
+       ArrayList<Venda> vendas = new ArrayList<>();
+       try{
+           FileInputStream fis = new FileInputStream(path);
+            ois = new ObjectInputStream(fis);
+           Venda v = null;
+           do{
+               
+               v = (Venda) ois.readObject();
+               if(v != null){
+                   vendas.add(v);
+                   
+                   
+                
+               
+           }
+           
+       }while (v != null);
+           //System.out.println(vendas.get());
+       
+    } catch(Exception ex){
+        ex.printStackTrace();
+    } finally{
+           if(ois != null){
+               ois.close();
+           }
+       }
+    
+   }
     
 }

@@ -19,6 +19,8 @@ import regraNegocio.Cliente;
  * @author samuk
  */
 public class EscritaLeituraCliente extends EscritaLeitura {
+    
+    private final String PATH = System.getProperty("user.dir") + "\\clientes.txt";
 
     @Override
     public void salvar(Cadastravel c) {
@@ -132,6 +134,46 @@ public class EscritaLeituraCliente extends EscritaLeitura {
         
         
         return clientes;
+        
+    }
+    
+    public void removerCliente(String cpf){
+        
+        ArrayList<Cliente> clientes = ler();
+        ArrayList<Cliente> res = new ArrayList<Cliente>();
+        for(Cliente c:clientes){
+            if(cpf.equals(c.getCpf())){
+                clientes.remove(c);
+            }
+        }
+        
+        FileWriter fw;
+        
+        
+            
+             
+            try {
+               fw = new FileWriter(PATH);
+               PrintWriter pw = new PrintWriter(fw);
+                for(Cliente cl:clientes){
+                    
+                    System.out.println(cl.toString());
+                    pw.write(cl.getNome()+","+cl.getEmail()+","+cl.getCpf()+","+cl.getLogradouro()+","+cl.getCep());
+                    //fw.write(line + System.lineSeparator());
+                    
+                }
+                
+                fw.close();
+                pw.close();
+                
+                
+                
+                
+                
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(EscritaLeituraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        
         
     }
     

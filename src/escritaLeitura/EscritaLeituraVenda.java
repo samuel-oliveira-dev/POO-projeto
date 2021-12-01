@@ -4,6 +4,7 @@
  */
 package escritaLeitura;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,18 +31,14 @@ import regraNegocio.Venda;
  */
 public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
 
-    private final String PATH = System.getProperty("user.dir")+"\\livros.txt";
-    ObjectOutputStream oos = null;
-    FileOutputStream fos = null;
-    FileInputStream fis = null;
-    ObjectInputStream ois = null;
+    private final String PATH = System.getProperty("user.dir")+"\\vendas.txt";
     
     
     
-    public void vender(Livro livro, int quantidade){
+    public void vender(String codLivro, int quantidade){
         
         //int quantidade = livro.getQuantidade();
-        String codigo = livro.getCodigo();
+        String codigo = codLivro;
         EscritaLeituraLivro ell = new EscritaLeituraLivro();
         ArrayList<Livro> livros = ell.ler();
        //Livro livro;
@@ -64,7 +61,7 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
        }
        
        String path = System.getProperty("user.dir");
-        path = path + "\\livros.txt";
+       path = path + "\\livros.txt";
        FileWriter fw; 
        try{
            fw = new FileWriter(path);
@@ -76,32 +73,73 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
            }
            fw.close();
        }catch(IOException ex){
-           System.out.println(ex);
+           ex.printStackTrace();
        }
        
     }
     
     
-    public void save(Cadastravel c) throws IOException{
+    public void save(Cadastravel c){
         Venda v = ((Venda)c);
         String path = System.getProperty("user.dir") + "\\vendas.ser";
-        //FileOutputStream fos = null;
-        //ObjectOutputStream oos = null;
-        
-        try {
-            fos = new FileOutputStream(path,true);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(v);
+        ArrayList<Venda> venda = new ArrayList<>();
+        venda.add(v);
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try{
+          fos = new FileOutputStream(path, true);
+          oos = new ObjectOutputStream(fos);
+          oos.writeObject(venda);
+          
             
-            
-        } catch (Exception ex) {
+        } catch(Exception ex){
             ex.printStackTrace();
         } finally{
             if(oos != null){
-                oos.close();
+                try {
+                    oos.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
+       
         
+        
+    }
+    
+    public void read() {
+         String path = System.getProperty("user.dir") + "\\vendas.ser";
+         ObjectInputStream ois = null;
+         //ArrayList<ArrayList<Venda>> vendas = new ArrayList<>();
+          ArrayList vendas = new ArrayList();
+        try{
+            FileInputStream fis = new FileInputStream(path);
+            ois = new ObjectInputStream(fis);
+            ArrayList<Venda> venda;
+           
+            do {
+                venda = (ArrayList<Venda>) ois.readObject();
+                vendas.add(venda);
+            } while(venda != null);
+            
+            
+            
+            
+            
+        } catch(Exception ex){
+            ex.printStackTrace();
+        } finally{
+            if(ois != null){
+                try {
+                    ois.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //return vendas;
+         
         
     }
     
@@ -111,37 +149,32 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
         if(c instanceof Venda){
             Venda venda = ((Venda) c);
             
-        String path = System.getProperty("user.dir");
-        path = path + "\\vendas.txt";
-        String caminho = System.getProperty("user.dir") + "\\vendas.ser";
+        EscritaLeituraLivro ell = new EscritaLeituraLivro();
+        //EscritaLeituraCliente elc = new EscritaLeituraCliente();
         FileOutputStream fos;
-        Livro livro = venda.getLivro();
-        Cliente cliente = venda.getCliente();
+        String codLivro = venda.getCodLivro();
+        String cpfCliente = venda.getCpfCliente();
+        
         
         try {
-            fos = new FileOutputStream(path, true);
+            fos = new FileOutputStream(PATH, true);
             PrintStream ps = new PrintStream(fos);
+            ArrayList<Livro> livro = ell.buscar("Codigo", codLivro);
+            //Cliente cliente = (Cliente) elc.buscar("CPF", cpfCliente).get(0);
            
             
-            String autor = livro.getAutor();
-            String titulo = livro.getTitulo();
-            String isbn = livro.getIsbn();
-            int qtdVenda = venda.getQtdVendida();
-            String cod = livro.getCodigo();
-            Calendar data = venda.getData();
-            int dia = data.get(Calendar.DAY_OF_MONTH);
-            int mes = data.get(Calendar.MONTH) + 1;
-            int ano = data.get(Calendar.YEAR);
-            int hora = data.get(Calendar.HOUR_OF_DAY);
-            int minuto = data.get(Calendar.MINUTE);
-            int segundo = data.get(Calendar.SECOND);
-            
-            String dataCompleta = String.format("%02d/%02d/%d at %02d:%02d:%02d", dia,mes,ano,hora,minuto,segundo);
-            venda.setDataStr(dataCompleta);
+            String autor = livro.get(0).getAutor();
+            String titulo = livro.get(0).getTitulo();
+            String isbn = livro.get(0).getIsbn();
+            int qtdVenda = venda.getQtdLivroVendida();
+            String cod = livro.get(0).getCodigo();
+            String data = venda.getData();
             
             
-             String lineSeparator = System.getProperty("line.separator");
-            ps.println(titulo+","+autor+","+isbn+","+cod+","+qtdVenda+","+dataCompleta);
+            
+             
+            ps.println(titulo+","+autor+","+isbn+","+cod+","+cpfCliente+","+qtdVenda+","+data);
+            System.out.println("Gravado!");
            
             ps.close();
             
@@ -159,22 +192,43 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
 
     @Override
     public ArrayList buscar(String arg1, String arg2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Venda> vendas = ler();
+        ArrayList<Venda> resultado = new ArrayList<>();
+        
+        for(Venda v:vendas){
+            if(arg1.equals("Todos")){
+                resultado = vendas;
+            } else {
+                if(arg1.equals("CPF") && arg2.equals(v.getCpfCliente())){
+                    resultado.add(v);
+                }
+            }
+        }
+        
+        return resultado;
+        
+        
     }
 
     @Override
     public ArrayList ler() {
+        ArrayList<Venda> vendas = new ArrayList<>();
         try {
             FileInputStream fis = new FileInputStream(PATH);
             Scanner input = new Scanner(fis);
+            
             while(input.hasNext()){
                 String[] vect = input.nextLine().split(",");
                 String titulo = vect[0];
                 String autor = vect[1];
                 String codigo = vect[2];
                 String isbn = vect[3];
-                int qtd = Integer.parseInt(vect[4]);
-                String dataStr = vect[3];
+                String cpf = vect[4];
+                int qtd = Integer.parseInt(vect[5]);
+                String data = vect[6];
+                
+                Venda venda = new Venda (codigo,cpf,qtd,data,isbn,titulo, autor);
+                vendas.add(venda);
                 
                 
             }
@@ -182,42 +236,13 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
         } catch (FileNotFoundException ex) {
             Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for(Venda v:vendas){
+            System.out.println(v.toString());
+        }
         
-        
-        return null;
+        return vendas;
         
     }
     
-    public void read() throws IOException{
-       //ObjectInputStream ois = null;
-       //FileInputStream fis = null;
-       String path = System.getProperty("user.dir") + "\\vendas.ser";
-       ArrayList<Venda> vendas = new ArrayList<>();
-       try{
-           fis = new FileInputStream(path);
-           ois = new ObjectInputStream(fis);
-           Venda v = null;
-           do{
-               ois.readObject();
-               v = (Venda) ois.readObject();
-               if(v != null){
-                   vendas.add(v);
-                   
-                   
-                
-               
-           }
-           
-       }while (v != null);
-           //System.out.println(vendas.get());
-       
-    } catch(Exception ex){
-        ex.printStackTrace();
-    } finally{
-           if(ois != null){
-               ois.close();
-           }
-       }
     
-   }
 }    

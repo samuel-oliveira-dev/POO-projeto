@@ -1,2 +1,2 @@
-Dom Casmurro,Machado de Assis,Martin Claret,Literatura Brasileira,9584839939933,3,22,2020,33.0,10,6374737373
-O Lobo da Estepe,Hermann Hesse,Best Bolso,Literatura Estrangeira,7859394933939,5,300,2020,34.0,14,7374838838
+O Lobo da Estepe,Hermann Hesse,Best Bolso,Literatura Estrangeira,0493838383333,3,300,2020,32.0,34,3788438333
+Assim Falou Zaraturstra,Frederich Nietzsche,Cia das Letras,Literatura Estrangeira,3948773838383,5,340,2020,34.0,84,3783884844

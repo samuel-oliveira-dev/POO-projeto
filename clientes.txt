@@ -1,6 +1,1 @@
-Joao,joao@gmail.com,029.882.838-92,Rua C;22,98.493-939
-joao2,joao@gmail.com,838.483.838-33,Rua E;33,83.983-838
-Carlos2,carlos@gamil.com,200.939.493-93,Rua C;22,83.839-399
-Joao22,joao@gmail.com,837.477.377-33,Rua C;33,73.848-383
-joao34,joao@gmail.com,848.384.838-84,Rua D;33,83.829-848
-carla,carla@gmail.com,877.448.444-44,Rua P;33,74.747-444
+Joao,wwwwwwwwwwww,333.333.333-33,sssssssssss,33.333-333

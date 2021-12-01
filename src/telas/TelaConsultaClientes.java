@@ -7,6 +7,8 @@ package telas;
 import regraNegocio.Cliente;
 import escritaLeitura.EscritaLeituraCliente;
 import java.util.ArrayList;
+import javax.swing.JDesktopPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,6 +40,8 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jComboBoxTipo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldArgumento = new javax.swing.JTextField();
@@ -45,6 +49,14 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
         jTableConsulta = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
 
         setClosable(true);
         setIconifiable(true);
@@ -77,6 +89,11 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
             }
         });
         jTableConsulta.getTableHeader().setReorderingAllowed(false);
+        jTableConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTableConsultaMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableConsulta);
         if (jTableConsulta.getColumnModel().getColumnCount() > 0) {
             jTableConsulta.getColumnModel().getColumn(0).setResizable(false);
@@ -200,12 +217,50 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoActionPerformed
 
+    private void jTableConsultaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaMouseReleased
+        // TODO add your handling code here:
+        int linha = jTableConsulta.rowAtPoint(evt.getPoint());
+        if(linha >= 0 && linha < jTableConsulta.getRowCount()){
+            jTableConsulta.setRowSelectionInterval(linha, linha);
+        } else {
+            jTableConsulta.clearSelection();
+        }
+        int linhaIndex = jTableConsulta.getSelectedRow();
+        if(linhaIndex < 0){
+            return ;
+        }
+        if(evt.isPopupTrigger() && evt.getComponent() instanceof JTable){
+            jPopupMenu1.show(jTableConsulta, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTableConsultaMouseReleased
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        TelaGerenciamentoCliente obj = new TelaGerenciamentoCliente();
+        JDesktopPane desk = getDesktopPane();
+        desk.add(obj);
+        obj.setVisible(true);
+        
+        int linha = jTableConsulta.getSelectedRow();
+        obj.setNome(jTableConsulta.getValueAt(linha, 0).toString());
+        obj.setCpf(jTableConsulta.getValueAt(linha, 1).toString());
+        obj.setEmail(jTableConsulta.getValueAt(linha, 2).toString());
+        obj.setLogradouro(jTableConsulta.getValueAt(linha, 3).toString());
+        obj.setCep(jTableConsulta.getValueAt(linha, 4).toString());
+        
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableConsulta;
     private javax.swing.JTextField jTextFieldArgumento;
