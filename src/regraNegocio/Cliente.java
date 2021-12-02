@@ -29,6 +29,19 @@ public class Cliente implements Cadastravel, Serializable{
     private String cpf;
     private String cep;
 
+    public Cliente(String logradouro, String email, String cpf, String cep) {
+        this.nome = nome;
+        this.logradouro = logradouro;
+        this.email = email;
+        this.cpf = cpf;
+        this.cep = cep;
+    }
+
+    public Cliente() {
+    }
+    
+    
+
     public String getEmail() {
         return email;
     }

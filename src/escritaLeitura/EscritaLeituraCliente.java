@@ -5,6 +5,8 @@
 package escritaLeitura;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -137,34 +139,50 @@ public class EscritaLeituraCliente extends EscritaLeitura {
         
     }
     
-    public void removerCliente(String cpf){
-        
+    public boolean editarCliente(String logradouro, String email, String cpf, String cep){
+        boolean val = false;
+        //Cliente mudanca = new Cliente(email, cpf, cep);
         ArrayList<Cliente> clientes = ler();
-        ArrayList<Cliente> res = new ArrayList<Cliente>();
-        for(Cliente c:clientes){
-            if(cpf.equals(c.getCpf())){
-                clientes.remove(c);
+        System.out.println("CPF_ARG = "+cpf);
+        for(Cliente cl:clientes){
+            System.out.println("CPF_ARR = "+cl.getCpf());
+            if(cpf.equals(cl.getCpf())){
+                //cl.setNome(nome);
+                cl.setLogradouro(logradouro);
+                //cl.setCpf(cpf);
+                cl.setEmail(email);
+                cl.setCep(cep);
+                val = true;
+                
             }
         }
+        File file = new File(PATH);
+        file.delete();
+        
+       
         
         FileWriter fw;
         
+        //res = clientes;
         
             
              
             try {
-               fw = new FileWriter(PATH);
-               PrintWriter pw = new PrintWriter(fw);
+               fw = new FileWriter(PATH,true);
+               
+               BufferedWriter br = new BufferedWriter(fw);
                 for(Cliente cl:clientes){
                     
-                    System.out.println(cl.toString());
-                    pw.write(cl.getNome()+","+cl.getEmail()+","+cl.getCpf()+","+cl.getLogradouro()+","+cl.getCep());
+                    //System.out.println(cl.toString());
+                    br.write(cl.getNome()+","+cl.getEmail()+","+cl.getCpf()+","+cl.getLogradouro()+","+cl.getCep());
+                    br.newLine();
                     //fw.write(line + System.lineSeparator());
                     
                 }
                 
+                
+                br.close();
                 fw.close();
-                pw.close();
                 
                 
                 
@@ -173,6 +191,64 @@ public class EscritaLeituraCliente extends EscritaLeitura {
             } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(EscritaLeituraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
+        
+        
+        
+        
+        
+        return val;
+        
+    }
+    
+    public boolean removerCliente(String cpf){
+        
+        boolean val = false;
+        ArrayList<Cliente> clientes = ler();
+        ArrayList<Cliente> res = new ArrayList<>();
+        for(Cliente c:clientes){
+            //System.out.println(cpf == c.getCpf());
+            if(cpf.equals(c.getCpf()) == false){
+                //clientes.remove(c);
+                res.add(c);
+                val = true;
+                
+            }
+        }
+        
+        File file = new File(PATH);
+        file.delete();
+        
+        FileWriter fw;
+        
+        
+        
+            
+             
+            try {
+               fw = new FileWriter(PATH,true);
+               
+               BufferedWriter br = new BufferedWriter(fw);
+                for(Cliente cl:res){
+                    
+                    //System.out.println(cl.toString());
+                    br.write(cl.getNome()+","+cl.getEmail()+","+cl.getCpf()+","+cl.getLogradouro()+","+cl.getCep());
+                    br.newLine();
+                    //fw.write(line + System.lineSeparator());
+                    
+                }
+                
+                
+                br.close();
+                fw.close();
+                
+                
+                
+                
+                
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(EscritaLeituraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        return val ;
         
         
     }
