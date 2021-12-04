@@ -75,7 +75,7 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Categoria");
 
-        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Literatura Brasileira", "Fantasia", "Literatura Estrangeira", "Hq e Mangas", "Administracao", "Direito", "Medicina" }));
+        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Literatura Brasileira", "Literatura Estrangeira", "Fantasia", "Graphic Novel", "Administracao", "Direito", "Medicina", "Filosofia" }));
 
         jTextFieldAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

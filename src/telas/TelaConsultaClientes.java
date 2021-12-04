@@ -7,6 +7,7 @@ package telas;
 import regraNegocio.Cliente;
 import escritaLeitura.EscritaLeituraCliente;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -25,9 +26,58 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
         initComponents();
     }
     
+    public void consultar(){
+        EscritaLeituraCliente elc = new EscritaLeituraCliente();
+        Cliente cliente = new Cliente();
+        ArrayList<Cliente> leitura = elc.ler();
+        
+        DefaultTableModel dtm = (DefaultTableModel) jTableConsulta.getModel();
+        
+        if(jComboBoxTipo.getSelectedItem().toString().equals("Todos")){
+            for(Cliente c : leitura){
+            dtm.addRow(
+                    new Object []{
+                        c.getNome(),
+                        c.getCpf(),
+                        c.getEmail(),
+                        c.getLogradouro(),
+                        c.getCep()
+                    }
+            );
+        }
+        }if(jComboBoxTipo.getSelectedItem().toString().equals("Listar Excluidos")){
+            ArrayList<Cliente> excluidos = elc.getDeletados();
+            for(Cliente c:excluidos){
+                dtm.addRow(
+                        new Object []{
+                        c.getNome(),
+                        c.getCpf(),
+                        c.getEmail(),
+                        c.getLogradouro(),
+                        c.getCep()
+                    }
+                        
+                );
+            }
+        } else {
+            ArrayList<Cliente> resultado = elc.buscar(jComboBoxTipo.getSelectedItem().toString(), jTextFieldArgumento.getText());
+            for(Cliente c : resultado){
+            dtm.addRow(
+                    new Object []{
+                        c.getNome(),
+                        c.getCpf(),
+                        c.getEmail(),
+                        c.getLogradouro(),
+                        c.getCep()
+                    }
+            );
+        }
+        }
+    }
+    
     
     public void limpar(){
-        //jTableLivros.setModel(new DefaultTableModel(null, new String[]{"Titulo", "Autor", "Editora", "ISBN", "Edicao", "Paginas", "Ano", "Preco", "Quantidade", "Codigo", "Categoria"}));
+        
         DefaultTableModel dtm =  (DefaultTableModel) jTableConsulta.getModel();
         dtm.getDataVector().removeAllElements();
     }
@@ -73,7 +123,7 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Consulta de Clientes");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Nome", "CPF" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Nome", "CPF", "Listar Excluidos" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoActionPerformed(evt);
@@ -132,22 +182,23 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(12, 12, 12)
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(31, 31, 31)
-                            .addComponent(jTextFieldArgumento, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(29, 29, 29)
-                            .addComponent(jButton1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jTextFieldArgumento, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1))
+                .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,9 +211,9 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(28, 28, 28))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -172,45 +223,8 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         EscritaLeituraCliente elc = new EscritaLeituraCliente();
         limpar();
+        consultar();
         
-        
-        Cliente cliente = new Cliente();
-        ArrayList<Cliente> leitura = elc.ler();
-        
-        DefaultTableModel dtm = (DefaultTableModel) jTableConsulta.getModel();
-        
-        if(jComboBoxTipo.getSelectedItem().toString().equals("Todos")){
-            for(Cliente c : leitura){
-            dtm.addRow(
-                    new Object []{
-                        c.getNome(),
-                        c.getCpf(),
-                        c.getEmail(),
-                        c.getLogradouro(),
-                        c.getCep()
-                    }
-            
-            
-            
-            );
-        }
-        } else {
-            ArrayList<Cliente> resultado = elc.buscar(jComboBoxTipo.getSelectedItem().toString(), jTextFieldArgumento.getText());
-            for(Cliente c : resultado){
-            dtm.addRow(
-                    new Object []{
-                        c.getNome(),
-                        c.getCpf(),
-                        c.getEmail(),
-                        c.getLogradouro(),
-                        c.getCep()
-                    }
-            
-            
-            
-            );
-        }
-        }
         
         
         
@@ -229,24 +243,31 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
 
     private void jTableConsultaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaMouseReleased
         // TODO add your handling code here:
-        int linha = jTableConsulta.rowAtPoint(evt.getPoint());
-        if(linha >= 0 && linha < jTableConsulta.getRowCount()){
-            jTableConsulta.setRowSelectionInterval(linha, linha);
-        } else {
-            jTableConsulta.clearSelection();
+        if(jComboBoxTipo.getSelectedItem().toString().equals("Listar Excluidos") == false){
+            int linha = jTableConsulta.rowAtPoint(evt.getPoint());
+            if(linha >= 0 && linha < jTableConsulta.getRowCount()){
+                jTableConsulta.setRowSelectionInterval(linha, linha);
+            
+              } else {
+                jTableConsulta.clearSelection();
+            
+             }
+            int linhaIndex = jTableConsulta.getSelectedRow();
+            if(linhaIndex < 0){
+                return ;
+            
+            }
+            if(evt.isPopupTrigger() && evt.getComponent() instanceof JTable){
+                jPopupMenu1.show(jTableConsulta, evt.getX(), evt.getY());
+            }
         }
-        int linhaIndex = jTableConsulta.getSelectedRow();
-        if(linhaIndex < 0){
-            return ;
-        }
-        if(evt.isPopupTrigger() && evt.getComponent() instanceof JTable){
-            jPopupMenu1.show(jTableConsulta, evt.getX(), evt.getY());
-        }
+        
     }//GEN-LAST:event_jTableConsultaMouseReleased
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        TelaGerenciamentoCliente obj = new TelaGerenciamentoCliente();
+        if(jComboBoxTipo.getSelectedItem().toString().equals("Listar Excluidos") == false){
+            TelaGerenciamentoCliente obj = new TelaGerenciamentoCliente();
         JDesktopPane desk = getDesktopPane();
         desk.add(obj);
         obj.setVisible(true);
@@ -257,6 +278,8 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
         obj.setEmail(jTableConsulta.getValueAt(linha, 2).toString());
         obj.setLogradouro(jTableConsulta.getValueAt(linha, 3).toString());
         obj.setCep(jTableConsulta.getValueAt(linha, 4).toString());
+        }
+        
         
         
         
@@ -266,12 +289,15 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         String[] opcoes = {"Sim", "Nao"};
-        int excluirCliente = JOptionPane.showOptionDialog(this, "Deseja Realmente Exluir esse Cliente?", "Excluir Cliente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, frameIcon, opcoes, "Sim");
+        int excluirCliente = JOptionPane.showOptionDialog(this, "Deseja Realmente Exluir esse Cliente?", "Excluir Cliente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, frameIcon, opcoes, "Nao");
         if(excluirCliente == 0){
             int linha = jTableConsulta.getSelectedRow();
             String cpf = jTableConsulta.getValueAt(linha, 1).toString();
             EscritaLeituraCliente elc = new EscritaLeituraCliente();
-            elc.removerCliente(cpf);
+            
+            if(elc.deletar(cpf)){
+                JOptionPane.showMessageDialog(this,"Cliente Exluido Com Sucesso!");
+            }
         }
         
         

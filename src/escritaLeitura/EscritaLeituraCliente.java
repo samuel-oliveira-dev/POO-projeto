@@ -7,36 +7,44 @@ package escritaLeitura;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import regraNegocio.Cliente;
 
 /**
  *
  * @author samuk
  */
-public class EscritaLeituraCliente extends EscritaLeitura {
+public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
     
-    private final String PATH = System.getProperty("user.dir") + "\\clientes.txt";
+    public final String PATH = System.getProperty("user.dir") + "\\clientes.txt";
+    public final String PATH_EXC = System.getProperty("user.dir") + "\\clienteExc.txt";
+    
+    
+    
+    public long getSizeFile(String path){
+        File file = new File(path);
+        long size = file.length();
+        
+        return size;
+        
+    }
+    
 
     @Override
     public void salvar(Cadastravel c) {
-        
         Cliente cl = ((Cliente) c);
-        
-        
         try {
-            
-            String s = System.getProperty("user.dir");
-            s = s + "\\clientes.txt";
-            FileWriter fw = new FileWriter(s, true);
+            FileWriter fw = new FileWriter(PATH, true);
             PrintWriter pw = new PrintWriter(fw);
-            pw.println(cl.getNome()+","+cl.getEmail()+","+cl.getCpf()+","+cl.getLogradouro()+","+cl.getCep());
+            pw.println(cl.getNome()+"|"+cl.getEmail()+"|"+cl.getCpf()+"|"+cl.getLogradouro()+"|"+cl.getCep());
             pw.flush();
             pw.close();
             fw.close();
@@ -97,41 +105,43 @@ public class EscritaLeituraCliente extends EscritaLeitura {
     @Override
     public ArrayList ler() {
         String path = System.getProperty("user.dir");
-        path = path + "\\clientes.txt";
         ArrayList<Cliente> clientes = new ArrayList<>();
         
         
         
         
-        try(BufferedReader br = new BufferedReader(new FileReader(path)))
+        try(BufferedReader br = new BufferedReader(new FileReader(PATH)))
         {
+            
+            File arq = new File(path);
             
             String line = br.readLine();
             
-            
+
             while(line != null){
-            String[] vect = line.split(",");
-            String nome  = vect[0];
-            String email = vect[1];
-            String cpf = vect[2];
-            String logradouro = vect[3];
-            String cep = vect[4];
+                String[] vect = line.split("\\|");
+                String nome  = vect[0];
+                String email = vect[1];
+                String cpf = vect[2];
+                String logradouro = vect[3];
+                String cep = vect[4];
             
-            Cliente c = new Cliente();
+                Cliente c = new Cliente();
+                 c.setNome(nome);
+                 c.setEmail(email);
+                 c.setLogradouro(logradouro);
+                 c.setCep(cep);
+                 c.setCpf(cpf);
             
-            c.setNome(nome);
-            c.setEmail(email);
-            c.setLogradouro(logradouro);
-            c.setCep(cep);
-            c.setCpf(cpf);
-            
-            clientes.add(c);
-            line = br.readLine();
+                 clientes.add(c);
+                 line = br.readLine();
             
             
                }
+  
+           
           } catch (IOException ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
         }
         
         
@@ -143,113 +153,157 @@ public class EscritaLeituraCliente extends EscritaLeitura {
         boolean val = false;
         //Cliente mudanca = new Cliente(email, cpf, cep);
         ArrayList<Cliente> clientes = ler();
-        System.out.println("CPF_ARG = "+cpf);
         for(Cliente cl:clientes){
-            System.out.println("CPF_ARR = "+cl.getCpf());
+            
             if(cpf.equals(cl.getCpf())){
-                //cl.setNome(nome);
                 cl.setLogradouro(logradouro);
-                //cl.setCpf(cpf);
                 cl.setEmail(email);
                 cl.setCep(cep);
+                
                 val = true;
                 
             }
         }
         File file = new File(PATH);
         file.delete();
-        
-       
-        
+
         FileWriter fw;
-        
-        //res = clientes;
-        
-            
-             
+
             try {
                fw = new FileWriter(PATH,true);
                
                BufferedWriter br = new BufferedWriter(fw);
                 for(Cliente cl:clientes){
                     
-                    //System.out.println(cl.toString());
-                    br.write(cl.getNome()+","+cl.getEmail()+","+cl.getCpf()+","+cl.getLogradouro()+","+cl.getCep());
+                    br.write(cl.getNome()+"|"+cl.getEmail()+"|"+cl.getCpf()+"|"+cl.getLogradouro()+"|"+cl.getCep());
                     br.newLine();
-                    //fw.write(line + System.lineSeparator());
                     
                 }
-                
-                
+
                 br.close();
                 fw.close();
-                
-                
-                
-                
                 
             } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(EscritaLeituraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        
-        
-        
-        
-        
+
         return val;
         
     }
     
-    public boolean removerCliente(String cpf){
+   
+
+    @Override
+    public boolean deletar(String cpf) {
         
         boolean val = false;
         ArrayList<Cliente> clientes = ler();
         ArrayList<Cliente> res = new ArrayList<>();
+        ArrayList<Cliente> excluidos = new ArrayList<>();
+        File file = new File(PATH);
         for(Cliente c:clientes){
-            //System.out.println(cpf == c.getCpf());
+            
             if(cpf.equals(c.getCpf()) == false){
-                //clientes.remove(c);
+                //Nesse if, o programa nao faz nada caso tenha somente um cliente no arquivo
+                System.out.println(c.getNome());
+            System.out.println(c.getLogradouro());
+            System.out.println(c.getCpf());
                 res.add(c);
+                val = true;
+                
+            } else {
+                
+                excluidos.add(c);
                 val = true;
                 
             }
         }
         
-        File file = new File(PATH);
+        
         file.delete();
         
-        FileWriter fw;
-        
-        
-        
-            
-             
+        FileWriter fw;        
+                       
             try {
                fw = new FileWriter(PATH,true);
                
                BufferedWriter br = new BufferedWriter(fw);
+               
                 for(Cliente cl:res){
                     
-                    //System.out.println(cl.toString());
-                    br.write(cl.getNome()+","+cl.getEmail()+","+cl.getCpf()+","+cl.getLogradouro()+","+cl.getCep());
+                    
+                    br.write(cl.getNome()+"|"+cl.getEmail()+"|"+cl.getCpf()+"|"+cl.getLogradouro()+"|"+cl.getCep());
                     br.newLine();
-                    //fw.write(line + System.lineSeparator());
+                    
                     
                 }
                 
                 
                 br.close();
-                fw.close();
-                
-                
-                
-                
+                fw.close();                
                 
             } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(EscritaLeituraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
+            
+            FileWriter fw2;
+            
+            
+            try{
+                fw2 = new FileWriter(PATH_EXC, true);
+                BufferedWriter br2 = new BufferedWriter(fw2);
+                for(Cliente c:excluidos){
+                    
+                    br2.write(c.getNome()+"|"+c.getEmail()+"|"+c.getCpf()+"|"+c.getLogradouro()+"|"+c.getCep());
+                    br2.newLine();
+                }
+                br2.close();
+                fw2.close();
+                
+            } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(EscritaLeituraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         return val ;
         
+    }
+
+    @Override
+    public ArrayList getDeletados() {
+        ArrayList<Cliente> excluidos = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(PATH_EXC))){
+            
+            String line = br.readLine();
+            
+
+            while(line != null){
+                String[] vect = line.split("\\|");
+                String nome  = vect[0];
+                String email = vect[1];
+                String cpf = vect[2];
+                String logradouro = vect[3];
+                String cep = vect[4];
+            
+                Cliente c = new Cliente();
+                 c.setNome(nome);
+                 c.setEmail(email);
+                 c.setLogradouro(logradouro);
+                 c.setCep(cep);
+                 c.setCpf(cpf);
+            
+                 excluidos.add(c);
+                 line = br.readLine();
+            
+            
+               }
+            
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        return excluidos;
         
     }
     

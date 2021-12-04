@@ -28,6 +28,7 @@ public class Cliente implements Cadastravel, Serializable{
     private String email;
     private String cpf;
     private String cep;
+    private String numero;
 
     public Cliente(String logradouro, String email, String cpf, String cep) {
         this.nome = nome;
@@ -84,6 +85,16 @@ public class Cliente implements Cadastravel, Serializable{
     public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
     }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+    
+    
 
     @Override
     public String toString() {
