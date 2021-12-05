@@ -172,7 +172,11 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbVendas.getTableHeader().setResizingAllowed(false);
+        tbVendas.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tbVendas);
+        tbVendas.getAccessibleContext().setAccessibleName("");
+        tbVendas.getAccessibleContext().setAccessibleDescription("");
 
         jLabel1.setText("Pagamento:");
 
