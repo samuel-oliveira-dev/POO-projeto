@@ -301,14 +301,6 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         }
         
         
-            
-        
-        
-        
-        
-        
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextFieldArgumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldArgumentoActionPerformed

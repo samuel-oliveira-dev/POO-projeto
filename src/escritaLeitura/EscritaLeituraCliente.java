@@ -29,6 +29,8 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
     
     
     
+    
+    
     public long getSizeFile(String path){
         File file = new File(path);
         long size = file.length();
