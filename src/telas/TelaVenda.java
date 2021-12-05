@@ -37,6 +37,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
     
     public void consultar2(){
         String nome = txtBusca.getText();
+        int quantidade = Integer.parseInt(jsQuantidade.getValue().toString());
         EscritaLeituraLivro ell = new EscritaLeituraLivro();
         ArrayList<Livro> populacao = ell.buscar(ComboCategoria.getSelectedItem().toString(),nome);
         DefaultTableModel dtm =  (DefaultTableModel) tbVendas.getModel();
@@ -45,7 +46,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Preencha o campo para realizar a busca!", "Campo em branco", JOptionPane.ERROR_MESSAGE);
             txtBusca.setText("");
         } else{
-            if (Integer.parseInt(jsQuantidade.getValue().toString()) == 0){
+            if (quantidade == 0){
                 JOptionPane.showMessageDialog(this, "Informe a quantidade de produtos desejados!", "Quantidade nula", JOptionPane.ERROR_MESSAGE);
             } else{
                 for(Livro l : populacao){
@@ -54,7 +55,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                                 l.getTitulo(),
                                 l.getAutor(),
                                 l.getCodigo(),
-                                l.getPreco(),
+                                l.getPreco() * quantidade,
                             }
                     );
                 }
@@ -73,6 +74,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
             jTextPane1.setText("Titulo: "+resultado.get(0).getTitulo()+"\nAutor: "+resultado.get(0).getAutor()+"\nPreco: "+resultado.get(0).getPreco()+"\nQuantidade: "+resultado.get(0).getQuantidade());
         }
         */
+        
     }
     
     public void setJTextCodigo(String cod){
