@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class EscritaLeituraUsuario extends EscritaLeitura{
 
     @Override
-    public void salvar(Cadastravel c) {
+    public void salvar(Cadastravel c, String path) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -23,8 +23,10 @@ public class EscritaLeituraUsuario extends EscritaLeitura{
     }
 
     @Override
-    public ArrayList ler() {
+    public ArrayList ler(String path) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
 }
