@@ -235,15 +235,12 @@ public class TelaVenda extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-         EscritaLeituraCliente elc = new EscritaLeituraCliente();
-         EscritaLeituraLivro ell = new EscritaLeituraLivro();
-         EscritaLeituraVenda elv = new EscritaLeituraVenda();
-        
-        
+        EscritaLeituraCliente elc = new EscritaLeituraCliente();
+        EscritaLeituraLivro ell = new EscritaLeituraLivro();
+        EscritaLeituraVenda elv = new EscritaLeituraVenda();
         
         ArrayList<Cliente> clientes = elc.buscar("CPF", jFormattedTextFieldCPF.getText());
-        ArrayList<Livro> livros = ell.buscar("Codigo", txtBusca.getText());
+        
         String cpf = elc.undoMaskCpf(jFormattedTextFieldCPF.getText()).isBlank()? null: jFormattedTextFieldCPF.getText() ;
         String cod =  txtBusca.getText();
         //ArrayList<Cliente> clientes =  elc.buscar("CPF", cpf);
