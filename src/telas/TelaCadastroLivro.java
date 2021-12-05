@@ -259,7 +259,7 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         livro.setCodigo(jFormattedTextFieldCodigo.getText());
         livro.setCategoria((String) jComboBoxCategoria.getSelectedItem());
         
-        ell.salvar(livro);
+        ell.salvar(livro, ell.PATH);
         
         JOptionPane.showMessageDialog(this, "Livro Cadastrado com Sucesso!");
         

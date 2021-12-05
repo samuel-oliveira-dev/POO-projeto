@@ -37,7 +37,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         
         DefaultTableModel dtm =  (DefaultTableModel) jTableLivros.getModel();
             
-            ArrayList<Livro> lista = ell.ler();
+            ArrayList<Livro> lista = ell.ler(ell.PATH);
             
             if(jComboBoxTipo.getSelectedItem().toString().equals("Todos")){
                 for(Livro l : lista){
@@ -112,6 +112,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jComboBoxTipo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldArgumento = new javax.swing.JTextField();
@@ -127,6 +128,14 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
             }
         });
         jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Excluir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem2);
 
         setClosable(true);
         setIconifiable(true);
@@ -326,6 +335,15 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        EscritaLeituraLivro ell = new EscritaLeituraLivro();
+        int linha = jTableLivros.getSelectedRow();
+        String cpf = jTableLivros.getValueAt(linha, 10).toString();
+        
+        ell.deletar(cpf);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -333,6 +351,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableLivros;

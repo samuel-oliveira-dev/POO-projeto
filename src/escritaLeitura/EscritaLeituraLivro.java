@@ -5,21 +5,43 @@
 package escritaLeitura;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 import regraNegocio.Livro;
 
 /**
  *
  * @author samuk
  */
-public class EscritaLeituraLivro extends EscritaLeitura{
+public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
     
+   public final String PATH = System.getProperty("user.dir") + "\\livros.txt";
+   public final String PATH_EXC = System.getProperty("user.dir") + "\\livrosExc.txt";
+
+    public String getPATH() {
+        return PATH;
+    }
+
+    public String getPATH_EXC() {
+        return PATH_EXC;
+    }
+   
    
 
     @Override
@@ -27,7 +49,7 @@ public class EscritaLeituraLivro extends EscritaLeitura{
         
          
         Livro livro = new Livro();
-        ArrayList<Livro>  lista = ler();
+        ArrayList<Livro>  lista = ler(PATH);
         ArrayList<Livro> resultado = new ArrayList<>();
         for(Livro l : lista){
             if(l.getAutor().toUpperCase().contains(argumento.toUpperCase()) && categoria.equals("Autor")){
@@ -50,88 +72,129 @@ public class EscritaLeituraLivro extends EscritaLeitura{
     }
 
     @Override
-    public ArrayList ler() {
-        
+    public ArrayList ler(String path) {
         ArrayList<Livro> livros = new ArrayList<>();
-        String path = System.getProperty("user.dir");
-        path = path + "\\livros.txt";
+        String[] array = null;
+        try{
+            InputStream is = new FileInputStream(path);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            int i = 0;
+            while((i = is.read()) != -1){
+                baos.write((byte) i);
+
+            }
+            is.close();
+        Stream<String> stream  = baos.toString().lines();
+        array = stream.toArray(String[] :: new);
         
-        
-        try (BufferedReader br = new BufferedReader(new FileReader(path)))
-        {
-            String line = br.readLine();
-            while(line != null)
-            {
-                
-                
-                String[] vect = line.split(",");
-                String titulo = vect[0];
-                String autor = vect[1];
-                String editora = vect[2];
-                String categoria = vect[3];
-                String isbn = vect[4];
-                String edicao = vect[5];
-                String paginas = vect[6];
-                String ano = vect[7];
-                double preco = Double.parseDouble(vect[8]);
-                int quantidade = Integer.parseInt(vect[9]) ;
-                String codigo = vect[10];
-                
-                
-                Livro livro = new Livro();
-                livro.setAutor(autor);
-                livro.setTitulo(titulo);
-                livro.setEditora(editora);
-                livro.setIsbn(isbn);
-                livro.setEdicao(edicao);
-                livro.setPaginas(paginas);
-                livro.setAno(ano);
-                livro.setPreco(preco);
-                livro.setQuantidade(quantidade);
-                livro.setCodigo(codigo);
-                livro.setCategoria(categoria);
-                
-                livros.add(livro);
-                
-                line = br.readLine();
-                
-               
             
-            } 
-        
-        
-        } catch(IOException ex){
-            System.out.print(ex.getMessage());
+        } catch(Exception ex){
+            ex.printStackTrace();
         }
+        for(int i = 0; i < array.length; ++i){
+            
+            String[] vect = array[i].split(",");
+            String titulo = vect[0];
+            String autor = vect[1];
+            String editora = vect[2];
+            String categoria = vect[3];
+            String isbn = vect[4];
+            String edicao = vect[5];
+            String paginas = vect[6];
+            String ano = vect[7];
+            double preco = Double.parseDouble(vect[8]);
+            int quantidade = Integer.parseInt(vect[9]) ;
+            String codigo = vect[10];
+            
+            Livro livro = new Livro();
+            livro.setAutor(autor);
+            livro.setTitulo(titulo);
+            livro.setEditora(editora);
+            livro.setIsbn(isbn);
+            livro.setEdicao(edicao);
+            livro.setPaginas(paginas);
+            livro.setAno(ano);
+            livro.setPreco(preco);
+            livro.setQuantidade(quantidade);
+            livro.setCodigo(codigo);
+            livro.setCategoria(categoria);
+            
+            livros.add(livro);
+ 
+        }
+        
         return livros;
         
         
     }
 
     @Override
-    public void salvar(Cadastravel c) {
+    public void salvar(Cadastravel c, String path) {
         if(c instanceof Livro){
             Livro l = ((Livro) c);
-            FileWriter fw;
-        String path = System.getProperty("user.dir");
-        path = path + "\\livros.txt";
-        
-        
+            
         try {
-            fw = new FileWriter(path, true);
-            PrintWriter pw = new PrintWriter(fw);
-            pw.println(l.getTitulo()+","+l.getAutor()+","+l.getEditora()+"," +l.getCategoria()+ ","+ l.getIsbn()+","+l.getEdicao()+","
+           OutputStream os = new FileOutputStream(path, true);
+           PrintStream ps = new PrintStream(os);
+           ps.println(l.getTitulo()+","+l.getAutor()+","+l.getEditora()+"," +l.getCategoria()+ ","+ l.getIsbn()+","+l.getEdicao()+","
                     +l.getPaginas()+","+l.getAno()+","+l.getPreco()+","+l.getQuantidade()+","+l.getCodigo());
-            pw.flush();
-            pw.close();
-            fw.close();
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Livro.class.getName()).log(Level.SEVERE, null, ex);
+ 
+               
+ 
+           
+           ps.flush();
+           ps.close();
+           
+       } catch (FileNotFoundException ex) {
+           ex.printStackTrace();
+       }
+ 
         }
+    }
+
+    @Override
+    public boolean deletar(String arg) {
+        ArrayList<Livro> livros = ler(PATH);
+        ArrayList<Livro> res = new ArrayList<>();
+        ArrayList<Livro> excluidos = new ArrayList<>();
+        boolean status = false;
         
-            
+        for(Livro l:livros){
+            if(l.getCodigo().equals(arg) == false){
+                res.add(l);
+                status = true;
+            } else {
+                excluidos.add(l);
+                status = true;
+            }
         }
+       
+        
+        File file = new File(PATH);
+        file.delete();
+        File file2 = new File(PATH);
+        for(Livro l: res){
+            salvar(l,PATH);
+        }
+       
+       
+       
+            
+            
+       
+        
+        
+        
+        
+        
+        
+        return status;
+    }
+
+    @Override
+    public ArrayList getDeletados() {
+        ArrayList<Livro> livros = ler(PATH_EXC);
+        return livros;
     }
 
     

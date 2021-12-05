@@ -5,6 +5,7 @@
 package escritaLeitura;
 
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -31,7 +32,7 @@ import regraNegocio.Venda;
  */
 public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
 
-    private final String PATH = System.getProperty("user.dir")+"\\vendas.txt";
+    public final String PATH = System.getProperty("user.dir")+"\\vendas.txt";
     
     
     
@@ -40,7 +41,7 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
         //int quantidade = livro.getQuantidade();
         String codigo = codLivro;
         EscritaLeituraLivro ell = new EscritaLeituraLivro();
-        ArrayList<Livro> livros = ell.ler();
+        ArrayList<Livro> livros = ell.ler(ell.PATH);
        //Livro livro;
        
        for(Livro l:livros){
@@ -56,24 +57,18 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
            }
        }
        
-       for(Livro l:livros){
-           System.out.println(l.toString());
-       }
+       
        
        String path = System.getProperty("user.dir");
        path = path + "\\livros.txt";
-       FileWriter fw; 
-       try{
-           fw = new FileWriter(path);
-           
-           for(Livro l:livros){
-               String line = (l.getTitulo()+","+l.getAutor()+","+l.getEditora()+"," +l.getCategoria()+ ","+ l.getIsbn()+","+l.getEdicao()+","
-                    +l.getPaginas()+","+l.getAno()+","+l.getPreco()+","+l.getQuantidade()+","+l.getCodigo());
-               fw.write(line + System.lineSeparator());
-           }
-           fw.close();
-       }catch(IOException ex){
-           ex.printStackTrace();
+       FileWriter fw;
+       File file = new File(PATH);
+       file.delete();
+       
+       File file2 = new File(PATH);
+       
+       for(Livro l:livros){
+           salvar(l,ell.PATH);
        }
        
     }
@@ -145,7 +140,7 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
     
     
     @Override
-    public void salvar(Cadastravel c) {
+    public void salvar(Cadastravel c, String path) {
         if(c instanceof Venda){
             Venda venda = ((Venda) c);
             
@@ -157,7 +152,7 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
         
         
         try {
-            fos = new FileOutputStream(PATH, true);
+            fos = new FileOutputStream(path, true);
             PrintStream ps = new PrintStream(fos);
             ArrayList<Livro> livro = ell.buscar("Codigo", codLivro);
             //Cliente cliente = (Cliente) elc.buscar("CPF", cpfCliente).get(0);
@@ -192,7 +187,7 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
 
     @Override
     public ArrayList buscar(String arg1, String arg2) {
-        ArrayList<Venda> vendas = ler();
+        ArrayList<Venda> vendas = ler(PATH);
         ArrayList<Venda> resultado = new ArrayList<>();
         
         for(Venda v:vendas){
@@ -211,10 +206,10 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
     }
 
     @Override
-    public ArrayList ler() {
+    public ArrayList ler(String path) {
         ArrayList<Venda> vendas = new ArrayList<>();
         try {
-            FileInputStream fis = new FileInputStream(PATH);
+            FileInputStream fis = new FileInputStream(path);
             Scanner input = new Scanner(fis);
             
             while(input.hasNext()){

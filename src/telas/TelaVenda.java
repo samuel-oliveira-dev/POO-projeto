@@ -198,7 +198,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                     //Calendar data = Calendar.getInstance();
             
                     Venda venda = new Venda(cod, cpf,qtd);
-                    elv.salvar(venda);
+                    elv.salvar(venda, elv.PATH);
                     
                     elv.vender(cod, qtd);
                 } else {

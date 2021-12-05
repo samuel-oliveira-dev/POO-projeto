@@ -39,10 +39,10 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
     
 
     @Override
-    public void salvar(Cadastravel c) {
+    public void salvar(Cadastravel c, String path) {
         Cliente cl = ((Cliente) c);
         try {
-            FileWriter fw = new FileWriter(PATH, true);
+            FileWriter fw = new FileWriter(path, true);
             PrintWriter pw = new PrintWriter(fw);
             pw.println(cl.getNome()+"|"+cl.getEmail()+"|"+cl.getCpf()+"|"+cl.getLogradouro()+"|"+cl.getCep());
             pw.flush();
@@ -80,7 +80,7 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
         
         Cliente cl = new Cliente();
         ArrayList<Cliente> resultado = new ArrayList<>();
-        ArrayList<Cliente> clientes = ler();
+        ArrayList<Cliente> clientes = ler(PATH);
         
         
         
@@ -103,8 +103,7 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
     
 
     @Override
-    public ArrayList ler() {
-        String path = System.getProperty("user.dir");
+    public ArrayList ler(String path) {
         ArrayList<Cliente> clientes = new ArrayList<>();
         
         
@@ -152,7 +151,7 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
     public boolean editarCliente(String logradouro, String email, String cpf, String cep){
         boolean val = false;
         //Cliente mudanca = new Cliente(email, cpf, cep);
-        ArrayList<Cliente> clientes = ler();
+        ArrayList<Cliente> clientes = ler(PATH);
         for(Cliente cl:clientes){
             
             if(cpf.equals(cl.getCpf())){
@@ -166,26 +165,11 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
         }
         File file = new File(PATH);
         file.delete();
+        File file2 = new File(PATH);
 
-        FileWriter fw;
-
-            try {
-               fw = new FileWriter(PATH,true);
-               
-               BufferedWriter br = new BufferedWriter(fw);
-                for(Cliente cl:clientes){
-                    
-                    br.write(cl.getNome()+"|"+cl.getEmail()+"|"+cl.getCpf()+"|"+cl.getLogradouro()+"|"+cl.getCep());
-                    br.newLine();
-                    
-                }
-
-                br.close();
-                fw.close();
-                
-            } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(EscritaLeituraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
+        for(Cliente c:clientes){
+            salvar(c,PATH);
+        }
 
         return val;
         
@@ -197,7 +181,7 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
     public boolean deletar(String cpf) {
         
         boolean val = false;
-        ArrayList<Cliente> clientes = ler();
+        ArrayList<Cliente> clientes = ler(PATH);
         ArrayList<Cliente> res = new ArrayList<>();
         ArrayList<Cliente> excluidos = new ArrayList<>();
         File file = new File(PATH);
@@ -217,47 +201,14 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
         
         
         file.delete();
+        File file2 = new File(PATH);
+        file2.delete();
+        for(Cliente c:res){
+            salvar(c,PATH);
+        }
         
-        FileWriter fw;        
-                       
-            try {
-               fw = new FileWriter(PATH,true);
-               
-               BufferedWriter br = new BufferedWriter(fw);
-               
-                for(Cliente cl:res){
-                    
-                    
-                    br.write(cl.getNome()+"|"+cl.getEmail()+"|"+cl.getCpf()+"|"+cl.getLogradouro()+"|"+cl.getCep());
-                    br.newLine();
-                    
-                    
-                }
-                
-                
-                br.close();
-                fw.close();                
-                
-            } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(EscritaLeituraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-            
-            FileWriter fw2;
-            
-            
-            try{
-                fw2 = new FileWriter(PATH_EXC, true);
-                BufferedWriter br2 = new BufferedWriter(fw2);
-                for(Cliente c:excluidos){
-                    
-                    br2.write(c.getNome()+"|"+c.getEmail()+"|"+c.getCpf()+"|"+c.getLogradouro()+"|"+c.getCep());
-                    br2.newLine();
-                }
-                br2.close();
-                fw2.close();
-                
-            } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(EscritaLeituraCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        for(Cliente c:excluidos){
+            salvar(c,PATH_EXC);
         }
         return val ;
         
@@ -265,40 +216,8 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
 
     @Override
     public ArrayList getDeletados() {
-        ArrayList<Cliente> excluidos = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(PATH_EXC))){
-            
-            String line = br.readLine();
-            
+        ArrayList<Cliente> excluidos = ler(PATH_EXC);
 
-            while(line != null){
-                String[] vect = line.split("\\|");
-                String nome  = vect[0];
-                String email = vect[1];
-                String cpf = vect[2];
-                String logradouro = vect[3];
-                String cep = vect[4];
-            
-                Cliente c = new Cliente();
-                 c.setNome(nome);
-                 c.setEmail(email);
-                 c.setLogradouro(logradouro);
-                 c.setCep(cep);
-                 c.setCpf(cpf);
-            
-                 excluidos.add(c);
-                 line = br.readLine();
-            
-            
-               }
-            
-            
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        
         return excluidos;
         
     }

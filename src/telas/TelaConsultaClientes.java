@@ -29,7 +29,7 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
     public void consultar(){
         EscritaLeituraCliente elc = new EscritaLeituraCliente();
         Cliente cliente = new Cliente();
-        ArrayList<Cliente> leitura = elc.ler();
+        ArrayList<Cliente> leitura = elc.ler(elc.PATH);
         
         DefaultTableModel dtm = (DefaultTableModel) jTableConsulta.getModel();
         

@@ -27,14 +27,11 @@ import regraNegocio.Venda;
  */
 public class Teste {
     public static void main(String[] agrs) {
-    EmailAddressValidator eav = new EmailAddressValidator("oliveirasamuel@gmail.com");
-        try {
-            eav.validate();
-            System.out.println("OK");
-        } catch (ParseException ex) {
-            System.out.println("invalido");
-        }
-        
+   EscritaLeituraLivro ell = new EscritaLeituraLivro();
+   ArrayList<Livro> livros = ell.ler(ell.PATH);
+   for(Livro l:livros){
+       System.out.println(l.toString());
+   }
         
     }
     

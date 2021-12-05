@@ -18,11 +18,11 @@ import regraNegocio.Livro;
 public abstract class EscritaLeitura {
     
     
-    abstract public void salvar(Cadastravel c);
+    abstract public void salvar(Cadastravel c, String path);
     
     abstract public ArrayList buscar(String arg1, String arg2);
     
-    abstract public ArrayList ler();
+    abstract public ArrayList ler(String path);
     
     
     public int countLines(String filePath) throws FileNotFoundException, IOException{
