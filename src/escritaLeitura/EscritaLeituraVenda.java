@@ -57,15 +57,10 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
            }
        }
        
-       
-       
-       String path = System.getProperty("user.dir");
-       path = path + "\\livros.txt";
-       FileWriter fw;
-       File file = new File(PATH);
+       File file = new File(ell.PATH);
        file.delete();
        
-       File file2 = new File(PATH);
+       File file2 = new File(ell.PATH);
        
        for(Livro l:livros){
            salvar(l,ell.PATH);
