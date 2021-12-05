@@ -40,7 +40,6 @@ public class ValidacaoEntradas {
         for(int i = 0; i<str.length();++i){
             
             String a = String.valueOf(str.charAt(i));
-            System.out.println(a);
             if(isNumeric(a)){
                 res = false;
             } 

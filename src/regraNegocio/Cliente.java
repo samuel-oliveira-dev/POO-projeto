@@ -4,17 +4,13 @@
  */
 package regraNegocio;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import escritaLeitura.Cadastravel;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,6 +25,7 @@ public class Cliente implements Cadastravel, Serializable{
     private String cpf;
     private String cep;
     private String numero;
+    JInternalFrame jf;
 
     public Cliente(String logradouro, String email, String cpf, String cep) {
         this.nome = nome;
@@ -57,6 +54,7 @@ public class Cliente implements Cadastravel, Serializable{
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+        
     }
 
     public String getCep() {
@@ -92,6 +90,35 @@ public class Cliente implements Cadastravel, Serializable{
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+    public void setJF(JInternalFrame jf){
+        this.jf = jf;
+    }
+    
+    public boolean isValidCpf(String cpf){
+        boolean result  = false;
+        DocumentUtil doc = new DocumentUtil();
+        if(doc.isValidSsn(cpf)){
+            result = true;
+        } else {
+            JOptionPane.showMessageDialog(jf, "CPF Invalido!");
+        }
+        
+        return result;
+    }
+    
+    public boolean isValidEamil(String email){
+        boolean result = false;
+        EmailAddressValidator eav = new EmailAddressValidator(email);
+        try {
+            eav.validate();
+            result = true;
+            
+        } catch (ParseException ex) {
+            
+            JOptionPane.showMessageDialog(jf, "E-mail Invalido!");
+        }
+      return result;  
     }
     
     

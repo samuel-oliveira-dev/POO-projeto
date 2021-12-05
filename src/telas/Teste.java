@@ -13,7 +13,11 @@ import escritaLeitura.EscritaLeituraLivro;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import regraNegocio.Cliente;
+import regraNegocio.EmailAddressValidator;
 import regraNegocio.ValidacaoEntradas;
 import regraNegocio.Venda;
 
@@ -22,8 +26,14 @@ import regraNegocio.Venda;
  * @author samuk
  */
 public class Teste {
-    public static void main(String[] agrs) throws IOException{
-    read();
+    public static void main(String[] agrs) {
+    EmailAddressValidator eav = new EmailAddressValidator("oliveirasamuel@gmail.com");
+        try {
+            eav.validate();
+            System.out.println("OK");
+        } catch (ParseException ex) {
+            System.out.println("invalido");
+        }
         
         
     }

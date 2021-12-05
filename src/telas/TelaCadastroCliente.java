@@ -7,6 +7,7 @@ package telas;
 import regraNegocio.Cliente;
 import escritaLeitura.EscritaLeituraCliente;
 import javax.swing.JOptionPane;
+import regraNegocio.DocumentUtil;
 import regraNegocio.ValidacaoEntradas;
 
 /**
@@ -155,13 +156,17 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         EscritaLeituraCliente elc = new EscritaLeituraCliente();
         ValidacaoEntradas vld = new ValidacaoEntradas();
+        DocumentUtil doc = new DocumentUtil();
+        
         
         
         String nome = jTextNome.getText();
         String cpf = jTextCPF.getText();
         String cep = jTextFieldCEP.getText();
-        String email = jTextFieldCEP.getText();
+        String email = jFormattedTextEmail.getText();
         String logradouro = jTextFieldLogradouro.getText();
+        
+        
         
         
         if(nome.isBlank() || cpf.isBlank() || cep.isBlank() || email.isBlank() || logradouro.isBlank())
@@ -170,7 +175,9 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(this, "O nome nao deve conter numeros!");
         else {
             Cliente cliente = new Cliente();
-            cliente.setNome(jTextNome.getText());
+            cliente.setJF(this);
+            if(cliente.isValidCpf(elc.undoMaskCpf(cpf)) && cliente.isValidEamil(email)){
+                cliente.setNome(jTextNome.getText());
             cliente.setCpf(jTextCPF.getText());
             cliente.setCep(jTextFieldCEP.getText());
             cliente.setEmail(jFormattedTextEmail.getText());
@@ -178,14 +185,18 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
             elc.salvar(cliente);
         
             JOptionPane.showMessageDialog(this, "Cliente Cadastrado com Sucesso!");
-        
-        
-        
-          jTextNome.setText("");
+            jTextNome.setText("");
           jTextCPF.setText("");
           jTextFieldCEP.setText("");
           jFormattedTextEmail.setText("");
           jTextFieldLogradouro.setText("");
+            
+            }
+            
+        
+        
+        
+          
         
         }
         

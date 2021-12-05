@@ -204,10 +204,6 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
         for(Cliente c:clientes){
             
             if(cpf.equals(c.getCpf()) == false){
-                //Nesse if, o programa nao faz nada caso tenha somente um cliente no arquivo
-                System.out.println(c.getNome());
-            System.out.println(c.getLogradouro());
-            System.out.println(c.getCpf());
                 res.add(c);
                 val = true;
                 
