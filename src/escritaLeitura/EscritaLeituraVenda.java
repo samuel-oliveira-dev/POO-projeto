@@ -15,6 +15,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -42,6 +45,7 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
         String codigo = codLivro;
         EscritaLeituraLivro ell = new EscritaLeituraLivro();
         ArrayList<Livro> livros = ell.ler(ell.PATH);
+        File file = new File(ell.PATH);
        //Livro livro;
        
        for(Livro l:livros){
@@ -57,13 +61,20 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
            }
        }
        
-       File file = new File(ell.PATH);
-       file.delete();
        
-       File file2 = new File(ell.PATH);
+       file.delete();
+       Path pathToFile = Paths.get(ell.PATH);
+        try {
+            Files.createDirectories(pathToFile.getParent());
+            Files.createFile(pathToFile);
+        } catch (IOException ex) {
+            Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
        
        for(Livro l:livros){
-           salvar(l,ell.PATH);
+           ell.salvar(l,ell.PATH);
        }
        
     }
@@ -71,13 +82,12 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
     
     public void save(Cadastravel c){
         Venda v = ((Venda)c);
-        String path = System.getProperty("user.dir") + "\\vendas.ser";
         ArrayList<Venda> venda = new ArrayList<>();
         venda.add(v);
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try{
-          fos = new FileOutputStream(path, true);
+          fos = new FileOutputStream(PATH, true);
           oos = new ObjectOutputStream(fos);
           oos.writeObject(venda);
           

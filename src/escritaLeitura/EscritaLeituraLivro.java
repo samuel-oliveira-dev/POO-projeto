@@ -18,6 +18,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -157,6 +158,7 @@ public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
         ArrayList<Livro> livros = ler(PATH);
         ArrayList<Livro> res = new ArrayList<>();
         ArrayList<Livro> excluidos = new ArrayList<>();
+        File file = new File(PATH);
         boolean status = false;
         
         for(Livro l:livros){
@@ -169,12 +171,24 @@ public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
             }
         }
        
-        
-        File file = new File(PATH);
         file.delete();
-        File file2 = new File(PATH);
+        
+        Path pathToFile = Paths.get(PATH);
+       try {
+           Files.createDirectories(pathToFile.getParent());
+           Files.createFile(pathToFile);
+       } catch (IOException ex) {
+           Logger.getLogger(EscritaLeituraLivro.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        
+        
+        
         for(Livro l: res){
             salvar(l,PATH);
+        }
+        
+        for(Livro l:excluidos){
+            salvar(l,PATH_EXC);
         }
        
        

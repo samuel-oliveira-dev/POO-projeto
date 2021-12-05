@@ -56,10 +56,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
                         l.getQuantidade(),
                         l.getCodigo(),
                         l.getCategoria()
-                        
-                        
-                        
-                        
+
                     }
             );
             
@@ -142,7 +139,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Consulta de Produtos");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Titulo", "Autor", "Codigo", "ISBN" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Titulo", "Autor", "Codigo", "ISBN", "Listar Exluidos" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoActionPerformed(evt);
@@ -228,7 +225,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
                 .addComponent(jTextFieldArgumento, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(472, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -339,9 +336,9 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         EscritaLeituraLivro ell = new EscritaLeituraLivro();
         int linha = jTableLivros.getSelectedRow();
-        String cpf = jTableLivros.getValueAt(linha, 10).toString();
+        String cod = jTableLivros.getValueAt(linha, 10).toString();
         
-        ell.deletar(cpf);
+        ell.deletar(cod);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 

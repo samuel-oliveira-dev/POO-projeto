@@ -271,9 +271,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                 obj.setVisible(true);
                   } else {
                 if(qtd > 0){
-                    //cliente = null;
-                    //Calendar data = Calendar.getInstance();
-            
+
                     Venda venda = new Venda(cod, cpf,qtd);
                     elv.salvar(venda, elv.PATH);
                     
