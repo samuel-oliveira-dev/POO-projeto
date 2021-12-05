@@ -92,6 +92,29 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
             }
     }
     
+    public void popularTabela(ArrayList<Livro> list){
+        DefaultTableModel dtm = (DefaultTableModel)jTableLivros.getModel();
+        for(Livro l:list){
+            dtm.addRow(
+                    new Object[]{
+                        l.getTitulo(),
+                        l.getAutor(),
+                        l.getEditora(),
+                        l.getCategoria(),
+                        l.getIsbn(),
+                        l.getEdicao(),
+                        l.getPaginas(),
+                        l.getAno(),
+                        l.getPreco(),
+                        l.getQuantidade(),
+                        l.getCodigo(),
+                    }
+            
+            
+            );
+        }
+    }
+    
     public void limpar(){
         //jTableLivros.setModel(new DefaultTableModel(null, new String[]{"Titulo", "Autor", "Editora", "ISBN", "Edicao", "Paginas", "Ano", "Preco", "Quantidade", "Codigo", "Categoria"}));
         DefaultTableModel dtm =  (DefaultTableModel) jTableLivros.getModel();
@@ -139,7 +162,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Consulta de Produtos");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Titulo", "Autor", "Codigo", "ISBN", "Listar Exluidos" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Titulo", "Autor", "Codigo", "ISBN", "Listar Excluidos" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoActionPerformed(evt);
@@ -225,7 +248,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
                 .addComponent(jTextFieldArgumento, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(472, Short.MAX_VALUE))
+                .addContainerGap(467, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -261,7 +284,21 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         limpar();
-        consultar();
+        EscritaLeituraLivro ell = new EscritaLeituraLivro();
+        String selectedItem = jComboBoxTipo.getSelectedItem().toString();
+        ArrayList<Livro> pop;
+        if(selectedItem.equals("Todos")){
+            pop = ell.ler(ell.PATH);
+            popularTabela(pop);
+        } else {
+            if(selectedItem.equals("Listar Excluidos")){
+                pop = ell.getDeletados();
+                popularTabela(pop);
+            } else {
+                pop = ell.buscar(selectedItem, ell.PATH);
+                popularTabela(pop);
+            }
+        }
         
         
             
@@ -302,19 +339,22 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
 
     private void jTableLivrosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLivrosMouseReleased
         // TODO add your handling code here:
-        int linha = jTableLivros.rowAtPoint(evt.getPoint());
-        if(linha >= 0 && linha < jTableLivros.getRowCount()){
-            jTableLivros.setRowSelectionInterval(linha, linha);
-        } else {
-            jTableLivros.clearSelection();
+        if(jComboBoxTipo.getSelectedItem().toString().equals("Listar Excluidos") == false){
+            int linha = jTableLivros.rowAtPoint(evt.getPoint());
+            if(linha >= 0 && linha < jTableLivros.getRowCount()){
+                jTableLivros.setRowSelectionInterval(linha, linha);
+            } else {
+                jTableLivros.clearSelection();
+            }
+            int linhaIndex = jTableLivros.getSelectedRow();
+            if(linhaIndex < 0){
+                return ;
+            }
+            if(evt.isPopupTrigger() && evt.getComponent() instanceof JTable){
+                jPopupMenu1.show(jTableLivros, evt.getX(), evt.getY());
         }
-        int linhaIndex = jTableLivros.getSelectedRow();
-        if(linhaIndex < 0){
-            return ;
         }
-        if(evt.isPopupTrigger() && evt.getComponent() instanceof JTable){
-            jPopupMenu1.show(jTableLivros, evt.getX(), evt.getY());
-        }
+        
         
     }//GEN-LAST:event_jTableLivrosMouseReleased
 
