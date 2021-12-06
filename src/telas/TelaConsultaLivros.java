@@ -359,8 +359,6 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         obj.setVisible(true);
         int linha = jTableLivros.getSelectedRow();
         obj.setJTextCodigo(jTableLivros.getValueAt(linha, 10).toString());
-        String resumo = "Titulo: "+jTableLivros.getValueAt(linha,0).toString() +"\nAutor: "+jTableLivros.getValueAt(linha,1).toString()+"\nPreco: "+jTableLivros.getValueAt(linha,8).toString()+"\nQuantidade: "+jTableLivros.getValueAt(linha,9).toString();
-        obj.setTextPane(resumo);
         setVisible(false);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
