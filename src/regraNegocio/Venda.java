@@ -24,35 +24,28 @@ public class Venda implements Cadastravel, Serializable {
     private static final long serialVersionUID = 4440897898944013059L;
     
     private String codLivro;
-    private String cpfCliente;
     private int qtdLivroVendida;
-    private String data;
     private String isbn;
     private String autor;
     private String titulo;
+    private float total;
+    private String FormaPagamento;
+    private String cpfCliente;
+    private String data;
 
-    public Venda(String codLivro, String cpfCliente, int qtdLivroVendida) {
-        this.codLivro = codLivro;
+    public Venda(String cpfCliente, float total, String FormaPagamento) {
         this.cpfCliente = cpfCliente;
-        this.qtdLivroVendida = qtdLivroVendida;
+        this.total = total;
+        this.FormaPagamento = FormaPagamento;
         this.data = generateData();
     }
 
-    public Venda(String codLivro, String cpfCliente, int qtdLivroVendida, String data, String isbn, String titulo, String autor) {
-        this.codLivro = codLivro;
+    public Venda(float total, String FormaPagamento, String cpfCliente, String data) {
+        this.total = total;
+        this.FormaPagamento = FormaPagamento;
         this.cpfCliente = cpfCliente;
-        this.qtdLivroVendida = qtdLivroVendida;
         this.data = data;
-        this.isbn = isbn;
-        this.titulo = titulo;
-        this.autor = autor;
     }
-    
-    
-    
-    
-    
-    
     
     private String generateData(){
        
@@ -64,7 +57,7 @@ public class Venda implements Cadastravel, Serializable {
         int minuto = data.get(Calendar.MINUTE);
         int segundo = data.get(Calendar.SECOND);
             
-        String res = String.format("%02d/%02d/%d at %02d:%02d:%02d", dia,mes,ano,hora,minuto,segundo);
+        String res = String.format("%02d/%02d/%d as %02d:%02d:%02d", dia,mes,ano,hora,minuto,segundo);
         
         
         
@@ -72,6 +65,23 @@ public class Venda implements Cadastravel, Serializable {
         
     }
 
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    public String getFormaPagamento() {
+        return FormaPagamento;
+    }
+
+    public void setFormaPagamento(String FormaPagamento) {
+        this.FormaPagamento = FormaPagamento;
+    }
+
+    
     public String getIsbn() {
         return isbn;
     }

@@ -50,17 +50,19 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Titulo", "Autor", "ISBN", "Codigo", "Quantidade", "Cliente", "Data"
+                "Total", "Forma de Pagamento", "Cliente", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTableVendas.getTableHeader().setResizingAllowed(false);
+        jTableVendas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableVendas);
         if (jTableVendas.getColumnModel().getColumnCount() > 0) {
             jTableVendas.getColumnModel().getColumn(0).setResizable(false);
@@ -136,11 +138,8 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
             dtm.addRow(
                 
                 new Object[]{
-                    venda.getTitulo(),
-                    venda.getAutor(),
-                    venda.getIsbn(),
-                    venda.getCodLivro(),
-                    venda.getQtdLivroVendida(),
+                    venda.getTotal(),
+                    venda.getFormaPagamento(),
                     venda.getCpfCliente(),
                     venda.getData()
                 }

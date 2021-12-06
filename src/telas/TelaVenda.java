@@ -98,7 +98,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tbVendas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcPagamento = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -177,10 +177,10 @@ public class TelaVenda extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Pagamento:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "cartao", "Pix", "Cheque" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jcPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dinheiro", "cartao", "Pix", "Cheque" }));
+        jcPagamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jcPagamentoActionPerformed(evt);
             }
         });
 
@@ -216,7 +216,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel3))
                                     .addGap(33, 33, 33)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jcPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jsQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jFormattedTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -242,7 +242,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jcPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE))
@@ -265,6 +265,8 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         
         String cpf = elc.undoMaskCpf(jFormattedTextFieldCPF.getText()).isBlank()? null: jFormattedTextFieldCPF.getText();
         String cod =  txtBusca.getText();
+        float total = subtotal;
+        String Forma_pagamento = jcPagamento.getSelectedItem().toString();
         //ArrayList<Cliente> clientes =  elc.buscar("CPF", cpf);
         int qtd = Integer.parseInt(jsQuantidade.getValue().toString());
         
@@ -277,14 +279,15 @@ public class TelaVenda extends javax.swing.JInternalFrame {
                 desk.add(obj);
                 obj.setVisible(true);
             }else {
-                Venda venda = new Venda(cod, cpf,qtd);
+                Venda venda = new Venda(cpf, total, Forma_pagamento);
                 elv.salvar(venda, elv.PATH);
             }
         }
-        
-        
-        //Livro l = new Livro();
-        //l.vender(jFormattedTextFieldCodigo.getText(), Integer.parseInt(jSpinnerQuantidade.getValue().toString()));
+        txtBusca.setText("");
+        DefaultTableModel dtm =  (DefaultTableModel) tbVendas.getModel();
+        dtm.getDataVector().removeAllElements();
+        jcPagamento.resetKeyboardActions();
+        jTextPane1.setText("");
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -318,15 +321,14 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jFormattedTextFieldCPFMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jcPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcPagamentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jcPagamentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -335,6 +337,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JComboBox<String> jcPagamento;
     private javax.swing.JSpinner jsQuantidade;
     private javax.swing.JTable tbVendas;
     private javax.swing.JFormattedTextField txtBusca;
