@@ -291,6 +291,7 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         jcPagamento.resetKeyboardActions();
         jTextPane1.setText("");
         jFormattedTextFieldCPF.setText("");
+        subtotal = 0;
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
