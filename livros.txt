@@ -4,3 +4,6 @@ fasfssdfasd,ffsfasfas,sfffsdf,Literatura Brasileira,3883333333,2,200,2009,50.0,5
 fafdffdfsfs,dfffsfasdfsd,dfdsfaasdf,Literatura Brasileira,4424324242,3332,4332,34242,2332.0,2332,8737333333333
 fsfsdfsdf,fsdfasfa,fsdfafas,Literatura Brasileira,3333333333,3,300,2009,40.0,37,6545455555555
 asfsdfsaf,dfasfasfd,ffasd,Literatura Brasileira,3433222222,234324,34242,4242,442.0,442,1999999999999
+,,,Literatura Brasileira,             ,,,,-1.0,-1,          
+fasdfsf,fasfas,ffafsdf,Literatura Brasileira,5442323242423,sdfs,fsd,fsdfs,-1.0,-1,4334334343
+fafsdf,fsfsafd,fsfdsa,Literatura Brasileira,4324242343234,4,200,2009,50.0,50,8572324364

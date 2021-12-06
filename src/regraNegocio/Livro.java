@@ -156,7 +156,47 @@ public class Livro  implements Cadastravel, Serializable, Validavel{
 
     @Override
     public boolean checkFields() {
-        boolean res = verifyEmpty() || verifyNumericFields() || isValidIsbn();
+        System.out.println(ISBN.isValid(isbn));
+        boolean res = true;
+        int emptyFields = verifyEmpty()? 1:0;
+        int validIsbn = this.isbn.isBlank() ==  false && isValidIsbn() == false? 0:1;
+        int numericPaginas = this.paginas.isBlank() == false && checkNumeric(this.paginas) == false? 0:1;
+        int numericAno = this.ano.isBlank() == false && checkNumeric(this.ano) == false? 0:1;
+        int numericEdicao = this.edicao.isBlank() == false && checkNumeric(this.edicao) == false? 0:1;
+        
+        switch(emptyFields){
+            case 0:
+                JOptionPane.showMessageDialog(jf, "Campos Vazios nao sao permitidos");
+                res = false;
+                break;
+        }
+        switch(validIsbn){
+            case 0:
+                JOptionPane.showMessageDialog(jf, "ISBN Invalido!");
+                res = false;
+                break;
+        }
+        switch(numericPaginas){
+            case 0:
+                JOptionPane.showMessageDialog(jf, "Somente Numeros Sao Permitidos no Campo de Paginas");
+                res = false;
+                break;
+                
+        }
+        switch(numericAno){
+            case 0:
+                JOptionPane.showMessageDialog(jf, "Somente Numeros Sao Permitidos no Campo de Ano");
+                res = false;
+                break;
+        }
+        switch(numericEdicao){
+            case 0:
+                JOptionPane.showMessageDialog(jf, "Somente Numeros Sao Permitidos no Campo de Edicao");
+                res = false;
+                break;
+        }
+        
+        
         
         
         return res;
@@ -167,7 +207,7 @@ public class Livro  implements Cadastravel, Serializable, Validavel{
         if(this.autor.isBlank() || this.titulo.isBlank() || this.ano.isBlank()
                 || this.codigo.isBlank() || this.editora.isBlank()
                 || this.edicao.isBlank() || this.isbn.isBlank()){
-            JOptionPane.showMessageDialog(jf, "Campos Vazios nao sao permitidos");
+            
             res = false;
         }
         
@@ -176,7 +216,7 @@ public class Livro  implements Cadastravel, Serializable, Validavel{
     
     private boolean isValidIsbn(){
         if(ISBN.isValid(isbn) == false){
-            JOptionPane.showMessageDialog(jf, "ISBN Invalido!");
+            
             
         }
         
@@ -207,10 +247,10 @@ public class Livro  implements Cadastravel, Serializable, Validavel{
             boolean res = true;
             if(this.quantidade == -1){
                 res = false;
-                JOptionPane.showMessageDialog(jf, "Valor de Quantidade Invalido!");
+               
             }
             if(this.preco == -1){
-                JOptionPane.showMessageDialog(jf, "Valor de Preco Invalido!");
+                
                 res = false;
             }
             if(checkNumeric(this.paginas) == false){
@@ -218,7 +258,7 @@ public class Livro  implements Cadastravel, Serializable, Validavel{
                  res = false;
             }
             if(checkNumeric(this.ano) == false){
-                JOptionPane.showMessageDialog(jf, "Valor de Ano Invalido!");
+               
                 res = false;
                 
             }

@@ -33,7 +33,7 @@ import regraNegocio.Venda;
  *
  * @author samuk
  */
-public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
+public class EscritaLeituraVenda extends EscritaLeitura implements Cadastravel{
 
     public final String PATH = System.getProperty("user.dir")+"\\vendas.txt";
     
@@ -80,68 +80,9 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Serializable{
     }
     
     
-    public void save(Cadastravel c){
-        Venda v = ((Venda)c);
-        ArrayList<Venda> venda = new ArrayList<>();
-        venda.add(v);
-        FileOutputStream fos = null;
-        ObjectOutputStream oos = null;
-        try{
-          fos = new FileOutputStream(PATH, true);
-          oos = new ObjectOutputStream(fos);
-          oos.writeObject(venda);
-          
-            
-        } catch(Exception ex){
-            ex.printStackTrace();
-        } finally{
-            if(oos != null){
-                try {
-                    oos.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-       
-        
-        
-    }
     
-    public void read() {
-         String path = System.getProperty("user.dir") + "\\vendas.ser";
-         ObjectInputStream ois = null;
-         //ArrayList<ArrayList<Venda>> vendas = new ArrayList<>();
-          ArrayList vendas = new ArrayList();
-        try{
-            FileInputStream fis = new FileInputStream(path);
-            ois = new ObjectInputStream(fis);
-            ArrayList<Venda> venda;
-           
-            do {
-                venda = (ArrayList<Venda>) ois.readObject();
-                vendas.add(venda);
-            } while(venda != null);
-            
-            
-            
-            
-            
-        } catch(Exception ex){
-            ex.printStackTrace();
-        } finally{
-            if(ois != null){
-                try {
-                    ois.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(EscritaLeituraVenda.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        //return vendas;
-         
-        
-    }
+    
+    
     
     
     @Override
