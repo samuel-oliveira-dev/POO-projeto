@@ -28,10 +28,9 @@ import regraNegocio.Venda;
 public class Teste {
     public static void main(String[] agrs) {
    EscritaLeituraLivro ell = new EscritaLeituraLivro();
-   ArrayList<Livro> livros = ell.ler(ell.PATH);
-   for(Livro l:livros){
-       System.out.println(l.toString());
-   }
+   //ell.notExists("6545455555555");
+   System.out.println(ell.exists("9999999999999"));
+   
         
     }
     

@@ -4,29 +4,19 @@
  */
 package regraNegocio;
 
-import java.awt.List;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.wojcikiewicz.isbn.ISBN;
 import javax.swing.JOptionPane;
 import escritaLeitura.Cadastravel;
-import escritaLeitura.EscritaLeituraLivro;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+import javax.swing.JInternalFrame;
 
 /**
  *
  * @author samuk
  */
-public class Livro  implements Cadastravel, Serializable{
+public class Livro  implements Cadastravel, Serializable, Validavel{
     
     private String titulo;
     private String autor;
@@ -39,6 +29,7 @@ public class Livro  implements Cadastravel, Serializable{
     private String categoria;
     private int quantidade;
     private double preco;
+    private JInternalFrame jf;
     
 
     
@@ -46,7 +37,17 @@ public class Livro  implements Cadastravel, Serializable{
         
     }
 
-    public Livro(String titulo, String autor, String paginas, String isbn, String editora, String ano, String edicao) {
+    public JInternalFrame getJf() {
+        return jf;
+    }
+
+    public void setJf(JInternalFrame jf) {
+        this.jf = jf;
+    }
+    
+    
+
+    /*public Livro(String titulo, String autor, String paginas, String isbn, String editora, String ano, String edicao) {
         this.titulo = titulo;
         this.autor = autor;
         this.paginas = paginas;
@@ -54,7 +55,7 @@ public class Livro  implements Cadastravel, Serializable{
         this.editora = editora;
         this.ano = ano;
         this.edicao = edicao;
-    }
+    }*/
 
     public String getCodigo() {
         return codigo;
@@ -146,139 +147,88 @@ public class Livro  implements Cadastravel, Serializable{
     public void setEdicao(String edicao) {
         this.edicao = edicao;
     }
-    
-    
 
-    
-    
-    
-  
-    
-    
-    
-   
-        
-    
-    
-    
-    
-    /*public String salvar(){
-        
-        FileWriter fw;
-        String path = System.getProperty("user.dir");
-        path = path + "\\livros.txt";
-        
-        try {
-            fw = new FileWriter(path, true);
-            PrintWriter pw = new PrintWriter(fw);
-            pw.println(getTitulo()+","+getAutor()+","+getEditora()+"," +getCategoria()+ ","+ getIsbn()+","+getEdicao()+","
-                    +getPaginas()+","+getAno()+","+getPreco()+","+getQuantidade()+","+getCodigo());
-            pw.flush();
-            pw.close();
-            fw.close();
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Livro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return "Cadastrado com sucesso!";
-    }
-    */
-    
-    /*public ArrayList ler() 
-    {
-       
-        ArrayList<Livro> livros = new ArrayList<>();
-        String path = System.getProperty("user.dir");
-        path = path + "\\livros.txt";
-        
-        
-        try (BufferedReader br = new BufferedReader(new FileReader(path)))
-        {
-            String line = br.readLine();
-            while(line != null)
-            {
-                
-                
-                String[] vect = line.split(",");
-                String titulo = vect[0];
-                String autor = vect[1];
-                String editora = vect[2];
-                String categoria = vect[3];
-                String isbn = vect[4];
-                String edicao = vect[5];
-                String paginas = vect[6];
-                String ano = vect[7];
-                double preco = Double.parseDouble(vect[8]);
-                int quantidade = Integer.parseInt(vect[9]) ;
-                String codigo = vect[10];
-                
-                
-                Livro livro = new Livro();
-                livro.setAutor(autor);
-                livro.setTitulo(titulo);
-                livro.setEditora(editora);
-                livro.setIsbn(isbn);
-                livro.setEdicao(edicao);
-                livro.setPaginas(paginas);
-                livro.setAno(ano);
-                livro.setPreco(preco);
-                livro.setQuantidade(quantidade);
-                livro.setCodigo(codigo);
-                livro.setCategoria(categoria);
-                
-                livros.add(livro);
-                
-                line = br.readLine();
-                
-               
-
-
-            
-            } 
-        
-        
-        } catch(IOException ex){
-            System.out.print(ex.getMessage());
-        }
-        return livros;
-        
-        
-     
-    }
-    /*
-    
-    
-    /*public ArrayList busca(String categoria, String argumento){
-        
-        Livro livro = new Livro();
-        ArrayList<Livro>  lista = livro.ler();
-        ArrayList<Livro> resultado = new ArrayList<>();
-        for(Livro l : lista){
-            if(l.getAutor().toUpperCase().contains(argumento.toUpperCase()) && categoria.equals("Autor")){
-                resultado.add(l);
-            } else {
-                if(l.getTitulo().toUpperCase().contains(argumento.toUpperCase()) && categoria.equals("Titulo")){
-                    resultado.add(l);
-                } else{
-                    if(argumento.toUpperCase().equals(l.getCodigo().toUpperCase()) && categoria.equals("Codigo")){
-                        resultado.add(l);
-                    } else {
-                        if(argumento.equals(l.getIsbn()) && categoria.equals("ISBN")){
-                            resultado.add(l);
-                        }
-                    }
-                }
-            }
-        }
-        return resultado;
-    }
-    */
 
     @Override
     public String toString() {
         return "Livro{" + "titulo=" + titulo + ", autor=" + autor + ", paginas=" + paginas + ", isbn=" + isbn + ", editora=" + editora + ", ano=" + ano + ", edicao=" + edicao + ", codigo=" + codigo + ", categoria=" + categoria + ", quantidade=" + quantidade + ", preco=" + preco + '}';
     }
+
+    @Override
+    public boolean checkFields() {
+        boolean res = verifyEmpty() || verifyNumericFields() || isValidIsbn();
+        
+        
+        return res;
+    }
+    
+    private boolean verifyEmpty(){
+        boolean res = true;
+        if(this.autor.isBlank() || this.titulo.isBlank() || this.ano.isBlank()
+                || this.codigo.isBlank() || this.editora.isBlank()
+                || this.edicao.isBlank() || this.isbn.isBlank()){
+            JOptionPane.showMessageDialog(jf, "Campos Vazios nao sao permitidos");
+            res = false;
+        }
+        
+        return res;
+    }
+    
+    private boolean isValidIsbn(){
+        if(ISBN.isValid(isbn) == false){
+            JOptionPane.showMessageDialog(jf, "ISBN Invalido!");
+            
+        }
+        
+        return ISBN.isValid(isbn);
+    }
+    
+     public boolean checkNumeric(String str){
+        
+        boolean res = false;
+        for(int i = 0; i<str.length();++i){
+            
+            String a = String.valueOf(str.charAt(i));
+            if(isNumeric(a)){
+                res = true;
+            } 
+        }
+
+        return res;
+    }
+     
+     public boolean isNumeric(String str) {
+       ParsePosition pos = new ParsePosition(0);
+       NumberFormat.getInstance().parse(str, pos);
+       return str.length() == pos.getIndex();
+    }
+     
+     public boolean verifyNumericFields(){
+            boolean res = true;
+            if(this.quantidade == -1){
+                res = false;
+                JOptionPane.showMessageDialog(jf, "Valor de Quantidade Invalido!");
+            }
+            if(this.preco == -1){
+                JOptionPane.showMessageDialog(jf, "Valor de Preco Invalido!");
+                res = false;
+            }
+            if(checkNumeric(this.paginas) == false){
+                 JOptionPane.showMessageDialog(jf, "Valor de Paginas Invalido!");
+                 res = false;
+            }
+            if(checkNumeric(this.ano) == false){
+                JOptionPane.showMessageDialog(jf, "Valor de Ano Invalido!");
+                res = false;
+                
+            }
+            
+            return res;
+            
+        }
+        
+    
+    
 
     
     

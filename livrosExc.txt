@@ -14,3 +14,17 @@ fsfadfsdfdsf,asfsafsdfs,fgrfrfer,Literatura Brasileira,6666666666666,45353,5353,
 fsddfsfsdfdf,dfssfsfs,fsfsdfsfsd,Literatura Brasileira,5554444444444,565,5447,55535,234.0,5454,4543433444
 eteefdrgfre,dfgdggsd,gfhrgfef,Literatura Brasileira,4444444444444,323,45664,554646,3232.0,4242,2222222222
 vxvcxvxvcxz,dvbvccds,sdvdsdcsd,Literatura Brasileira,5666666555555,755,5454,4343,232.0,434,4444444444
+,,,Literatura Brasileira,             ,,,,-1.0,-1,          
+fsfsfsdf,dsfafafs,ffsdfsfs,Literatura Brasileira,5353343444444,33,313,2009,444.0,444,4434433333
+,,,Literatura Brasileira,             ,,,,-1.0,-1,          
+,,,Literatura Brasileira,             ,,,,-1.0,-1,          
+,,,Literatura Brasileira,             ,,,,-1.0,-1,          
+,,,Literatura Brasileira,             ,,,,-1.0,-1,          
+,,,Literatura Brasileira,             ,,,,-1.0,-1,          
+fsdffafa,fsdfsfsdf,fsfssvdsds,Literatura Brasileira,4243223443342,33,2009,3030,333.0,333,4333433422
+dfsfafasd,fasdfasdfsdfs,rfsfsfsd,Literatura Brasileira,             ,32,200,2020,50.0,50,4434333333
+1984,George Orwell,melancolic,Literatura Estrangeira,9780140817,3,90,2005,50.0,60,9999999999999
+fdffasfds,fsdafsdfsafas,dsfsafasfsad,Literatura Brasileira,3333333333,23,200,2009,50.0,50,9999999999999
+fasdfsad,fasdfsfsd,fsafasfd,Literatura Brasileira,3333333333,23,2002,2009,23.0,23,9999999999999
+fdasfsafsfsfd,sfsaffasdf,sdfafafas,Literatura Brasileira,3333333333,333,3333,333,333.0,333,9999999999999
+sdfasfsd,ffassd,fssadfa,Literatura Brasileira,4333333333,2232,3322,333,3232.0,3232,9999999999999

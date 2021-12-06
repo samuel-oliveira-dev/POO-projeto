@@ -48,8 +48,8 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jFormattedTextFieldIsbn = new javax.swing.JFormattedTextField();
         jFormattedTextFieldCodigo = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldIsbn = new javax.swing.JFormattedTextField();
         jTextFieldQuantidade = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -106,13 +106,13 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         jLabel10.setText("Codigo:");
 
         try {
-            jFormattedTextFieldIsbn.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
+            jFormattedTextFieldCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            jFormattedTextFieldCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
+            jFormattedTextFieldIsbn.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -158,8 +158,8 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,11 +195,11 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jFormattedTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jFormattedTextFieldIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,36 +246,52 @@ public class TelaCadastroLivro extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         EscritaLeituraLivro ell = new EscritaLeituraLivro();
         Livro livro = new Livro();
+        String qtdStr = jTextFieldQuantidade.getText();
+        String precoStr = jTextFieldPreco.getText();
+        int qtd = qtdStr.isBlank() || livro.checkNumeric(qtdStr) == false? -1 : Integer.parseInt(qtdStr);
+        double preco = precoStr.isBlank() || livro.checkNumeric(qtdStr) == false? -1 : Double.parseDouble(qtdStr);
         livro.setTitulo(jTextFieldTitulo.getText());
         livro.setAutor(jTextFieldAutor.getText());
         livro.setEditora(jTextFieldEditora.getText());
-        livro.setIsbn(jFormattedTextFieldIsbn.getText());
+        livro.setIsbn(jFormattedTextFieldCodigo.getText());
         livro.setAno(jTextFieldAno.getText());
         livro.setEdicao(jTextFieldEdicao.getText());
         livro.setAno(jTextFieldAno.getText());
         livro.setPaginas(jTextFieldPaginas.getText());
-        livro.setPreco(Double.parseDouble(jTextFieldPreco.getText()));
-        livro.setQuantidade(Integer.parseInt(jTextFieldQuantidade.getText()));
-        livro.setCodigo(jFormattedTextFieldCodigo.getText());
+        livro.setPreco(preco);
+        livro.setQuantidade(qtd);
+        livro.setCodigo(jFormattedTextFieldIsbn.getText());
         livro.setCategoria((String) jComboBoxCategoria.getSelectedItem());
+        livro.setJf(this);
         
-        ell.salvar(livro, ell.PATH);
+        if(livro.checkFields()){
+            if(ell.exists(jFormattedTextFieldCodigo.getText()) == false){
+                ell.salvar(livro, ell.PATH);
+                JOptionPane.showMessageDialog(this, "Livro Cadastrado com Sucesso!");
+                jTextFieldTitulo.setText("");
+                jTextFieldAutor.setText("");
+                jTextFieldEditora.setText("");
+                jFormattedTextFieldCodigo.setText("");
+                jTextFieldAno.setText("");
+                jTextFieldEdicao.setText("");
+                jTextFieldAno.setText("");
+                jTextFieldPaginas.setText("");
+                jTextFieldPreco.setText("");
+                jTextFieldQuantidade.setText("");
+                jFormattedTextFieldIsbn.setText("");
+                } else {
+                
+                    JOptionPane.showMessageDialog(this, "Codigo Ja Cadastrado!");
+            
+                }
+            
+            
+        } 
         
-        JOptionPane.showMessageDialog(this, "Livro Cadastrado com Sucesso!");
         
         
-        jTextFieldTitulo.setText("");
-        jTextFieldAutor.setText("");
-        jTextFieldEditora.setText("");
-        jFormattedTextFieldIsbn.setText("");
-        //jTextFieldISBN.setText("");
-        jTextFieldAno.setText("");
-        jTextFieldEdicao.setText("");
-        jTextFieldAno.setText("");
-        jTextFieldPaginas.setText("");
-        jTextFieldPreco.setText("");
-        jTextFieldQuantidade.setText("");
-        jFormattedTextFieldCodigo.setText("");
+        
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -10,6 +10,7 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -295,7 +296,7 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
                 pop = ell.getDeletados();
                 popularTabela(pop);
             } else {
-                pop = ell.buscar(selectedItem, ell.PATH);
+                pop = ell.buscar(selectedItem, jTextFieldArgumento.getText());
                 popularTabela(pop);
             }
         }
@@ -370,7 +371,9 @@ public class TelaConsultaLivros extends javax.swing.JInternalFrame {
         int linha = jTableLivros.getSelectedRow();
         String cod = jTableLivros.getValueAt(linha, 10).toString();
         
-        ell.deletar(cod);
+        if(ell.deletar(cod)){
+            JOptionPane.showMessageDialog(this, "Livro Deletado!");
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 

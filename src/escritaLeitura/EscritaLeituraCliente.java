@@ -87,7 +87,7 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
         
         
         for(Cliente c : clientes){
-            if(parametro.equals("Nome") && c.getNome().toUpperCase().equals(argumento.toUpperCase())){
+            if(parametro.equals("Nome") && c.getNome().toUpperCase().contains(argumento.toUpperCase())){
                 resultado.add(c);
             } else {
                 if(parametro.equals("CPF") && undoMaskCpf(c.getCpf()).equals(undoMaskCpf(argumento))){
@@ -222,6 +222,12 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
 
         return excluidos;
         
+    }
+    
+    public boolean exists(String cpf){
+        boolean res = buscar("CPF", cpf).size() > 0? true:false;
+        
+        return res;
     }
     
 }

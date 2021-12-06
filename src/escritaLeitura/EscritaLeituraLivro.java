@@ -49,7 +49,7 @@ public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
     public ArrayList buscar(String categoria, String argumento) {
         
          
-        Livro livro = new Livro();
+        //Livro livro = new Livro();
         ArrayList<Livro>  lista = ler(PATH);
         ArrayList<Livro> resultado = new ArrayList<>();
         for(Livro l : lista){
@@ -59,7 +59,9 @@ public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
                 if(l.getTitulo().toUpperCase().contains(argumento.toUpperCase()) && categoria.equals("Titulo")){
                     resultado.add(l);
                 } else{
-                    if(argumento.toUpperCase().equals(l.getCodigo().toUpperCase()) && categoria.equals("Codigo")){
+                    System.out.println("Array: "+l.getCodigo());
+                    System.out.println("Arg:"+argumento);
+                    if(argumento.equals(l.getCodigo()) && categoria.equals("Codigo")){
                         resultado.add(l);
                     } else {
                         if(argumento.equals(l.getIsbn()) && categoria.equals("ISBN")){
@@ -99,13 +101,13 @@ public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
             String autor = vect[1];
             String editora = vect[2];
             String categoria = vect[3];
-            String isbn = vect[4];
+            String codigo = vect[4];
             String edicao = vect[5];
             String paginas = vect[6];
             String ano = vect[7];
             double preco = Double.parseDouble(vect[8]);
             int quantidade = Integer.parseInt(vect[9]) ;
-            String codigo = vect[10];
+            String isbn = vect[10];
             
             Livro livro = new Livro();
             livro.setAutor(autor);
@@ -209,6 +211,12 @@ public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
     public ArrayList getDeletados() {
         ArrayList<Livro> livros = ler(PATH_EXC);
         return livros;
+    }
+    
+    public boolean exists(String cod){
+        boolean res = buscar("Codigo", cod).size() > 0? true:false;
+        
+        return res;
     }
 
     

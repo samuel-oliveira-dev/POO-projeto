@@ -49,8 +49,8 @@
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jFormattedTextFieldIsbn" alignment="0" min="-2" pref="443" max="-2" attributes="0"/>
                   <Component id="jFormattedTextFieldCodigo" alignment="0" min="-2" pref="443" max="-2" attributes="0"/>
+                  <Component id="jFormattedTextFieldIsbn" alignment="0" min="-2" pref="443" max="-2" attributes="0"/>
                   <Component id="jTextFieldEditora" alignment="0" min="-2" pref="443" max="-2" attributes="0"/>
                   <Component id="jTextFieldAutor" alignment="0" min="-2" pref="443" max="-2" attributes="0"/>
                   <Component id="jTextFieldTitulo" min="-2" pref="443" max="-2" attributes="0"/>
@@ -94,12 +94,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextFieldCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFormattedTextFieldIsbn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextFieldIsbn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFormattedTextFieldCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -237,14 +237,14 @@
         <Property name="text" type="java.lang.String" value="Codigo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldIsbn">
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCodigo">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="#############" subtype="-1" type="5"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCodigo">
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldIsbn">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##########" subtype="-1" type="5"/>

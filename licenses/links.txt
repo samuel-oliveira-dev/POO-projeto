@@ -1,0 +1,3 @@
+https://github.com/adrianoluis/misc-tools
+https://github.com/mormegil-cz/rfcemailvalidator
+https://github.com/Hilson-Alex/isbn-validator

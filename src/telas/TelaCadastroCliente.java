@@ -169,6 +169,7 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
         
         
         
+        
         if(nome.isBlank() || cpf.isBlank() || cep.isBlank() || email.isBlank() || logradouro.isBlank())
             JOptionPane.showMessageDialog(this, "Campos vazios nao sao permitidos!");
         else if(vld.checkName(nome) == false && nome.isBlank() == false)
@@ -176,21 +177,27 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
         else {
             Cliente cliente = new Cliente();
             cliente.setJF(this);
-            if(cliente.isValidCpf(elc.undoMaskCpf(cpf)) && cliente.isValidEamil(email)){
-                cliente.setNome(jTextNome.getText());
-            cliente.setCpf(jTextCPF.getText());
-            cliente.setCep(jTextFieldCEP.getText());
-            cliente.setEmail(jFormattedTextEmail.getText());
-            cliente.setLogradouro(jTextFieldLogradouro.getText());
-            elc.salvar(cliente, elc.PATH);
-        
-            JOptionPane.showMessageDialog(this, "Cliente Cadastrado com Sucesso!");
-            jTextNome.setText("");
-          jTextCPF.setText("");
-          jTextFieldCEP.setText("");
-          jFormattedTextEmail.setText("");
-          jTextFieldLogradouro.setText("");
             
+            if(cliente.isValidCpf(elc.undoMaskCpf(cpf)) && cliente.isValidEamil(email)){
+                if(elc.exists(cpf) == false){
+                    cliente.setNome(jTextNome.getText());
+                    cliente.setCpf(jTextCPF.getText());
+                    cliente.setCep(jTextFieldCEP.getText());
+                    cliente.setEmail(jFormattedTextEmail.getText());
+                    cliente.setLogradouro(jTextFieldLogradouro.getText());
+                    elc.salvar(cliente, elc.PATH);
+        
+                    JOptionPane.showMessageDialog(this, "Cliente Cadastrado com Sucesso!");
+                    jTextNome.setText("");
+                    jTextCPF.setText("");
+                    jTextFieldCEP.setText("");
+                    jFormattedTextEmail.setText("");
+                    jTextFieldLogradouro.setText("");
+            
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cliente Ja Cadastrado!");
+                }
+                
             }
             
         
