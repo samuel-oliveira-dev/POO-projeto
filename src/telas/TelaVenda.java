@@ -285,9 +285,12 @@ public class TelaVenda extends javax.swing.JInternalFrame {
         }
         txtBusca.setText("");
         DefaultTableModel dtm =  (DefaultTableModel) tbVendas.getModel();
-        dtm.getDataVector().removeAllElements();
+        while(dtm.getRowCount() > 0){
+            dtm.removeRow(0);
+        }
         jcPagamento.resetKeyboardActions();
         jTextPane1.setText("");
+        jFormattedTextFieldCPF.setText("");
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
