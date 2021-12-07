@@ -201,9 +201,8 @@ public class Main extends javax.swing.JFrame {
                 String[] vetor = line.split(",");
                 String name = vetor[0];
                 String password = vetor[1];
-                String type = vetor[2];
 
-                Usuario usuario = new Usuario(name, password, type);
+                Usuario usuario = new Usuario(name, password);
                 lista.add(usuario);
                 line = br.readLine();
             }

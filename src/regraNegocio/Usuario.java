@@ -19,12 +19,10 @@ import java.util.logging.Logger;
 public class Usuario {
     private String nome;
     private String senha;
-    private String tipo;
-
-    public Usuario(String nome, String senha, String tipo) {
+    
+    public Usuario(String nome, String senha) {
         this.nome = nome;
         this.senha = senha;
-        this.tipo = tipo;
     }
 
     
@@ -43,14 +41,6 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
     
     public String salvar(){
         try {
@@ -58,7 +48,7 @@ public class Usuario {
             s = s + "\\usuarios.txt";
             FileWriter fw = new FileWriter(s, true); 
             PrintWriter pw = new PrintWriter(fw);
-            pw.println(getNome()+","+getSenha()+","+getTipo());
+            pw.println(getNome()+","+getSenha());
             pw.flush();
             pw.close();
             fw.close();

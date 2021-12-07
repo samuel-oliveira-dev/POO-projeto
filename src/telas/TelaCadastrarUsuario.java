@@ -44,8 +44,6 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         btnCadastrarUsuario = new javax.swing.JButton();
-        comboTipo = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtSenhaCad = new javax.swing.JPasswordField();
         txtUsuarioCad = new javax.swing.JTextField();
@@ -64,10 +62,6 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECIONE--", "Administrador", "Usuário" }));
-
-        jLabel3.setText("Tipo");
-
         jLabel2.setText("Senha");
 
         jLabel1.setText("Usuário");
@@ -77,8 +71,6 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add-user.png"))); // NOI18N
 
         jDesktopPane1.setLayer(btnCadastrarUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(comboTipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(txtSenhaCad, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(txtUsuarioCad, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -102,13 +94,9 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtUsuarioCad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
+                                .addComponent(jLabel2)
                                 .addGap(26, 26, 26)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnCadastrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -125,11 +113,7 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(txtSenhaCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(34, 34, 34)
                 .addComponent(btnCadastrarUsuario)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -152,7 +136,6 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
     private void btnCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarUsuarioActionPerformed
         String usuariocad = txtUsuarioCad.getText();
         String senhacad = new String(txtSenhaCad.getPassword());
-        int tipocad = comboTipo.getSelectedIndex();
         
         listaUsuarios.clear();
         String path = System.getProperty("user.dir");
@@ -165,9 +148,8 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
 			String[] vetor = line.split(",");
 			String name = vetor[0];
 			String password = vetor[1];
-			String type = vetor[2];
 	
-			Usuario usuario = new Usuario(name, password, type);
+			Usuario usuario = new Usuario(name, password);
 			listaUsuarios.add(usuario);
 			line = br.readLine();
 		}
@@ -186,22 +168,18 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
         if (contador > 0){
             JOptionPane.showMessageDialog(this, "O usuário informado já foi cadastrado", "Duplicidade de dados", JOptionPane.ERROR_MESSAGE);
         }else if ((usuariocad == null || usuariocad.isEmpty())
-                || (senhacad.isEmpty() || tipocad == 0)){
+                || (senhacad.isEmpty())){
             JOptionPane.showMessageDialog(this, "Informe usuário, senha e tipo", "Campo não preenchido", JOptionPane.ERROR_MESSAGE);
             txtUsuarioCad.setText("");
             txtSenhaCad.setText("");
-            comboTipo.setSelectedIndex(0);
             txtUsuarioCad.requestFocus();
         }else{
-            String combo = comboTipo.getSelectedItem().toString();
-        
-            Usuario u = new Usuario(usuariocad, senhacad, combo);
+            Usuario u = new Usuario(usuariocad, senhacad);
             
             JOptionPane.showMessageDialog(null, u.salvar());
             
             txtUsuarioCad.setText("");
             txtSenhaCad.setText("");
-            comboTipo.setSelectedIndex(0);
             txtUsuarioCad.requestFocus();
         }
         
@@ -242,11 +220,9 @@ public class TelaCadastrarUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarUsuario;
-    private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField txtSenhaCad;
     private javax.swing.JTextField txtUsuarioCad;
