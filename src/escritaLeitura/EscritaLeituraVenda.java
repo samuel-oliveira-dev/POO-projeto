@@ -88,7 +88,7 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Cadastravel{
     @Override
     public void salvar(Cadastravel c, String path) {
         if(c instanceof Venda){
-            Venda venda = ((Venda) c);
+            Venda venda = ((Venda)c);
             
         EscritaLeituraLivro ell = new EscritaLeituraLivro();
         //EscritaLeituraCliente elc = new EscritaLeituraCliente();
@@ -96,25 +96,16 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Cadastravel{
         String codLivro = venda.getCodLivro();
         String cpfCliente = venda.getCpfCliente();
         
-        
         try {
             fos = new FileOutputStream(path, true);
             PrintStream ps = new PrintStream(fos);
-            ArrayList<Livro> livro = ell.buscar("Codigo", codLivro);
-            //Cliente cliente = (Cliente) elc.buscar("CPF", cpfCliente).get(0);
-           
             
-            String autor = livro.get(0).getAutor();
-            String titulo = livro.get(0).getTitulo();
-            String isbn = livro.get(0).getIsbn();
-            int qtdVenda = venda.getQtdLivroVendida();
-            String cod = livro.get(0).getCodigo();
+            float total = venda.getTotal();
+            String Forma_Pagamento = venda.getFormaPagamento();
             String data = venda.getData();
+            String cpf = venda.getCpfCliente();
             
-            
-            
-             
-            ps.println(titulo+","+autor+","+isbn+","+cod+","+cpfCliente+","+qtdVenda+","+data);
+            ps.println(total+","+Forma_Pagamento+","+cpfCliente+","+data);
             System.out.println("Gravado!");
            
             ps.close();
@@ -160,18 +151,13 @@ public class EscritaLeituraVenda extends EscritaLeitura implements Cadastravel{
             
             while(input.hasNext()){
                 String[] vect = input.nextLine().split(",");
-                String titulo = vect[0];
-                String autor = vect[1];
-                String codigo = vect[2];
-                String isbn = vect[3];
-                String cpf = vect[4];
-                int qtd = Integer.parseInt(vect[5]);
-                String data = vect[6];
+                String total = vect[0];
+                String forma_pagamento = vect[1];
+                String cpf = vect[2];
+                String data = vect[3];
                 
-                Venda venda = new Venda (codigo,cpf,qtd,data,isbn,titulo, autor);
+                Venda venda = new Venda (Float.parseFloat(total),forma_pagamento,cpf,data);
                 vendas.add(venda);
-                
-                
             }
             
         } catch (FileNotFoundException ex) {

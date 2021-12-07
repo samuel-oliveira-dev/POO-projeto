@@ -35,40 +35,15 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableVendas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbConsultaVd = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
-
-        jTableVendas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Titulo", "Autor", "ISBN", "Codigo", "Quantidade", "Cliente", "Data"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTableVendas);
-        if (jTableVendas.getColumnModel().getColumnCount() > 0) {
-            jTableVendas.getColumnModel().getColumn(0).setResizable(false);
-            jTableVendas.getColumnModel().getColumn(1).setResizable(false);
-            jTableVendas.getColumnModel().getColumn(2).setResizable(false);
-            jTableVendas.getColumnModel().getColumn(3).setResizable(false);
-            jTableVendas.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         jButton1.setText("Consultar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +56,26 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Cliente" }));
 
+        tbConsultaVd.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Total", "Forma de Pagamento", "CPF", "Data e Hora"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbConsultaVd.getTableHeader().setResizingAllowed(false);
+        tbConsultaVd.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tbConsultaVd);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,16 +83,16 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
                         .addComponent(jButton1)
-                        .addGap(0, 419, Short.MAX_VALUE)))
+                        .addGap(0, 150, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,38 +104,30 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+        DefaultTableModel dtm = (DefaultTableModel) tbConsultaVd.getModel();
+        while(dtm.getRowCount() > 0){
+            dtm.removeRow(0);
+        }
         String arg1 = jComboBox1.getSelectedItem().toString();
         String arg2 = jTextField1.getText();
         EscritaLeituraVenda elv = new EscritaLeituraVenda();
         ArrayList<Venda> vendas = elv.buscar(arg1,arg2);
-        //Venda venda = vendas.get(0);
-       
-        
-        
-        
-        DefaultTableModel dtm = (DefaultTableModel) jTableVendas.getModel();
-        dtm.getDataVector().removeAllElements();
         
         for(Venda venda:vendas){
             dtm.addRow(
                 
                 new Object[]{
-                    venda.getTitulo(),
-                    venda.getAutor(),
-                    venda.getIsbn(),
-                    venda.getCodLivro(),
-                    venda.getQtdLivroVendida(),
+                    venda.getTotal(),
+                    venda.getFormaPagamento(),
                     venda.getCpfCliente(),
                     venda.getData()
                 }
@@ -157,8 +144,8 @@ public class TelaConsultaVendas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableVendas;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tbConsultaVd;
     // End of variables declaration//GEN-END:variables
 }

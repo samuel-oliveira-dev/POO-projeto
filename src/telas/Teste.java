@@ -29,7 +29,7 @@ public class Teste {
     public static void main(String[] agrs) {
    EscritaLeituraLivro ell = new EscritaLeituraLivro();
    //ell.notExists("6545455555555");
-   System.out.println(isValidCod("9788550801483"));
+   System.out.println(ell.exists("9999999999999"));
    
         
     }
@@ -54,16 +54,6 @@ public class Teste {
         
         return resdef;
     }
-    
-    public static boolean isValidCep(String cep){
-        boolean res = cep.matches("\\d{5}-\\d{3}");
-        return res;
-    }
-    
-    public static boolean isValidCod(String cod){
-        
-        return cod.matches("978\\d{10}");
-    }
     static ObjectInputStream ois = null;
      public static void read() throws IOException{
        //ObjectInputStream ois = null;
@@ -79,7 +69,10 @@ public class Teste {
                v = (Venda) ois.readObject();
                if(v != null){
                    vendas.add(v);
-
+                   
+                   
+                
+               
            }
            
        }while (v != null);

@@ -1,2 +1,3 @@
-fsfsddfsdfs,fsdfsf,fsadfas,Literatura Brasileira,9788550801483,43435,3434,4334,42423.0,42423,9788550801483
-fasfdsfsa,fssdfasfsa,fsafsdfs,Literatura Brasileira,9788568014004,4242,33423,2009,4342.0,4342,sdfasfas
+Dom Casmurro,Machado de Assis,Martin Claret,Literatura Brasileira,3234433333,4,293,2020,50.0,50,3637337373344
+Poemas de Alvaro de Campos,Fernando Pessoa,Lpm Pocket,Literatura Estrangeira,9788525415929,5,278,2020,50.0,50,9788525415929
+Corpo,Carlos Drummond de Andrade,Cia das Letras,Literatura Brasileira,9788535925548,3,100,2019,50.0,50,9788535925548

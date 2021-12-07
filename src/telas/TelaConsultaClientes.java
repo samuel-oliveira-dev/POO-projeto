@@ -81,23 +81,6 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
         DefaultTableModel dtm =  (DefaultTableModel) jTableConsulta.getModel();
         dtm.getDataVector().removeAllElements();
     }
-    
-    public void popularTabela(ArrayList<Cliente> lista){
-        
-        DefaultTableModel dtm = (DefaultTableModel) jTableConsulta.getModel();
-        for(Cliente c:lista){
-            dtm.addRow(
-                    new Object[]{
-                        c.getNome(),
-                        c.getCpf(),
-                        c.getEmail(),
-                        c.getLogradouro(),
-                        c.getCep()
-                    }
-            );
-        }
-        
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -240,27 +223,7 @@ public class TelaConsultaClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         EscritaLeituraCliente elc = new EscritaLeituraCliente();
         limpar();
-       ArrayList<Cliente> clientes = elc.getDeletados();
-       for(Cliente c:clientes){
-           System.out.println(c.toString());
-       }
-        
-        //consultar();
-        if(jComboBoxTipo.getSelectedItem().equals("Todos")){
-            popularTabela(elc.ler(elc.PATH));
-        } else {
-            if(jComboBoxTipo.getSelectedItem().equals("Nome")){
-                popularTabela(elc.buscar("Nome", jTextFieldArgumento.getText()));
-            } else {
-                if(jComboBoxTipo.getSelectedItem().equals("CPF")){
-                    popularTabela(elc.buscar("CPF", jTextFieldArgumento.getText()));
-                } else {
-                     if(jComboBoxTipo.getSelectedItem().equals("Listar Excluidos")){
-                         popularTabela(elc.getDeletados());
-                     }
-                }
-            }
-        }
+        consultar();
         
         
         

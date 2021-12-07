@@ -1,4 +1,4 @@
-package regraNegocio;
+package com.wojcikiewicz.isbn;
 
 import java.io.Serializable;
 import java.util.Objects;

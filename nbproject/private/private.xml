@@ -3,26 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/escritaLeitura/EscritaLeituraVenda.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaConsultaLivros.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaUsuario.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/ValidacaoEntradas.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaCadastroLivro.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/Livro.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaConsultaClientes.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaInicial.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/Cliente.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/EmailAddressValidator.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/Venda.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/escritaLeitura/EscritaLeituraCliente.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaVenda.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/Teste.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/DocumentUtil.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaCadastroCliente.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/escritaLeitura/EscritaLeitura.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/ISBN.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/escritaLeitura/EscritaLeituraLivro.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/escritaLeitura/EscritaLeituraUsuario.java</file>
         </group>
     </open-files>
 </project-private>

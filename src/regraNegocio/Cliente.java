@@ -120,17 +120,13 @@ public class Cliente implements Cadastravel, Serializable{
         }
       return result;  
     }
-    
-    public boolean valida(String cep){
-        boolean res = cep.matches("\\d{5}-\\d{3}");
-        if(res == false){
-            JOptionPane.showMessageDialog(jf, "CEP Invalido!");
+     public boolean isValidCEP(String cep){
+        if(cep.matches("\\d{5}-\\d{3}")){
+            JOptionPane.showMessageDialog(jf, "CPF Invalido!");
         }
-    
         
-        return  res;
+        return cep.matches("\\d{5}-\\d{3}");
     }
-    
     
     
 

@@ -144,7 +144,7 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(21, 21, 21))
         );
@@ -178,7 +178,7 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
             Cliente cliente = new Cliente();
             cliente.setJF(this);
             
-            if(cliente.isValidCpf(elc.undoMaskCpf(cpf)) && cliente.isValidEamil(email) && cliente.valida(cep)){
+            if(cliente.isValidCpf(elc.undoMaskCpf(cpf)) && cliente.isValidEamil(email) && cliente.isValidCEP(cep)){
                 if(elc.exists(cpf) == false){
                     cliente.setNome(jTextNome.getText());
                     cliente.setCpf(jTextCPF.getText());
