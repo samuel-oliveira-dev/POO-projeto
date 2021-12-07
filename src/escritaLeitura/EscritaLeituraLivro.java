@@ -108,7 +108,8 @@ public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
             double preco = Double.parseDouble(vect[8]);
             int quantidade = Integer.parseInt(vect[9]) ;
             String isbn = vect[10];
-            
+            System.out.println(preco);
+            System.out.println(quantidade);
             Livro livro = new Livro();
             livro.setAutor(autor);
             livro.setTitulo(titulo);

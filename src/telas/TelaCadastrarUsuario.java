@@ -19,12 +19,12 @@ import javax.swing.JOptionPane;
 public class TelaCadastrarUsuario extends javax.swing.JFrame {
 
     private ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
-    private TelaUsuario tela;
+    private Main tela;
     /**
      * Creates new form TelaCadastrarUsuario
      * @param tela
      */
-    public TelaCadastrarUsuario(TelaUsuario tela) {
+    public TelaCadastrarUsuario(Main tela) {
         initComponents();
         this.tela = tela;
     }

@@ -19,13 +19,13 @@ import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
  *
  * @author Valter
  */
-public class TelaUsuario extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame {
     
     private ArrayList<Usuario> lista = new ArrayList<Usuario>();
     /**
      * Creates new form TelaUsuario
      */
-    public TelaUsuario() {
+    public Main() {
         initComponents();
     }
 
@@ -163,7 +163,7 @@ public class TelaUsuario extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent evt){
                 java.awt.EventQueue.invokeLater(() -> {
-                    new TelaUsuario().setVisible(true);
+                    new Main().setVisible(true);
                 });
                 cadastrarUsuario.dispose();
             }
@@ -272,19 +272,20 @@ public class TelaUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new TelaUsuario().setVisible(true);
+            new Main().setVisible(true);
         });
     }
 
