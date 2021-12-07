@@ -8,6 +8,7 @@
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaUsuario.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/ValidacaoEntradas.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaCadastroLivro.java</file>
+            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/Livro.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaConsultaClientes.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaInicial.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/Cliente.java</file>
@@ -19,9 +20,9 @@
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/DocumentUtil.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/telas/TelaCadastroCliente.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/escritaLeitura/EscritaLeitura.java</file>
+            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/regraNegocio/ISBN.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/escritaLeitura/EscritaLeituraLivro.java</file>
             <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/src/escritaLeitura/EscritaLeituraUsuario.java</file>
-            <file>file:/C:/Users/samuk/Documents/NetBeansProjects/SistemaLivrariaAnt/test/escritaLeitura/EscritaLeituraClienteTest.java</file>
         </group>
     </open-files>
 </project-private>

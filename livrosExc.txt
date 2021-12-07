@@ -28,3 +28,4 @@ fdffasfds,fsdafsdfsafas,dsfsafasfsad,Literatura Brasileira,3333333333,23,200,200
 fasdfsad,fasdfsfsd,fsafasfd,Literatura Brasileira,3333333333,23,2002,2009,23.0,23,9999999999999
 fdasfsafsfsfd,sfsaffasdf,sdfafafas,Literatura Brasileira,3333333333,333,3333,333,333.0,333,9999999999999
 sdfasfsd,ffassd,fssadfa,Literatura Brasileira,4333333333,2232,3322,333,3232.0,3232,9999999999999
+,,,Literatura Brasileira,          ,,,,-1.0,-1,             

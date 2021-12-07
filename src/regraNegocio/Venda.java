@@ -4,7 +4,6 @@
  */
 package regraNegocio;
 
-import regraNegocio.Livro;
 import java.util.ArrayList;
 import escritaLeitura.Cadastravel;
 import escritaLeitura.EscritaLeituraLivro;

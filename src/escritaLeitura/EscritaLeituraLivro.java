@@ -95,7 +95,7 @@ public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
             ex.printStackTrace();
         }
         for(int i = 0; i < array.length; ++i){
-            
+            //System.out.println(array[i]);
             String[] vect = array[i].split(",");
             String titulo = vect[0];
             String autor = vect[1];
@@ -193,16 +193,7 @@ public class EscritaLeituraLivro extends EscritaLeitura implements Deletavel{
             salvar(l,PATH_EXC);
         }
        
-       
-       
-            
-            
-       
-        
-        
-        
-        
-        
+    
         
         return status;
     }

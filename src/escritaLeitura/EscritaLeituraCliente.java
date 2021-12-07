@@ -111,7 +111,7 @@ public class EscritaLeituraCliente extends EscritaLeitura implements Deletavel{
         
         
         
-        try(BufferedReader br = new BufferedReader(new FileReader(PATH)))
+        try(BufferedReader br = new BufferedReader(new FileReader(path)))
         {
             
             File arq = new File(path);
